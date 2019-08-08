@@ -1,0 +1,43 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "sindesperdicio.um.edu.ar",
+      "nativeLanguage": "es"
+    },
+    "jhipsterVersion": "6.2.0",
+    "applicationType": "monolith",
+    "baseName": "SinDesperdicio",
+    "packageName": "sindesperdicio.um.edu.ar",
+    "packageFolder": "sindesperdicio/um/edu/ar",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MzYwMjgzOTRmODI1YThlMTIyMGNlZTliYmIyNDgxNzNhOGQ5NWFkNTIxY2MzMGRlMGQ4MGYzM2Y1ZTRhZWYwYTIyNjc1YjkwNTViZDY0OWVjNjA3NjM0NGZmMzFiMGIwNzQ1ZmU4YmQ4YjAyMDdiNTAyYTQwMDFhZmU4MTQ5OTA=",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "es",
+    "languages": [
+      "es"
+    ],
+    "blueprints": []
+  }
+}
