@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="branch">
+            <h2><span>Branch</span> {{ branch.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Desription</span></dt>
+                <dd>
+                    <span>{{ branch.desription }}</span>
+                </dd>
+                <dt><span>Latitud</span></dt>
+                <dd>
+                    <span>{{ branch.latitud }}</span>
+                </dd>
+                <dt><span>Longitud</span></dt>
+                <dd>
+                    <span>{{ branch.longitud }}</span>
+                </dd>
+                <dt><span>Organization</span></dt>
+                <dd>
+                    <div *ngIf="branch.organization">
+                        <a [routerLink]="['/organization', branch.organization?.id, 'view']">{{ branch.organization?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/branch', branch.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

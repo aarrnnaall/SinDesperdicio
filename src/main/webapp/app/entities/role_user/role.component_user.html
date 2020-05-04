@@ -1,0 +1,94 @@
+<div>
+    <h2 id="page-heading">
+        <span>Tus Roles</span>
+    
+        <button id="jh-create-entity" *ngIf="filter(account.login)?.length === 0" class="btn btn-primary float-right jh-create-entity create-role" [routerLink]="['/role_user/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Crear Nuevo Rol
+            </span>
+        </button>
+    </h2>
+    
+    <jhi-alert-error></jhi-alert-error>
+
+    <!--<jhi-alert></jhi-alert>-->
+
+    <div class="alert alert-warning" id="no-result" *ngIf="filter(account.login)?.length === 0">
+        <span>No se encontraron roles</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="filter(account.login)?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th *ngIf="false" scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Donador</span></th>
+                    <th scope="col" ><span>Conductor</span></th>
+                    <th scope="col" ><span>Punto Consumo</span></th>
+                    <th *ngIf="false" scope="col" ><span>Admin</span></th>
+                    <th *ngIf="false" scope="col" ><span>Usuario</span></th>
+                    <th scope="col" ><span>Sucursal</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let role of filter(account.login) ;trackBy: trackId">
+                    <td *ngIf="false"><a [routerLink]="['/role', role.id, 'view']">{{ role.id }}</a></td>
+                    <td>
+                        <div *ngIf="role.donor">
+                            <a><fa-icon [icon]="'times'"></fa-icon></a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="role.driver">
+                            <a><fa-icon [icon]="'times'"></fa-icon></a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="role.pointConsumption">
+                            <a><fa-icon [icon]="'times'"></fa-icon></a>
+                        </div>
+                    </td>
+                    <td *ngIf="false">
+                        <div *ngIf="role.admin">
+                            <a><fa-icon [icon]="'times'"></fa-icon></a>
+                        </div>
+                    </td>
+                    
+                    <td *ngIf="false">
+                        {{ role.user?.login }}
+                    </td>
+                    <td>
+                        <div *ngIf="role.branch">
+                            <a [routerLink]="['/branch', role.branch?.id, 'view']" >{{ role.branch?.desription }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/role_user', role.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">Vista</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/role_user', role.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Editar</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(role)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Eliminar</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

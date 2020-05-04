@@ -18,15 +18,17 @@ spring:
     name: SinDesperdicio
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:mem:SinDesperdicio;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MULTI_THREADED=FALSE
+    url: jdbc:h2:mem:SinDesperdicio;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     name:
     username:
     password:
     hikari:
       auto-commit: false
+  jackson:
+    serialization:
+      write-durations-as-timestamps: false
   jpa:
     database-platform: io.github.jhipster.domain.util.FixedH2Dialect
-    database: H2
     open-in-view: false
     show-sql: false
     hibernate:
@@ -83,9 +85,8 @@ jhipster:
   logging:
     # To test json console appender
     use-json-format: true # By default, logs are in Json format
-    # To test logstash appender
     logstash:
-      enabled: true
+      enabled: false
       host: localhost
       port: 5000
       queue-size: 512
@@ -96,7 +97,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: MzYwMjgzOTRmODI1YThlMTIyMGNlZTliYmIyNDgxNzNhOGQ5NWFkNTIxY2MzMGRlMGQ4MGYzM2Y1ZTRhZWYwYTIyNjc1YjkwNTViZDY0OWVjNjA3NjM0NGZmMzFiMGIwNzQ1ZmU4YmQ4YjAyMDdiNTAyYTQwMDFhZmU4MTQ5OTA=
+        base64-secret: NWNhOTMyMGUwNmI1YzEwNDVjYTM5YTc0ZmRmNjc2ZjdiMzYwNzc4NzhiNDg2MzlkZDRhYTBhZmQxYmVlYzE5MGVhMDE1NmFmNWY2MGQ1NTE4Yzg0NzIzNDE5MjYwYzBmODc3NDRkZDZlMWYxYmExYTI3ODRlNjkxMTBhODhhNDU=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
   metrics:

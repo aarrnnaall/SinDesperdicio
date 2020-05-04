@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="needdonation">
+            <h2><span>Needdonation</span> {{ needdonation.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{ needdonation.description }}</span>
+                </dd>
+                <dt><span>Datestart</span></dt>
+                <dd>
+                    <span>{{ needdonation.datestart }}</span>
+                </dd>
+                <dt><span>Dateend</span></dt>
+                <dd>
+                    <span>{{ needdonation.dateend }}</span>
+                </dd>
+                <dt><span>Availabilityday</span></dt>
+                <dd>
+                    <span>{{ needdonation.availabilityday }}</span>
+                </dd>
+                <dt><span>Availabilitytime</span></dt>
+                <dd>
+                    <span>{{ needdonation.availabilitytime }}</span>
+                </dd>
+                <dt><span>Latitud</span></dt>
+                <dd>
+                    <span>{{ needdonation.latitud }}</span>
+                </dd>
+                <dt><span>Longitud</span></dt>
+                <dd>
+                    <span>{{ needdonation.longitud }}</span>
+                </dd>
+                <dt><span>Duration</span></dt>
+                <dd>
+                    <span>{{ needdonation.duration }}</span>
+                </dd>
+                <dt><span>Intervalduration</span></dt>
+                <dd>
+                    <span>{{ needdonation.intervalduration }}</span>
+                </dd>
+                <dt><span>Cantpeople</span></dt>
+                <dd>
+                    <span>{{ needdonation.cantpeople }}</span>
+                </dd>
+                <dt><span>Point</span></dt>
+                <dd>
+                    <div *ngIf="needdonation.point">
+                        <a [routerLink]="['/role', needdonation.point?.id, 'view']">{{ needdonation.point?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/needdonation', needdonation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="locationDriver">
+            <h2><span>Location Driver</span> {{ locationDriver.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Latitud</span></dt>
+                <dd>
+                    <span>{{ locationDriver.latitud }}</span>
+                </dd>
+                <dt><span>Longitud</span></dt>
+                <dd>
+                    <span>{{ locationDriver.longitud }}</span>
+                </dd>
+                <dt><span>Detaildriver</span></dt>
+                <dd>
+                    <div *ngIf="locationDriver.detaildriver">
+                        <a [routerLink]="['/detail-driver', locationDriver.detaildriver?.id, 'view']">{{ locationDriver.detaildriver?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/location-driver', locationDriver.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

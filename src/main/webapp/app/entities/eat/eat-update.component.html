@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-eat-heading">Create or edit a Eat</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_category">Category</label>
+                    <select class="form-control" name="category" formControlName="category" id="field_category">
+                        <option value="Pan">Pan</option>
+                        <option value="Cereales">Cereales</option>
+                        <option value="Pastas">Pastas</option>
+                        <option value="Arroz">Arroz</option>
+                        <option value="Verduras">Verduras</option>
+                        <option value="Frutas">Frutas</option>
+                        <option value="Leche">Leche</option>
+                        <option value="Cacao">Cacao</option>
+                        <option value="Yogur">Yogur</option>
+                        <option value="Queso">Queso</option>
+                        <option value="Carne">Carne</option>
+                        <option value="Pollo">Pollo</option>
+                        <option value="Pescado">Pescado</option>
+                        <option value="Huevos">Huevos</option>
+                        <option value="Aceite">Aceite</option>
+                        <option value="Galletas">Galletas</option>
+                        <option value="Jugo">Jugo</option>
+                        <option value="Gaseosa">Gaseosa</option>
+                        <option value="Harina">Harina</option>
+                        <option value="Azucar">Azucar</option>
+                        <option value="Sal">Sal</option>
+                        <option value="Manteca">Manteca</option>
+                        <option value="Te">Te</option>
+                        <option value="Cafe">Cafe</option>
+                        <option value="Yerba">Yerba</option>
+                        <option value="Otros">Otros</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_canteat">Canteat</label>
+                    <input type="number" class="form-control" name="canteat" id="field_canteat"
+                           formControlName="canteat"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_donations">Donations</label>
+                    <select class="form-control" id="field_donations" name="donations" formControlName="donations">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="donationsOption.id === editForm.get('donations')!.value?.id ? editForm.get('donations')!.value : donationsOption" *ngFor="let donationsOption of donations; trackBy: trackById">{{ donationsOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

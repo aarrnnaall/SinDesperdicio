@@ -1,0 +1,133 @@
+<div>
+    <h2 id="page-heading">
+        <span>Nutritions</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-nutrition" [routerLink]="['/nutrition/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Nutrition
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="nutritions?.length === 0">
+        <span>No nutritions found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="nutritions?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Description</span></th>
+                    <th scope="col" ><span>Water</span></th>
+                    <th scope="col" ><span>Calorie</span></th>
+                    <th scope="col" ><span>Protein</span></th>
+                    <th scope="col" ><span>Lipid Tot</span></th>
+                    <th scope="col" ><span>Ash</span></th>
+                    <th scope="col" ><span>Carbohydrt</span></th>
+                    <th scope="col" ><span>Fiber</span></th>
+                    <th scope="col" ><span>Sugar Tot</span></th>
+                    <th scope="col" ><span>Calcium</span></th>
+                    <th scope="col" ><span>Iron</span></th>
+                    <th scope="col" ><span>Magnesium</span></th>
+                    <th scope="col" ><span>Phosphorus</span></th>
+                    <th scope="col" ><span>Potassium</span></th>
+                    <th scope="col" ><span>Sodium</span></th>
+                    <th scope="col" ><span>Zinc</span></th>
+                    <th scope="col" ><span>Manganese</span></th>
+                    <th scope="col" ><span>Vit C</span></th>
+                    <th scope="col" ><span>Thiamin</span></th>
+                    <th scope="col" ><span>Riboflavin</span></th>
+                    <th scope="col" ><span>Niacin</span></th>
+                    <th scope="col" ><span>Panto Acid</span></th>
+                    <th scope="col" ><span>Vit B 6</span></th>
+                    <th scope="col" ><span>Folate Tot</span></th>
+                    <th scope="col" ><span>Folic Acid</span></th>
+                    <th scope="col" ><span>Food Folate</span></th>
+                    <th scope="col" ><span>Folate DFE</span></th>
+                    <th scope="col" ><span>Vholine Tot</span></th>
+                    <th scope="col" ><span>Vit B 12</span></th>
+                    <th scope="col" ><span>Vit AIU</span></th>
+                    <th scope="col" ><span>Vit ARAE</span></th>
+                    <th scope="col" ><span>Vit E</span></th>
+                    <th scope="col" ><span>Vit D</span></th>
+                    <th scope="col" ><span>Vit K</span></th>
+                    <th scope="col" ><span>Donation</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let nutrition of nutritions ;trackBy: trackId">
+                    <td><a [routerLink]="['/nutrition', nutrition.id, 'view']">{{ nutrition.id }}</a></td>
+                    <td>{{ nutrition.description }}</td>
+                    <td>{{ nutrition.water }}</td>
+                    <td>{{ nutrition.calorie }}</td>
+                    <td>{{ nutrition.protein }}</td>
+                    <td>{{ nutrition.lipidTot }}</td>
+                    <td>{{ nutrition.ash }}</td>
+                    <td>{{ nutrition.carbohydrt }}</td>
+                    <td>{{ nutrition.fiber }}</td>
+                    <td>{{ nutrition.sugarTot }}</td>
+                    <td>{{ nutrition.calcium }}</td>
+                    <td>{{ nutrition.iron }}</td>
+                    <td>{{ nutrition.magnesium }}</td>
+                    <td>{{ nutrition.phosphorus }}</td>
+                    <td>{{ nutrition.potassium }}</td>
+                    <td>{{ nutrition.sodium }}</td>
+                    <td>{{ nutrition.zinc }}</td>
+                    <td>{{ nutrition.manganese }}</td>
+                    <td>{{ nutrition.vitC }}</td>
+                    <td>{{ nutrition.thiamin }}</td>
+                    <td>{{ nutrition.riboflavin }}</td>
+                    <td>{{ nutrition.niacin }}</td>
+                    <td>{{ nutrition.pantoAcid }}</td>
+                    <td>{{ nutrition.vitB6 }}</td>
+                    <td>{{ nutrition.folateTot }}</td>
+                    <td>{{ nutrition.folicAcid }}</td>
+                    <td>{{ nutrition.foodFolate }}</td>
+                    <td>{{ nutrition.folateDFE }}</td>
+                    <td>{{ nutrition.vholineTot }}</td>
+                    <td>{{ nutrition.vitB12 }}</td>
+                    <td>{{ nutrition.vitAIU }}</td>
+                    <td>{{ nutrition.vitARAE }}</td>
+                    <td>{{ nutrition.vitE }}</td>
+                    <td>{{ nutrition.vitD }}</td>
+                    <td>{{ nutrition.vitK }}</td>
+                    <td>
+                        <div *ngIf="nutrition.donation">
+                            <a [routerLink]="['/donations', nutrition.donation?.id, 'view']" >{{ nutrition.donation?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/nutrition', nutrition.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/nutrition', nutrition.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(nutrition)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

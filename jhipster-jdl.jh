@@ -1,0 +1,131 @@
+enum TipoOrg {
+    ONG,OV 
+}
+enum TipoEat {
+    Cargado,Apto,NoApto 
+}
+enum TipoDrive {
+    Cargado,EnCamino,Problema,Entregado 
+}
+enum TipoCate {
+	Pan,Cereales,Pastas,Arroz,Verduras,Frutas,Leche,Cacao,Yogur,Queso,Carne,Pollo,Pescado,Huevos,Aceite,Galletas,Jugo,Gaseosa,Harina,Azucar,Sal,Manteca,Te,Cafe,Yerba,Otros
+}
+enum TipoDuration {
+    Continua,Unavez 
+}
+entity User {
+}
+entity Role	{	
+ PointConsumption Boolean,
+ Donor Boolean,
+ Driver Boolean,
+ Admin Boolean
+}
+entity Eat{
+ category TipoCate,
+ canteat Integer
+
+}
+entity LocationDriver{
+   latitud Integer,
+   longitud Integer
+}
+entity Organization{
+   razonSocial String required,
+   cuit Integer required,
+   tipo TipoOrg,
+   description String required
+}
+entity Branch{
+   desription String required,
+   latitud Integer,
+   longitud Integer
+}
+entity DetailDriver{
+   availabilityday String,
+   availabilitytime String,
+   
+}
+entity Donations{
+   description String required,
+   date ZonedDateTime 
+   latitud Integer,
+   longitud Integer,
+   availabilityday String,
+   availabilitytime String,
+   statuseat TipoEat, 
+   statusdrive TipoDrive 
+
+}
+entity Needdonation	{
+   description String required,
+   datestart ZonedDateTime, 
+   dateend ZonedDateTime,
+   availabilityday String,
+   availabilitytime String,
+   latitud Integer,
+   longitud Integer,
+   duration TipoDuration,
+   intervalduration String,
+   cantpeople Integer
+}
+entity Nutrition {
+	description String,
+    water Float,	
+    calorie Float,	
+    protein	Float,
+    lipidTot Float,	
+    ash Float,	
+    carbohydrt Float,	
+    fiber Float,	
+    sugarTot Float,	
+    calcium Float,	
+    iron Float,	
+    magnesium Float,	
+    phosphorus Float,
+    potassium Float,	
+    sodium Float,
+    zinc Float,	
+    manganese Float,	
+    vitC Float,
+    thiamin Float,
+    riboflavin Float,
+    niacin Float
+    pantoAcid Float,
+    vitB6	Float,
+    folateTot Float,
+    folicAcid	Float,
+    foodFolate	Float,
+    folateDFE	Float,
+    vholineTot	Float,
+    vitB12 Float,	
+    vitAIU Float,	
+    vitARAE Float,
+    vitE Float,	
+    vitD Float,
+    vitD Float,
+    vitK Float
+}
+relationship ManyToMany {
+	Donations{needdonation} to Needdonation{donation}
+}
+relationship OneToMany {
+    Branch{role} to Role{branch}
+	Organization{brach} to Branch{organization}
+}
+relationship ManyToOne {
+	Role{user} to User  
+}
+relationship OneToMany {
+	Role{needdonation} to Needdonation{point}
+    Role{donation} to Donations{donor}
+	DetailDriver{locationdriver} to LocationDriver{detaildriver}
+    Donations{eats} to Eat{donations}
+}
+
+relationship OneToOne {
+	Nutrition{donation} to Donations{nutrition}
+    DetailDriver{drive} to Role{rol}  
+}
+
+

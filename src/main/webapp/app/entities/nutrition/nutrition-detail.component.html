@@ -1,0 +1,168 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="nutrition">
+            <h2><span>Nutrition</span> {{ nutrition.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{ nutrition.description }}</span>
+                </dd>
+                <dt><span>Water</span></dt>
+                <dd>
+                    <span>{{ nutrition.water }}</span>
+                </dd>
+                <dt><span>Calorie</span></dt>
+                <dd>
+                    <span>{{ nutrition.calorie }}</span>
+                </dd>
+                <dt><span>Protein</span></dt>
+                <dd>
+                    <span>{{ nutrition.protein }}</span>
+                </dd>
+                <dt><span>Lipid Tot</span></dt>
+                <dd>
+                    <span>{{ nutrition.lipidTot }}</span>
+                </dd>
+                <dt><span>Ash</span></dt>
+                <dd>
+                    <span>{{ nutrition.ash }}</span>
+                </dd>
+                <dt><span>Carbohydrt</span></dt>
+                <dd>
+                    <span>{{ nutrition.carbohydrt }}</span>
+                </dd>
+                <dt><span>Fiber</span></dt>
+                <dd>
+                    <span>{{ nutrition.fiber }}</span>
+                </dd>
+                <dt><span>Sugar Tot</span></dt>
+                <dd>
+                    <span>{{ nutrition.sugarTot }}</span>
+                </dd>
+                <dt><span>Calcium</span></dt>
+                <dd>
+                    <span>{{ nutrition.calcium }}</span>
+                </dd>
+                <dt><span>Iron</span></dt>
+                <dd>
+                    <span>{{ nutrition.iron }}</span>
+                </dd>
+                <dt><span>Magnesium</span></dt>
+                <dd>
+                    <span>{{ nutrition.magnesium }}</span>
+                </dd>
+                <dt><span>Phosphorus</span></dt>
+                <dd>
+                    <span>{{ nutrition.phosphorus }}</span>
+                </dd>
+                <dt><span>Potassium</span></dt>
+                <dd>
+                    <span>{{ nutrition.potassium }}</span>
+                </dd>
+                <dt><span>Sodium</span></dt>
+                <dd>
+                    <span>{{ nutrition.sodium }}</span>
+                </dd>
+                <dt><span>Zinc</span></dt>
+                <dd>
+                    <span>{{ nutrition.zinc }}</span>
+                </dd>
+                <dt><span>Manganese</span></dt>
+                <dd>
+                    <span>{{ nutrition.manganese }}</span>
+                </dd>
+                <dt><span>Vit C</span></dt>
+                <dd>
+                    <span>{{ nutrition.vitC }}</span>
+                </dd>
+                <dt><span>Thiamin</span></dt>
+                <dd>
+                    <span>{{ nutrition.thiamin }}</span>
+                </dd>
+                <dt><span>Riboflavin</span></dt>
+                <dd>
+                    <span>{{ nutrition.riboflavin }}</span>
+                </dd>
+                <dt><span>Niacin</span></dt>
+                <dd>
+                    <span>{{ nutrition.niacin }}</span>
+                </dd>
+                <dt><span>Panto Acid</span></dt>
+                <dd>
+                    <span>{{ nutrition.pantoAcid }}</span>
+                </dd>
+                <dt><span>Vit B 6</span></dt>
+                <dd>
+                    <span>{{ nutrition.vitB6 }}</span>
+                </dd>
+                <dt><span>Folate Tot</span></dt>
+                <dd>
+                    <span>{{ nutrition.folateTot }}</span>
+                </dd>
+                <dt><span>Folic Acid</span></dt>
+                <dd>
+                    <span>{{ nutrition.folicAcid }}</span>
+                </dd>
+                <dt><span>Food Folate</span></dt>
+                <dd>
+                    <span>{{ nutrition.foodFolate }}</span>
+                </dd>
+                <dt><span>Folate DFE</span></dt>
+                <dd>
+                    <span>{{ nutrition.folateDFE }}</span>
+                </dd>
+                <dt><span>Vholine Tot</span></dt>
+                <dd>
+                    <span>{{ nutrition.vholineTot }}</span>
+                </dd>
+                <dt><span>Vit B 12</span></dt>
+                <dd>
+                    <span>{{ nutrition.vitB12 }}</span>
+                </dd>
+                <dt><span>Vit AIU</span></dt>
+                <dd>
+                    <span>{{ nutrition.vitAIU }}</span>
+                </dd>
+                <dt><span>Vit ARAE</span></dt>
+                <dd>
+                    <span>{{ nutrition.vitARAE }}</span>
+                </dd>
+                <dt><span>Vit E</span></dt>
+                <dd>
+                    <span>{{ nutrition.vitE }}</span>
+                </dd>
+                <dt><span>Vit D</span></dt>
+                <dd>
+                    <span>{{ nutrition.vitD }}</span>
+                </dd>
+                <dt><span>Vit K</span></dt>
+                <dd>
+                    <span>{{ nutrition.vitK }}</span>
+                </dd>
+                <dt><span>Donation</span></dt>
+                <dd>
+                    <div *ngIf="nutrition.donation">
+                        <a [routerLink]="['/donations', nutrition.donation?.id, 'view']">{{ nutrition.donation?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/nutrition', nutrition.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

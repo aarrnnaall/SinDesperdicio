@@ -1,0 +1,87 @@
+<div>
+    <h2 id="page-heading">
+        <span>Donations</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-donations" [routerLink]="['/donations/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Donations
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="donations?.length === 0">
+        <span>No donations found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="donations?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Description</span></th>
+                    <th scope="col" ><span>Date</span></th>
+                    <th scope="col" ><span>Latitud</span></th>
+                    <th scope="col" ><span>Longitud</span></th>
+                    <th scope="col" ><span>Availabilityday</span></th>
+                    <th scope="col" ><span>Availabilitytime</span></th>
+                    <th scope="col" ><span>Statuseat</span></th>
+                    <th scope="col" ><span>Statusdrive</span></th>
+                    <th scope="col" ><span>Needdonation</span></th>
+                    <th scope="col" ><span>Donor</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let donations of donations ;trackBy: trackId">
+                    <td><a [routerLink]="['/donations', donations.id, 'view']">{{ donations.id }}</a></td>
+                    <td>{{ donations.description }}</td>
+                    <td>{{ donations.date | date:'medium' }}</td>
+                    <td>{{ donations.latitud }}</td>
+                    <td>{{ donations.longitud }}</td>
+                    <td>{{ donations.availabilityday }}</td>
+                    <td>{{ donations.availabilitytime }}</td>
+                    <td>{{ donations.statuseat }}</td>
+                    <td>{{ donations.statusdrive }}</td>
+                    <td>
+                        <span *ngFor="let needdonation of donations.needdonations; let last = last">
+                            <a class="form-control-static" [routerLink]="['/needdonation', needdonation?.id, 'view']">{{ needdonation.id }}</a>{{ last ? '' : ', ' }}
+                        </span>
+                    </td>
+                    <td>
+                        <div *ngIf="donations.donor">
+                            <a [routerLink]="['/role', donations.donor?.id, 'view']" >{{ donations.donor?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/donations', donations.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/donations', donations.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(donations)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

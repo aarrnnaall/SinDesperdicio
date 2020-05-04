@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="donations">
+            <h2><span>Donations</span> {{ donations.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{ donations.description }}</span>
+                </dd>
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{ donations.date }}</span>
+                </dd>
+                <dt><span>Latitud</span></dt>
+                <dd>
+                    <span>{{ donations.latitud }}</span>
+                </dd>
+                <dt><span>Longitud</span></dt>
+                <dd>
+                    <span>{{ donations.longitud }}</span>
+                </dd>
+                <dt><span>Availabilityday</span></dt>
+                <dd>
+                    <span>{{ donations.availabilityday }}</span>
+                </dd>
+                <dt><span>Availabilitytime</span></dt>
+                <dd>
+                    <span>{{ donations.availabilitytime }}</span>
+                </dd>
+                <dt><span>Statuseat</span></dt>
+                <dd>
+                    <span>{{ donations.statuseat }}</span>
+                </dd>
+                <dt><span>Statusdrive</span></dt>
+                <dd>
+                    <span>{{ donations.statusdrive }}</span>
+                </dd>
+                <dt><span>Needdonation</span></dt>
+                <dd>
+                    <span *ngFor="let needdonation of donations.needdonations; let last = last">
+                        <a [routerLink]="['/needdonation', needdonation?.id, 'view']">{{ needdonation.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+                <dt><span>Donor</span></dt>
+                <dd>
+                    <div *ngIf="donations.donor">
+                        <a [routerLink]="['/role', donations.donor?.id, 'view']">{{ donations.donor?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/donations', donations.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

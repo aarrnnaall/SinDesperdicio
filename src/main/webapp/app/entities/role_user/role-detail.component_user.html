@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="role">
+            <h2><span>Rol</span></h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <div *ngIf="role.donor">
+                <dt><span>Donador</span></dt>
+                <dd>
+                    <span><fa-icon [icon]="'times'"></fa-icon></span>
+                </dd>
+                </div>
+                <div *ngIf="role.driver">
+                <dt><span>Conductor</span></dt>
+                <dd>
+                    <span><fa-icon [icon]="'times'"></fa-icon></span>
+                </dd>
+                </div>
+                <div *ngIf="role.pointConsumption">
+                <dt><span>Punto Consumo</span></dt>
+                <dd>
+                    <span><fa-icon [icon]="'times'"></fa-icon></span>
+                </dd>
+                </div>
+                <!--
+                <dt><span>Admin</span></dt>
+                <dd>
+                    <span>{{ role.admin }}</span>
+                </dd>
+                <dt><span>User</span></dt>
+                <dd>
+                    {{ role.user?.id }}
+                </dd>-->
+                <div *ngIf="role.branch">
+                <dt><span>Sucursal</span></dt>
+                <dd>
+                    <div *ngIf="role.branch">
+                        <a [routerLink]="['/branch', role.branch?.id, 'view']">{{ role.branch?.desription }}</a>
+                    </div>
+                </dd>
+                </div>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Volver</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/role_user', role.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editar</span>
+            </button>
+        </div>
+    </div>
+</div>

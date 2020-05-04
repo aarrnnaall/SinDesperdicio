@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-role-heading">Crear o Editar Rol</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div *ngIf="false" class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+                <div *ngIf="!editForm.get(['pointConsumption'])!.value" class="form-group">
+                    <label class="form-control-label" for="field_donor">Donador</label>
+                    <input type="checkbox" class="form-control" name="donor" id="field_donor"
+                           formControlName="donor"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_driver">Conductor</label>
+                    <input type="checkbox" class="form-control" name="driver" id="field_driver"
+                           formControlName="driver"/>
+                </div>
+                <div *ngIf="!editForm.get(['donor'])!.value" class="form-group">
+                    <label class="form-control-label" for="field_pointConsumption">Punto Consumo</label>
+                    <input type="checkbox" class="form-control" name="pointConsumption" id="field_pointConsumption"
+                           formControlName="pointConsumption"/>
+                </div>
+
+                <div *ngIf="false" class="form-group">
+                    <label class="form-control-label" for="field_admin">Admin</label>
+                    <input type="checkbox" class="form-control" name="admin" id="field_admin"
+                           formControlName="admin"/>
+                </div>
+
+                <div *ngIf="false" class="form-group">
+                    <label class="form-control-label" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" formControlName="user">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_branch">Sucursal</label>
+                    <select class="form-control" id="field_branch" name="branch" formControlName="branch">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="branchOption.id === editForm.get('branch')!.value?.id ? editForm.get('branch')!.value : branchOption" *ngFor="let branchOption of branches; trackBy: trackById">{{ branchOption.desription }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Guardar</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

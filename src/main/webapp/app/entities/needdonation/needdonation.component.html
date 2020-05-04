@@ -1,0 +1,85 @@
+<div>
+    <h2 id="page-heading">
+        <span>Needdonations</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-needdonation" [routerLink]="['/needdonation/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Needdonation
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="needdonations?.length === 0">
+        <span>No needdonations found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="needdonations?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Description</span></th>
+                    <th scope="col" ><span>Datestart</span></th>
+                    <th scope="col" ><span>Dateend</span></th>
+                    <th scope="col" ><span>Availabilityday</span></th>
+                    <th scope="col" ><span>Availabilitytime</span></th>
+                    <th scope="col" ><span>Latitud</span></th>
+                    <th scope="col" ><span>Longitud</span></th>
+                    <th scope="col" ><span>Duration</span></th>
+                    <th scope="col" ><span>Intervalduration</span></th>
+                    <th scope="col" ><span>Cantpeople</span></th>
+                    <th scope="col" ><span>Point</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let needdonation of needdonations ;trackBy: trackId">
+                    <td><a [routerLink]="['/needdonation', needdonation.id, 'view']">{{ needdonation.id }}</a></td>
+                    <td>{{ needdonation.description }}</td>
+                    <td>{{ needdonation.datestart | date:'medium' }}</td>
+                    <td>{{ needdonation.dateend | date:'medium' }}</td>
+                    <td>{{ needdonation.availabilityday }}</td>
+                    <td>{{ needdonation.availabilitytime }}</td>
+                    <td>{{ needdonation.latitud }}</td>
+                    <td>{{ needdonation.longitud }}</td>
+                    <td>{{ needdonation.duration }}</td>
+                    <td>{{ needdonation.intervalduration }}</td>
+                    <td>{{ needdonation.cantpeople }}</td>
+                    <td>
+                        <div *ngIf="needdonation.point">
+                            <a [routerLink]="['/role', needdonation.point?.id, 'view']" >{{ needdonation.point?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/needdonation', needdonation.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/needdonation', needdonation.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(needdonation)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,238 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-nutrition-heading">Create or edit a Nutrition</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                           formControlName="description"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_water">Water</label>
+                    <input type="number" class="form-control" name="water" id="field_water"
+                           formControlName="water"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_calorie">Calorie</label>
+                    <input type="number" class="form-control" name="calorie" id="field_calorie"
+                           formControlName="calorie"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_protein">Protein</label>
+                    <input type="number" class="form-control" name="protein" id="field_protein"
+                           formControlName="protein"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_lipidTot">Lipid Tot</label>
+                    <input type="number" class="form-control" name="lipidTot" id="field_lipidTot"
+                           formControlName="lipidTot"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_ash">Ash</label>
+                    <input type="number" class="form-control" name="ash" id="field_ash"
+                           formControlName="ash"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_carbohydrt">Carbohydrt</label>
+                    <input type="number" class="form-control" name="carbohydrt" id="field_carbohydrt"
+                           formControlName="carbohydrt"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fiber">Fiber</label>
+                    <input type="number" class="form-control" name="fiber" id="field_fiber"
+                           formControlName="fiber"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_sugarTot">Sugar Tot</label>
+                    <input type="number" class="form-control" name="sugarTot" id="field_sugarTot"
+                           formControlName="sugarTot"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_calcium">Calcium</label>
+                    <input type="number" class="form-control" name="calcium" id="field_calcium"
+                           formControlName="calcium"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_iron">Iron</label>
+                    <input type="number" class="form-control" name="iron" id="field_iron"
+                           formControlName="iron"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_magnesium">Magnesium</label>
+                    <input type="number" class="form-control" name="magnesium" id="field_magnesium"
+                           formControlName="magnesium"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_phosphorus">Phosphorus</label>
+                    <input type="number" class="form-control" name="phosphorus" id="field_phosphorus"
+                           formControlName="phosphorus"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_potassium">Potassium</label>
+                    <input type="number" class="form-control" name="potassium" id="field_potassium"
+                           formControlName="potassium"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_sodium">Sodium</label>
+                    <input type="number" class="form-control" name="sodium" id="field_sodium"
+                           formControlName="sodium"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_zinc">Zinc</label>
+                    <input type="number" class="form-control" name="zinc" id="field_zinc"
+                           formControlName="zinc"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_manganese">Manganese</label>
+                    <input type="number" class="form-control" name="manganese" id="field_manganese"
+                           formControlName="manganese"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vitC">Vit C</label>
+                    <input type="number" class="form-control" name="vitC" id="field_vitC"
+                           formControlName="vitC"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_thiamin">Thiamin</label>
+                    <input type="number" class="form-control" name="thiamin" id="field_thiamin"
+                           formControlName="thiamin"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_riboflavin">Riboflavin</label>
+                    <input type="number" class="form-control" name="riboflavin" id="field_riboflavin"
+                           formControlName="riboflavin"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_niacin">Niacin</label>
+                    <input type="number" class="form-control" name="niacin" id="field_niacin"
+                           formControlName="niacin"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_pantoAcid">Panto Acid</label>
+                    <input type="number" class="form-control" name="pantoAcid" id="field_pantoAcid"
+                           formControlName="pantoAcid"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vitB6">Vit B 6</label>
+                    <input type="number" class="form-control" name="vitB6" id="field_vitB6"
+                           formControlName="vitB6"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_folateTot">Folate Tot</label>
+                    <input type="number" class="form-control" name="folateTot" id="field_folateTot"
+                           formControlName="folateTot"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_folicAcid">Folic Acid</label>
+                    <input type="number" class="form-control" name="folicAcid" id="field_folicAcid"
+                           formControlName="folicAcid"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_foodFolate">Food Folate</label>
+                    <input type="number" class="form-control" name="foodFolate" id="field_foodFolate"
+                           formControlName="foodFolate"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_folateDFE">Folate DFE</label>
+                    <input type="number" class="form-control" name="folateDFE" id="field_folateDFE"
+                           formControlName="folateDFE"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vholineTot">Vholine Tot</label>
+                    <input type="number" class="form-control" name="vholineTot" id="field_vholineTot"
+                           formControlName="vholineTot"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vitB12">Vit B 12</label>
+                    <input type="number" class="form-control" name="vitB12" id="field_vitB12"
+                           formControlName="vitB12"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vitAIU">Vit AIU</label>
+                    <input type="number" class="form-control" name="vitAIU" id="field_vitAIU"
+                           formControlName="vitAIU"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vitARAE">Vit ARAE</label>
+                    <input type="number" class="form-control" name="vitARAE" id="field_vitARAE"
+                           formControlName="vitARAE"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vitE">Vit E</label>
+                    <input type="number" class="form-control" name="vitE" id="field_vitE"
+                           formControlName="vitE"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vitD">Vit D</label>
+                    <input type="number" class="form-control" name="vitD" id="field_vitD"
+                           formControlName="vitD"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vitK">Vit K</label>
+                    <input type="number" class="form-control" name="vitK" id="field_vitK"
+                           formControlName="vitK"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_donation">Donation</label>
+                    <select class="form-control" id="field_donation" name="donation" formControlName="donation">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="donationsOption.id === editForm.get('donation')!.value?.id ? editForm.get('donation')!.value : donationsOption" *ngFor="let donationsOption of donations; trackBy: trackById">{{ donationsOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

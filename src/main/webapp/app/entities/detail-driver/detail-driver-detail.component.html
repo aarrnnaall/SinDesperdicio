@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="detailDriver">
+            <h2><span>Detail Driver</span> {{ detailDriver.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Availabilityday</span></dt>
+                <dd>
+                    <span>{{ detailDriver.availabilityday }}</span>
+                </dd>
+                <dt><span>Availabilitytime</span></dt>
+                <dd>
+                    <span>{{ detailDriver.availabilitytime }}</span>
+                </dd>
+                <dt><span>Drive</span></dt>
+                <dd>
+                    <div *ngIf="detailDriver.drive">
+                        <a [routerLink]="['/role', detailDriver.drive?.id, 'view']">{{ detailDriver.drive?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/detail-driver', detailDriver.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
