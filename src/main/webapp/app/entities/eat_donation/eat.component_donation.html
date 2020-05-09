@@ -1,0 +1,72 @@
+<div>
+    <h2 id="page-heading">
+        <span>Tus Donaciones</span>
+    <!--
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-eat" [routerLink]="['/eat/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Crear Nueva Comida
+            </span>
+        </button>
+    -->
+    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-donations" [routerLink]="['/donations_donor/new']">
+        <fa-icon icon="plus"></fa-icon>
+        <span>
+        Crear nueva Donación
+        </span>
+    </button>
+    </h2>
+
+
+   <jhi-alert-error></jhi-alert-error>
+
+ <!--   <jhi-alert></jhi-alert>-->
+
+    <div class="alert alert-warning" id="no-result" *ngIf="filter().length === 0">
+        <span>No se encontraron Donaciones</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="filter().length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th *ngIf="false" scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Categoria</span></th>
+                    <th scope="col" ><span>Cantidad Comida</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let eat of filter() ;trackBy: trackId">
+                    <td *ngIf="false"><a [routerLink]="['/eat_donation', eat.id, 'view']">{{ eat.id }}</a></td>
+                    <td>{{ eat.category }}</td>
+                    <td>{{ eat.canteat }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <div *ngIf="eat.donations">
+                            <button type="submit"
+                            [routerLink]="['/donations_donor', eat.donations?.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">Detalle</span>
+                            </button>
+                            </div>
+                            <button type="submit"
+                                    [routerLink]="['/eat_donation', eat.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Editar</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(eat)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Eliminar</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

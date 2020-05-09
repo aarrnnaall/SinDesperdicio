@@ -41,7 +41,7 @@ export class RoleComponent implements OnInit, OnDestroy {
   filter(login: String): any {
     return this.roles?.filter(x=>x.user?.login===login)
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-    
+
   }
   registerChangeInRoles(): void {
     this.eventSubscriber = this.eventManager.subscribe('roleListModification', () => this.loadAll());
@@ -51,4 +51,5 @@ export class RoleComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(RoleDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.role = role;
   }
+
 }

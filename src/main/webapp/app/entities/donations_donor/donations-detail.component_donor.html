@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="donations">
+            <h2><span></span></h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Descripción</span></dt>
+                <dd>
+                    <span>{{ donations.description }}</span>
+                </dd>
+                <dt><span>Fecha</span></dt>
+                <dd>
+                    <span>{{ donations.date | date:'shortDate'}}</span>
+                </dd>
+                <dt><span>Disponibilidad</span></dt>
+                <dt><span>Día</span></dt>
+                <dd>
+                    <span>{{ donations.availabilityday }}</span>
+                </dd>
+                <dt><span>Hora</span></dt>
+                <dd>
+                    <span>{{ donations.availabilitytime }}</span>
+                </dd>
+                <dt><span>Estado-Comida</span></dt>
+                <dd>
+                    <span>{{ donations.statuseat }}</span>
+                </dd>
+                <dt><span>Estado-Conductor</span></dt>
+                <dd>
+                    <span>{{ donations.statusdrive }}</span>
+                </dd>
+                <dt><span>Punto Consumo</span></dt>
+                <dd>
+                    <span *ngFor="let needdonation of donations.needdonations; let last = last">
+                        <a>{{ needdonation.description }}</a>{{ last ? '' : ', ' }}
+                        <a *ngIf="!needdonation">Ninguno</a>
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Volver</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/donations_donor', donations.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editar</span>
+            </button>
+        </div>
+    </div>
+</div>

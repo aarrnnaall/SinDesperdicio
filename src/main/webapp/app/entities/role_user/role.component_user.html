@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
-        <span>Tus Roles</span>
-    
+        <span>Tu Rol</span>
+
         <button id="jh-create-entity" *ngIf="filter(account.login)?.length === 0" class="btn btn-primary float-right jh-create-entity create-role" [routerLink]="['/role_user/new']">
             <fa-icon icon="plus"></fa-icon>
             <span>
@@ -9,7 +9,7 @@
             </span>
         </button>
     </h2>
-    
+
     <jhi-alert-error></jhi-alert-error>
 
     <!--<jhi-alert></jhi-alert>-->
@@ -55,7 +55,7 @@
                             <a><fa-icon [icon]="'times'"></fa-icon></a>
                         </div>
                     </td>
-                    
+
                     <td *ngIf="false">
                         {{ role.user?.login }}
                     </td>

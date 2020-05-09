@@ -17,6 +17,10 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./eat/eat.module').then(m => m.SinDesperdicioEatModule)
       },
       {
+        path: 'eat_donation',
+        loadChildren: () => import('./eat_donation/eat.module_donation').then(m => m.SinDesperdicioEatModule)
+      },
+      {
         path: 'location-driver',
         loadChildren: () => import('./location-driver/location-driver.module').then(m => m.SinDesperdicioLocationDriverModule)
       },
@@ -35,6 +39,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'donations',
         loadChildren: () => import('./donations/donations.module').then(m => m.SinDesperdicioDonationsModule)
+      },
+      {
+        path: 'donations_donor',
+        loadChildren: () => import('./donations_donor/donations.module_donor').then(m => m.SinDesperdicioDonationsModule)
       },
       {
         path: 'needdonation',

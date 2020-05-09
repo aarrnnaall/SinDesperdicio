@@ -1,0 +1,199 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <h2 id="jhi-donations-heading">Crear o Editar Donación</h2>
+        <button [hidden]="editForm.get('id')!.value" class="btn btn-info" (click)="Addeats()"> +  </button>
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div *ngIf="false" class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_description">Descripción</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                           formControlName="description"/>
+                    <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('description')?.errors?.required">
+                               Este campo es requerido.
+                        </small>
+                    </div>
+                </div>
+
+                <div *ngIf="false" class="form-group">
+                    <label class="form-control-label" for="field_date">Fecha</label>
+                    <div class="d-flex">
+                        <input id="field_date" type="datetime-local" class="form-control" name="date" formControlName="date" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div *ngIf="false" class="form-group">
+                    <label class="form-control-label" for="field_latitud">Latitud</label>
+                    <input type="number" class="form-control" name="latitud" id="field_latitud"
+                           formControlName="latitud"/>
+                </div>
+
+                <div *ngIf="false" class="form-group">
+                    <label class="form-control-label" for="field_longitud">Longitud</label>
+                    <input type="number" class="form-control" name="longitud" id="field_longitud"
+                           formControlName="longitud"/>
+                </div>
+                <label class="form-control-label"  for="field_availabilityday">Disponibilidad</label>
+                 <div class="form-group">
+                    <div>
+                        <table class="table-responsive">
+                            <thead>
+                                <th>
+                        <div class="form-group" >
+                            <label class="form-control-label">Lunes</label>
+                            <input type="checkbox" (click)="Addlunes()">
+                        </div>
+                                </th>
+                                <th>
+                        <div class="form-group">
+                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Martes</label>
+                            <input type="checkbox" (click)="Addmartes()">
+                        </div>
+                                </th>
+                                <th>
+                        <div class="form-group">
+                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Miercoles</label>
+                            <input  type="checkbox" (click)="Addmiercoles()">
+                        </div>
+                                </th>
+                                <th>
+                        <div class="form-group" >
+                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jueves</label>
+                            <input type="checkbox" (click)="Addjueves()">
+                        </div>
+                                </th>
+                                <th>
+                        <div class="form-group">
+                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Viernes</label>
+                            <input type="checkbox" (click)="Addviernes()">
+                        </div>
+                                </th>
+                                <th>
+                        <div class="form-group">
+                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sabado</label>
+                            <input  type="checkbox" (click)="Addsabado()">
+                        </div>
+                                </th>
+                                <th>
+                        <div class="form-group" >
+                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Domingo</label>
+                            <input type="checkbox" (click)="Adddomingo()">
+                        </div>
+                                </th>
+                        </thead>
+                        </table>
+                        <input [hidden]="!editForm.get('availabilityday')!.value" type="text" class="form-control" name="availabilityday" id="field_availabilityday"
+                        formControlName="availabilityday" readonly />
+                    </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Desde</span>
+                    </div>
+                    <input class="form-control ng-untouched ng-pristine ng-valid" formControlName="starttime" name="starttime" type="time" >
+                    <div class="input-group-append"> <span class="input-group-text" >Hasta</span>
+                    </div> <input class="form-control ng-pristine ng-valid ng-touched" formControlName="endtime" name="endtime" type="time" >
+                </div>
+
+                <div class="form-group">
+                    <input [hidden]="!editForm.get('availabilitytime')!.value" type="text" class="form-control" name="availabilitytime" id="field_availabilitytime"
+                           formControlName="availabilitytime" readonly />
+                </div>
+                <div *ngIf="false" class="form-group">
+                    <label class="form-control-label" for="field_statuseat">Estado-Comida</label>
+                    <select class="form-control" name="statuseat" formControlName="statuseat" id="field_statuseat">
+                        <option value="Cargado">Cargado</option>
+                        <option value="Apto">Apto</option>
+                        <option value="NoApto">NoApto</option>
+                    </select>
+                </div>
+
+                <div *ngIf="false" class="form-group">
+                    <label class="form-control-label" for="field_statusdrive">Estado-Conductor</label>
+                    <select class="form-control" name="statusdrive" formControlName="statusdrive" id="field_statusdrive">
+                        <option value="Cargado">Cargado</option>
+                        <option value="EnCamino">EnCamino</option>
+                        <option value="Problema">Problema</option>
+                        <option value="Entregado">Entregado</option>
+                    </select>
+                </div>
+
+                <div *ngIf="false" class="form-group">
+                    <label for="field_needdonations">Punto Consumo</label>
+                    <select class="form-control" id="field_needdonations" multiple name="needdonations" formControlName="needdonations">
+                        <option [ngValue]="getSelected(editForm.get('needdonations')!.value, needdonationOption)" *ngFor="let needdonationOption of needdonations; trackBy: trackById">{{ needdonationOption.id }}</option>
+                    </select>
+                </div>
+
+                <div *ngIf="false" class="form-group">
+                    <label class="form-control-label" for="field_donor">Donador</label>
+                    <select class="form-control" id="field_donor" name="donor" formControlName="donor">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="roleOption.id === editForm.get('donor')!.value?.id ? editForm.get('donor')!.value : roleOption" *ngFor="let roleOption of roles; trackBy: trackById">{{ roleOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+            <div formArrayName="eats" *ngFor="let eat of eats.controls; let i = index">
+                <div [formGroupName]="i">
+                  <div class="form-group row">
+                    <div class="col-md-4">
+                      <select type="text" [attr.id]="'category' + i" class="form-control" placeholder="Ingresar Comida" formControlName="category">
+                        <option ></option>
+                        <option value="Pan">Pan</option>
+                        <option value="Cereales">Cereales</option>
+                        <option value="Pastas">Pastas</option>
+                        <option value="Arroz">Arroz</option>
+                        <option value="Verduras">Verduras</option>
+                        <option value="Frutas">Frutas</option>
+                        <option value="Leche">Leche</option>
+                        <option value="Cacao">Cacao</option>
+                        <option value="Yogur">Yogur</option>
+                        <option value="Queso">Queso</option>
+                        <option value="Carne">Carne</option>
+                        <option value="Pollo">Pollo</option>
+                        <option value="Pescado">Pescado</option>
+                        <option value="Huevos">Huevos</option>
+                        <option value="Aceite">Aceite</option>
+                        <option value="Galletas">Galletas</option>
+                        <option value="Jugo">Jugo</option>
+                        <option value="Gaseosa">Gaseosa</option>
+                        <option value="Harina">Harina</option>
+                        <option value="Azucar">Azucar</option>
+                        <option value="Sal">Sal</option>
+                        <option value="Manteca">Manteca</option>
+                        <option value="Te">Te</option>
+                        <option value="Cafe">Cafe</option>
+                        <option value="Yerba">Yerba</option>
+                        <option value="Otros">Otros</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" [attr.id]="'canteat' + i" class="form-control" placeholder="Cantidad (KG o L)" formControlName="canteat">
+                    </div>
+                    <div class="col-md-2">
+                      <button class="btn btn-danger" (click)="Removeeats(i)">-</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Guardar</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

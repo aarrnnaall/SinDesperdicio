@@ -12,7 +12,7 @@ import { UserService } from 'app/core/user/user.service';
 import { IBranch } from 'app/shared/model/branch.model';
 import { BranchService } from 'app/entities/branch/branch.service';
 import { AccountService } from 'app/core/auth/account.service';
-
+import { JhiEventManager } from 'ng-jhipster';
 type SelectableEntity = IUser | IBranch;
 
 @Component({
@@ -41,7 +41,8 @@ export class RoleUpdateComponent implements OnInit {
     protected branchService: BranchService,
     protected activatedRoute: ActivatedRoute,
     private accountService: AccountService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected eventManager: JhiEventManager
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +54,7 @@ export class RoleUpdateComponent implements OnInit {
       this.branchService.query().subscribe((res: HttpResponse<IBranch[]>) => (this.branches = res.body || []));
     });
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
+
   }
   updateForm(role: IRole): void {
     this.editForm.patchValue({
@@ -96,7 +98,10 @@ export class RoleUpdateComponent implements OnInit {
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IRole>>): void {
     result.subscribe(
       () => this.onSaveSuccess(),
-      () => this.onSaveError()
+      () => this.onSaveError(),
+      () => {
+        this.eventManager.broadcast('roleListModification');
+      }
     );
   }
 
