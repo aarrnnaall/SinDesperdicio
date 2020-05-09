@@ -1,0 +1,87 @@
+<div>
+    <h2 id="page-heading">
+        <span>Tus Donaciónes</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-donations" [routerLink]="['/donations_donor/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Crear nueva Donación
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <!--<jhi-alert></jhi-alert>-->
+    <div class="alert alert-warning" id="no-result" *ngIf="filter().length === 0">
+        <span>No se encontraron donaciónes</span>
+    </div>
+    <div class="table-responsive" id="entities" *ngIf="filter().length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th *ngIf="false" scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Descripción</span></th>
+                    <th scope="col" ><span>Fecha</span></th>
+                    <th *ngIf="false" scope="col" ><span>Latitud</span></th>
+                    <th *ngIf="false" scope="col" ><span>Longitud</span></th>
+                    <th scope="col" ><span>Días</span></th>
+                    <th scope="col" ><span>Hora</span></th>
+                    <th scope="col" ><span>Estado-Comida</span></th>
+                    <th scope="col" ><span>Estado-Conductor</span></th>
+                    <th scope="col" ><span>Punto Consumo</span></th>
+                    <th *ngIf="false" scope="col" ><span>Donador</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let donations of filter() ;trackBy: trackId">
+                    <div *ngIf="false">
+                    <td><a [routerLink]="['/donations', donations.id, 'view']">{{ donations.id }}</a></td>
+                    </div>
+                    <td>{{ donations.description }}</td>
+                    <td>{{ donations.date | date:'shortDate' }}</td>
+                    <td *ngIf="false" >{{ donations.latitud }}</td>
+                    <td *ngIf="false" >{{ donations.longitud }}</td>
+                    <td>{{ donations.availabilityday }}</td>
+                    <td>{{ donations.availabilitytime }}</td>
+                    <td>{{ donations.statuseat }}</td>
+                    <td>{{ donations.statusdrive }}</td>
+                    <td>
+                        <span *ngFor="let needdonation of donations.needdonations; let last = last">
+                            <a class="form-control-static"><fa-icon [icon]="'times'"></fa-icon></a>{{ last ? '' : ', ' }}
+                        </span>
+                    </td>
+                    <td *ngIf="false">
+                        <div *ngIf="donations.donor">
+                            <a [routerLink]="['/role', donations.donor?.id, 'view']" >{{ donations.donor?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/donations_donor', donations.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">Vista</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/donations_donor', donations.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Editar</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(donations)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Eliminar</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -29,7 +29,7 @@ public class Eat implements Serializable {
     @Column(name = "canteat")
     private Integer canteat;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JsonIgnoreProperties("eats")
     private Donations donations;
 
