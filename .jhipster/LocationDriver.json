@@ -1,0 +1,33 @@
+{
+    "name": "LocationDriver",
+    "fields": [
+        {
+            "fieldName": "latitud",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "longitud",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "detailDriver",
+            "otherEntityRelationshipName": "locationdriver",
+            "relationshipName": "detaildriver",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200502231000",
+    "entityTableName": "location_driver",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

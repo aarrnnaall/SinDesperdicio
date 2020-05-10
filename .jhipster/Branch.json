@@ -1,0 +1,46 @@
+{
+    "name": "Branch",
+    "fields": [
+        {
+            "fieldName": "desription",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "latitud",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "longitud",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "role",
+            "otherEntityRelationshipName": "branch",
+            "relationshipName": "role"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "organization",
+            "otherEntityRelationshipName": "brach",
+            "relationshipName": "organization",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200502231200",
+    "entityTableName": "branch",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

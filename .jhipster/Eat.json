@@ -1,0 +1,34 @@
+{
+    "name": "Eat",
+    "fields": [
+        {
+            "fieldName": "category",
+            "fieldType": "TipoCate",
+            "fieldValues": "Pan,Cereales,Pastas,Arroz,Verduras,Frutas,Leche,Cacao,Yogur,Queso,Carne,Pollo,Pescado,Huevos,Aceite,Galletas,Jugo,Gaseosa,Harina,Azucar,Sal,Manteca,Te,Cafe,Yerba,Otros"
+        },
+        {
+            "fieldName": "canteat",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "donations",
+            "otherEntityRelationshipName": "eats",
+            "relationshipName": "donations",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200502230900",
+    "entityTableName": "eat",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
