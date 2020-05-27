@@ -54,7 +54,6 @@ export class RoleUpdateComponent implements OnInit {
       this.branchService.query().subscribe((res: HttpResponse<IBranch[]>) => (this.branches = res.body || []));
     });
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
-
   }
   updateForm(role: IRole): void {
     this.editForm.patchValue({

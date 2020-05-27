@@ -17,7 +17,12 @@ export class EatComponent implements OnInit, OnDestroy {
   account: any;
   eventSubscriber?: Subscription;
   authSubscription?: Subscription;
-  constructor(private accountService: AccountService,protected eatService: EatService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {}
+  constructor(
+    private accountService: AccountService,
+    protected eatService: EatService,
+    protected eventManager: JhiEventManager,
+    protected modalService: NgbModal
+  ) {}
 
   loadAll(): void {
     this.eatService.query().subscribe((res: HttpResponse<IEat[]>) => (this.eats = res.body || []));
@@ -34,8 +39,8 @@ export class EatComponent implements OnInit, OnDestroy {
       this.eventManager.destroy(this.eventSubscriber);
     }
   }
-  filter(): any{
-    return this.eats?.filter(x=>x.donations?.donor?.user?.login===this.account.login);
+  filter(): any {
+    return this.eats?.filter(x => x.donations?.donor?.user?.login === this.account.login);
   }
   trackId(index: number, item: IEat): number {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion

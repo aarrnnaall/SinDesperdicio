@@ -1,0 +1,83 @@
+{
+    "name": "Donations",
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "latitud",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "longitud",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "availabilityday",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "availabilitytime",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "statuseat",
+            "fieldType": "TipoEat",
+            "fieldValues": "Cargado,Apto,NoApto"
+        },
+        {
+            "fieldName": "statusdrive",
+            "fieldType": "TipoDrive",
+            "fieldValues": "Cargado,EnCamino,Problema,Entregado"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "eat",
+            "otherEntityRelationshipName": "donations",
+            "relationshipName": "eats"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "needdonation",
+            "otherEntityRelationshipName": "donation",
+            "relationshipName": "needdonation",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "nutrition",
+            "otherEntityRelationshipName": "donation",
+            "relationshipName": "nutrition",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "role",
+            "otherEntityRelationshipName": "donation",
+            "relationshipName": "donor",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200526212100",
+    "entityTableName": "donations",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

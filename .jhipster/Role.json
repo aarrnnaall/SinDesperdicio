@@ -1,0 +1,67 @@
+{
+    "name": "Role",
+    "fields": [
+        {
+            "fieldName": "pointConsumption",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "donor",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "driver",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "admin",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "needdonation",
+            "otherEntityRelationshipName": "point",
+            "relationshipName": "needdonation"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "donations",
+            "otherEntityRelationshipName": "donor",
+            "relationshipName": "donation"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "role",
+            "relationshipName": "user",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "detailDriver",
+            "otherEntityRelationshipName": "drive",
+            "relationshipName": "rol",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "branch",
+            "otherEntityRelationshipName": "role",
+            "relationshipName": "branch",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200526211500",
+    "entityTableName": "role",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -11,8 +11,6 @@ import { DonationsService } from './donations.service_donor';
 import { DonationsComponent } from './donations.component_donor';
 import { DonationsDetailComponent } from './donations-detail.component_donor';
 import { DonationsUpdateComponent } from './donations-update.component_donor';
-import { userManagementRoute } from '../../admin/user-management/user-management.route';
-import { User } from '../../core/user/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class DonationsResolve implements Resolve<IDonations> {

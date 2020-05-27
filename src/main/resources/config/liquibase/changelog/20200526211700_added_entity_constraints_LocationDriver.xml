@@ -4,15 +4,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
     <!--
-        Added the constraints for entity Nutrition.
+        Added the constraints for entity LocationDriver.
     -->
-    <changeSet id="20200502231600-2" author="jhipster">
+    <changeSet id="20200526211700-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="donation_id"
-                                 baseTableName="nutrition"
-                                 constraintName="fk_nutrition_donation_id"
+        <addForeignKeyConstraint baseColumnNames="detaildriver_id"
+                                 baseTableName="location_driver"
+                                 constraintName="fk_location_driver_detaildriver_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="donations"/>
+                                 referencedTableName="detail_driver"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -1,0 +1,162 @@
+{
+    "name": "Nutrition",
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "water",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "calorie",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "protein",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "lipidTot",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "ash",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "carbohydrt",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "fiber",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "sugarTot",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "calcium",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "iron",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "magnesium",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "phosphorus",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "potassium",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "sodium",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "zinc",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "manganese",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "vitC",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "thiamin",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "riboflavin",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "niacin",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "pantoAcid",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "vitB6",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "folateTot",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "folicAcid",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "foodFolate",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "folateDFE",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "vholineTot",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "vitB12",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "vitAIU",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "vitARAE",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "vitE",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "vitD",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "vitK",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "donations",
+            "otherEntityRelationshipName": "nutrition",
+            "relationshipName": "donation",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200526212300",
+    "entityTableName": "nutrition",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

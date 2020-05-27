@@ -1,18 +1,16 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "sindesperdicio.um.edu.ar",
-      "nativeLanguage": "es"
+      "packageName": "app.sindesperdicio.net.ar"
     },
-    "jhipsterVersion": "6.2.0",
+    "jhipsterVersion": "6.8.0",
     "applicationType": "monolith",
     "baseName": "SinDesperdicio",
-    "packageName": "sindesperdicio.um.edu.ar",
-    "packageFolder": "sindesperdicio/um/edu/ar",
+    "packageName": "app.sindesperdicio.net.ar",
+    "packageFolder": "app/sindesperdicio/net/ar",
     "serverPort": "8080",
     "authenticationType": "jwt",
-    "cacheProvider": "ehcache",
-    "enableHibernateCache": false,
+    "cacheProvider": "no",
     "websocket": false,
     "databaseType": "sql",
     "devDatabaseType": "mysql",
@@ -22,22 +20,20 @@
     "serviceDiscoveryType": false,
     "buildTool": "maven",
     "enableSwaggerCodegen": false,
-    "jwtSecretKey": "MzYwMjgzOTRmODI1YThlMTIyMGNlZTliYmIyNDgxNzNhOGQ5NWFkNTIxY2MzMGRlMGQ4MGYzM2Y1ZTRhZWYwYTIyNjc1YjkwNTViZDY0OWVjNjA3NjM0NGZmMzFiMGIwNzQ1ZmU4YmQ4YjAyMDdiNTAyYTQwMDFhZmU4MTQ5OTA=",
+    "jwtSecretKey": "MmRjODgxZDdjYzgwMDgwYWQ0MzQwOTk5MGE3Mzg5NjJmNjIxOTk1YTIxNGE3NDQzOTM4ZjIxYzg4ZTdkM2EwOTE3NDYyNGI0MDRiNDY3MzcyOTdkYmVhZDNiMWZjYTEzYzU0YTViZGM5ODQzZmQyM2FjYzRmMDE5MTkxOGNkY2I=",
+    "embeddableLaunchScript": false,
     "useSass": true,
     "clientPackageManager": "npm",
     "clientFramework": "angularX",
-    "clientTheme": "none",
-    "clientThemeVariant": "",
+    "clientTheme": "united",
+    "clientThemeVariant": "primary",
+    "creationTimestamp": 1590526964697,
     "testFrameworks": [],
     "jhiPrefix": "jhi",
     "entitySuffix": "",
     "dtoSuffix": "DTO",
     "otherModules": [],
-    "enableTranslation": true,
-    "nativeLanguage": "es",
-    "languages": [
-      "es"
-    ],
+    "enableTranslation": false,
     "blueprints": []
   }
 }

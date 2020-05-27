@@ -1,0 +1,40 @@
+{
+    "name": "DetailDriver",
+    "fields": [
+        {
+            "fieldName": "availabilityday",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "availabilitytime",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "role",
+            "otherEntityRelationshipName": "rol",
+            "relationshipName": "drive",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "locationDriver",
+            "otherEntityRelationshipName": "detaildriver",
+            "relationshipName": "locationdriver"
+        }
+    ],
+    "changelogDate": "20200526212000",
+    "entityTableName": "detail_driver",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

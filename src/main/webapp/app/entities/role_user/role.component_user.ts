@@ -18,7 +18,12 @@ export class RoleComponent implements OnInit, OnDestroy {
   account: any;
   authSubscription?: Subscription;
 
-  constructor(private accountService: AccountService,protected roleService: RoleService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {}
+  constructor(
+    private accountService: AccountService,
+    protected roleService: RoleService,
+    protected eventManager: JhiEventManager,
+    protected modalService: NgbModal
+  ) {}
 
   loadAll(): void {
     this.roleService.query().subscribe((res: HttpResponse<IRole[]>) => (this.roles = res.body || []));
@@ -39,9 +44,8 @@ export class RoleComponent implements OnInit, OnDestroy {
     return item.id!;
   }
   filter(login: String): any {
-    return this.roles?.filter(x=>x.user?.login===login)
+    return this.roles?.filter(x => x.user?.login === login);
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-
   }
   registerChangeInRoles(): void {
     this.eventSubscriber = this.eventManager.subscribe('roleListModification', () => this.loadAll());
@@ -51,5 +55,4 @@ export class RoleComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(RoleDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.role = role;
   }
-
 }

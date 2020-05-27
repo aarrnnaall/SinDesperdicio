@@ -1,0 +1,77 @@
+{
+    "name": "Needdonation",
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "datestart",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "dateend",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "availabilityday",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "availabilitytime",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "latitud",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "longitud",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "duration",
+            "fieldType": "TipoDuration",
+            "fieldValues": "Continua,Unavez"
+        },
+        {
+            "fieldName": "intervalduration",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cantpeople",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "role",
+            "otherEntityRelationshipName": "needdonation",
+            "relationshipName": "point",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "donations",
+            "otherEntityRelationshipName": "needdonation",
+            "relationshipName": "donation",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200526212200",
+    "entityTableName": "needdonation",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

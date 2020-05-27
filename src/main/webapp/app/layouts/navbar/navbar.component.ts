@@ -55,8 +55,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.eventManager.destroy(this.eventSubscriber);
     }
   }
-  filter(): any{
-    return this.roles?.filter(x=>x.user?.login===this.account.login);
+  filter(): any {
+    return this.roles?.filter(x => x.user?.login === this.account.login);
   }
   collapseNavbar(): void {
     this.isNavbarCollapsed = true;

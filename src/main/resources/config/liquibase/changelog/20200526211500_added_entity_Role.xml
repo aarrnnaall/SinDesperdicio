@@ -9,53 +9,36 @@
         <property name="autoIncrement" value="true"/>
 
     <!--
-        Added the entity Needdonation.
+        Added the entity Role.
     -->
-    <changeSet id="20200502231500-1" author="jhipster">
-        <createTable tableName="needdonation">
+    <changeSet id="20200526211500-1" author="jhipster">
+        <createTable tableName="role">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="description" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-            <column name="datestart" type="datetime">
+            <column name="point_consumption" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="dateend" type="datetime">
+            <column name="donor" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="availabilityday" type="varchar(255)">
+            <column name="driver" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="availabilitytime" type="varchar(255)">
+            <column name="admin" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="latitud" type="integer">
+            <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="longitud" type="integer">
-                <constraints nullable="true" />
-            </column>
-            <column name="duration" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="intervalduration" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="cantpeople" type="integer">
-                <constraints nullable="true" />
-            </column>
-            <column name="point_id" type="bigint">
+            <column name="branch_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="needdonation" columnName="datestart" columnDataType="datetime"/>
-        <dropDefaultValue tableName="needdonation" columnName="dateend" columnDataType="datetime"/>
     </changeSet>
 
-    <changeSet id="20200502231500-1-relations" author="jhipster">
+    <changeSet id="20200526211500-1-relations" author="jhipster">
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
@@ -68,22 +51,16 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20200502231500-1-data" author="jhipster" context="faker">
+    <changeSet id="20200526211500-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/needdonation.csv"
+                  file="config/liquibase/fake-data/role.csv"
                   separator=";"
-                  tableName="needdonation">
+                  tableName="role">
             <column name="id" type="numeric"/>
-            <column name="description" type="string"/>
-            <column name="datestart" type="datetime"/>
-            <column name="dateend" type="datetime"/>
-            <column name="availabilityday" type="string"/>
-            <column name="availabilitytime" type="string"/>
-            <column name="latitud" type="numeric"/>
-            <column name="longitud" type="numeric"/>
-            <column name="duration" type="string"/>
-            <column name="intervalduration" type="string"/>
-            <column name="cantpeople" type="numeric"/>
+            <column name="point_consumption" type="boolean"/>
+            <column name="donor" type="boolean"/>
+            <column name="driver" type="boolean"/>
+            <column name="admin" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

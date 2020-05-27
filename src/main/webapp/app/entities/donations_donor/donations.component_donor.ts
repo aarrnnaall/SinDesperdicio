@@ -18,7 +18,12 @@ export class DonationsComponent implements OnInit, OnDestroy {
   account: any;
   authSubscription?: Subscription;
 
-  constructor(protected donationsService: DonationsService, private accountService: AccountService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {}
+  constructor(
+    protected donationsService: DonationsService,
+    private accountService: AccountService,
+    protected eventManager: JhiEventManager,
+    protected modalService: NgbModal
+  ) {}
 
   loadAll(): void {
     this.donationsService.query().subscribe((res: HttpResponse<IDonations[]>) => (this.donations = res.body || []));
@@ -28,7 +33,6 @@ export class DonationsComponent implements OnInit, OnDestroy {
     this.loadAll();
     this.registerChangeInDonations();
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
-
   }
 
   ngOnDestroy(): void {
@@ -36,8 +40,8 @@ export class DonationsComponent implements OnInit, OnDestroy {
       this.eventManager.destroy(this.eventSubscriber);
     }
   }
-  filter(): any{
-    return this.donations?.filter(x=>x.donor?.user?.login===this.account.login);
+  filter(): any {
+    return this.donations?.filter(x => x.donor?.user?.login === this.account.login);
   }
   trackId(index: number, item: IDonations): number {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion

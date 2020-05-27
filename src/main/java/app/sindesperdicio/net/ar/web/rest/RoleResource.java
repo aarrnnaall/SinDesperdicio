@@ -1,16 +1,13 @@
 package app.sindesperdicio.net.ar.web.rest;
 
 import app.sindesperdicio.net.ar.domain.Role;
-import app.sindesperdicio.net.ar.domain.User;
 import app.sindesperdicio.net.ar.repository.RoleRepository;
-import app.sindesperdicio.net.ar.repository.UserRepository;
 import app.sindesperdicio.net.ar.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,11 +36,9 @@ public class RoleResource {
     private String applicationName;
 
     private final RoleRepository roleRepository;
-@Autowired
-public UserRepository userRepository;
-    public RoleResource(RoleRepository roleRepository,UserRepository userRepository) {
+
+    public RoleResource(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
-        this.userRepository = userRepository;
     }
 
     /**
@@ -118,13 +113,6 @@ public UserRepository userRepository;
         return ResponseUtil.wrapOrNotFound(role);
     }
 
-    @GetMapping("/roles/user/{id_user}")
-    public ResponseEntity<Role> getRoleuser(@PathVariable Long id_user) {
-        log.debug("REST request to get Role : {}", id_user);
-        Optional<User> user = userRepository.findById(id_user);
-        Optional<Role> role = roleRepository.findByUser(user.get());
-        return ResponseUtil.wrapOrNotFound(role);
-    }
     /**
      * {@code DELETE  /roles/:id} : delete the "id" role.
      *

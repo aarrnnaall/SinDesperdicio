@@ -29,8 +29,8 @@ export class DonationsUpdateComponent implements OnInit {
   isSaving = false;
   account: any;
   donations?: IDonations[];
-  day: string="";
-  hora: string="";
+  day: any = '';
+  hora: any;
   needdonations: INeeddonation[] = [];
   roles: IRole[] = [];
   authSubscription?: Subscription;
@@ -70,7 +70,6 @@ export class DonationsUpdateComponent implements OnInit {
         donations.date = today;
       }
       this.updateForm(donations);
-
     });
     this.donationsService.query().subscribe((res: HttpResponse<IDonations[]>) => (this.donations = res.body || []));
 
@@ -80,21 +79,23 @@ export class DonationsUpdateComponent implements OnInit {
 
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
   }
-  filterdonations(): any{
-    return this.donations?.filter(x=>x.donor?.user?.login===this.account.login);
+  filterdonations(): any {
+    return this.donations?.filter(x => x.donor?.user?.login === this.account.login);
   }
   registerChangeInDonations(): void {
-    this.eventSubscriber = this.eventManager.subscribe('donationsListModification', () => this.donationsService.query().subscribe((res: HttpResponse<IDonations[]>) => (this.donations = res.body || [])));
+    this.eventSubscriber = this.eventManager.subscribe('donationsListModification', () =>
+      this.donationsService.query().subscribe((res: HttpResponse<IDonations[]>) => (this.donations = res.body || []))
+    );
   }
   get eats(): any {
     return this.editForm.get('eats') as FormArray;
   }
-  private createFromEat(category: TipoCate, canteat: number,donations: IDonations): IEat {
+  private createFromEat(category: TipoCate, canteat: number, donations: IDonations): IEat {
     return {
       ...new Eat(),
-      category: category,
-      canteat: canteat,
-      donations: donations
+      category,
+      canteat,
+      donations
     };
   }
   protected subscribeToSaveResponseEat(result: Observable<HttpResponse<IEat>>): void {
@@ -114,8 +115,8 @@ export class DonationsUpdateComponent implements OnInit {
   Removeeats(indice: number): any {
     this.eats.removeAt(indice);
   }
-  filter(login: string): any{
-    return this.roles.filter(x=>x.user?.login===login);
+  filter(login: string): any {
+    return this.roles.filter(x => x.user?.login === login);
   }
   updateForm(donations: IDonations): void {
     this.editForm.patchValue({
@@ -142,27 +143,22 @@ export class DonationsUpdateComponent implements OnInit {
     const donations = this.createFromForm();
     if (donations.id !== undefined) {
       this.subscribeToSaveResponse(this.donationsService.update(donations));
-    } else {
-      //this.subscribeToSaveResponse(this.donationsService.create(donations));
     }
     for (const elemento of this.eats.controls) {
       this.subscribeToSaveResponseEat(
-        this.eatService.create(
-          this.createFromEat(elemento.get(['category']).value, elemento.get(['canteat']).value,donations)
-        )
+        this.eatService.create(this.createFromEat(elemento.get(['category']).value, elemento.get(['canteat']).value, donations))
       );
     }
-
   }
 
   private createFromForm(): IDonations {
-    if (this.day == '') {
+    if (this.day === '') {
       this.day = this.editForm.get(['availabilityday'])!.value;
     }
-    if (this.editForm.get(['starttime'])!.value == null && this.editForm.get(['endtime'])!.value == null){
+    if (this.editForm.get(['starttime'])!.value == null && this.editForm.get(['endtime'])!.value == null) {
       this.hora = this.editForm.get(['availabilitytime'])!.value;
-    } else{
-      this.hora = this.editForm.get(['starttime'])!.value +"-"+ this.editForm.get(['endtime'])!.value;
+    } else {
+      this.hora = this.editForm.get(['starttime'])!.value + '-' + this.editForm.get(['endtime'])!.value;
     }
     return {
       ...new Donations(),
