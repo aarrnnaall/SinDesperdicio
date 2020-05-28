@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let detailDriver of detailDrivers ;trackBy: trackId">
+                <tr *ngFor="let detailDriver of filter() ;trackBy: trackId">
                     <td scope="col"><b>de Dia</b></td>
                     <td>{{ detailDriver.availabilityday }}</td>
                     <td scope="col"><b>de Hora</b></td>
