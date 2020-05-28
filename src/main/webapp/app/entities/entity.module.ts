@@ -37,6 +37,10 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./detail-driver/detail-driver.module').then(m => m.SinDesperdicioDetailDriverModule)
       },
       {
+        path: 'detail-driver_user',
+        loadChildren: () => import('./detail-driver_user/detail-driver.module_user').then(m => m.SinDesperdicioDetailDriverModule)
+      },
+      {
         path: 'donations',
         loadChildren: () => import('./donations/donations.module').then(m => m.SinDesperdicioDonationsModule)
       },

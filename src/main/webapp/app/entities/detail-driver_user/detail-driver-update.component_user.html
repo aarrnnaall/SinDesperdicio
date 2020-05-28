@@ -1,0 +1,98 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-detail-driver-heading">Disponibilidad</h2>
+            <br>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div *ngIf="false" class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+                <div>
+                </div>
+                <div class="form-group">
+                    <table class="table-responsive">
+                        <thead>
+                            <th>
+                    <div class="form-group" >
+                        <label class="form-control-label">Lunes</label>
+                        <input type="checkbox" (click)="Addlunes()">
+                    </div>
+                            </th>
+                            <th>
+                    <div class="form-group">
+                        <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Martes</label>
+                        <input type="checkbox" (click)="Addmartes()">
+                    </div>
+                            </th>
+                            <th>
+                    <div class="form-group">
+                        <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Miercoles</label>
+                        <input  type="checkbox" (click)="Addmiercoles()">
+                    </div>
+                            </th>
+                            <th>
+                    <div class="form-group" >
+                        <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jueves</label>
+                        <input type="checkbox" (click)="Addjueves()">
+                    </div>
+                            </th>
+                            <th>
+                    <div class="form-group">
+                        <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Viernes</label>
+                        <input type="checkbox" (click)="Addviernes()">
+                    </div>
+                            </th>
+                            <th>
+                    <div class="form-group">
+                        <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sabado</label>
+                        <input  type="checkbox" (click)="Addsabado()">
+                    </div>
+                            </th>
+                            <th>
+                    <div class="form-group" >
+                        <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Domingo</label>
+                        <input type="checkbox" (click)="Adddomingo()">
+                    </div>
+                            </th>
+                    </thead>
+                    </table>
+                    <input [hidden]="!editForm.get('availabilityday')!.value" type="text" class="form-control" name="availabilityday" id="field_availabilityday"
+                    formControlName="availabilityday" readonly/>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Desde</span>
+                    </div>
+                    <input class="form-control ng-untouched ng-pristine ng-valid" formControlName="starttime" name="starttime" type="time" >
+                    <div class="input-group-append"> <span class="input-group-text" >Hasta</span>
+                    </div> <input class="form-control ng-pristine ng-valid ng-touched" formControlName="endtime" name="endtime" type="time" >
+                </div>
+                <div class="form-group">
+                    <input [hidden]="!editForm.get('availabilitytime')!.value" type="text" class="form-control" name="availabilitytime" id="field_availabilitytime"
+                           formControlName="availabilitytime" readonly/>
+                </div>
+
+                <div *ngIf="false" class="form-group">
+                    <label class="form-control-label" for="field_drive">Drive</label>
+                    <select class="form-control" id="field_drive" name="drive" formControlName="drive">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="roleOption.id === editForm.get('drive')!.value?.id ? editForm.get('drive')!.value : roleOption" *ngFor="let roleOption of drives; trackBy: trackById">{{ roleOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Guardar</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

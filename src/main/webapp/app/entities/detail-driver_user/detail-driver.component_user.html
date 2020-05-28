@@ -1,0 +1,75 @@
+<div>
+    <div class="alert alert-warning" id="no-result" *ngIf="filter().length === 0">
+    <h2 id="page-heading">
+
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-detail-driver" [routerLink]="['/detail-driver_user/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Disponibilidad
+            </span>
+        </button>
+
+    </h2>
+
+
+
+
+
+
+        <span>No se encontro Detalle del Conductor</span>
+    </div>
+    <jhi-alert-error></jhi-alert-error>
+    <div class="table-responsive" id="entities" *ngIf="filter().length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+
+                    <th scope="col" ><span>Disponibilidad</span></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let detailDriver of detailDrivers ;trackBy: trackId">
+                    <td scope="col"><b>de Dia</b></td>
+                    <td>{{ detailDriver.availabilityday }}</td>
+                    <td scope="col"><b>de Hora</b></td>
+                    <td>{{ detailDriver.availabilitytime }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button *ngIf="false" type="submit"
+                                    [routerLink]="['/detail-driver_user', detailDriver.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">Vista</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/detail-driver_user', detailDriver.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Editar</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(detailDriver)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Eliminar</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br><br>
+    <div class="footer">
+    <h2 id="page-heading">
+        <span>Tus Pedidos</span>
+    </h2>
+    <div class="alert alert-warning" id="no-result" *ngIf="true">
+        <span>No se encontraron Pedidos</span>
+    </div>
+    </div>
+
+</div>
