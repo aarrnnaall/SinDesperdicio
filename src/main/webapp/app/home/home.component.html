@@ -10,11 +10,13 @@
         <div [ngSwitch]="isAuthenticated()">
             <div *ngSwitchCase="true">
                 <p class="lead">Esta es tu página de inicio</p>
-                <div class="alert alert-success"> 
-                <span id="home-logged-message" *ngIf="account">Has iniciado sesión como usuario: "{{ account.login }}".</span>
+                <div class="alert alert-success" *ngIf="account">
+                <span id="home-logged-message" >Has iniciado sesión como usuario: "{{ account.login }}".</span>
                 </div>
-                <div class="alert alert-warning" *ngIf="!filter()[0]"> 
+                <div *jhiHasAnyAuthority="'ROLE_USER'">
+                <div class="alert alert-warning" *ngIf="!filter()[0]">
                     <span id="home-logged-message">¿Todavía no tenes Rol?. ¡Dirígete a la Pestaña de "Rol" para asignarte uno!</span>
+                </div>
                 </div>
             </div>
         </div>
