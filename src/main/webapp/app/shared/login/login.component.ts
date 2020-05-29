@@ -2,6 +2,7 @@ import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { JhiEventManager } from 'ng-jhipster';
 
 import { LoginService } from 'app/core/login/login.service';
 
@@ -21,7 +22,13 @@ export class LoginModalComponent implements AfterViewInit {
     rememberMe: [false]
   });
 
-  constructor(private loginService: LoginService, private router: Router, public activeModal: NgbActiveModal, private fb: FormBuilder) {}
+  constructor(
+    private loginService: LoginService,
+    protected eventManager: JhiEventManager,
+    private router: Router,
+    public activeModal: NgbActiveModal,
+    private fb: FormBuilder
+  ) {}
 
   ngAfterViewInit(): void {
     if (this.username) {
@@ -57,7 +64,10 @@ export class LoginModalComponent implements AfterViewInit {
             this.router.navigate(['']);
           }
         },
-        () => (this.authenticationError = true)
+        () => (this.authenticationError = true),
+        () => {
+          this.eventManager.broadcast('roleListModification');
+        }
       );
   }
 
