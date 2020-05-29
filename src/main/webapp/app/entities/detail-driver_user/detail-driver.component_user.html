@@ -1,8 +1,6 @@
 <div>
-    <div class="alert alert-warning" id="no-result" *ngIf="filter().length === 0">
+    <div  id="no-result" *ngIf="filter().length === 0">
     <h2 id="page-heading">
-
-
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-detail-driver" [routerLink]="['/detail-driver_user/new']">
             <fa-icon icon="plus"></fa-icon>
             <span>
@@ -11,13 +9,7 @@
         </button>
 
     </h2>
-
-
-
-
-
-
-        <span>No se encontro Detalle del Conductor</span>
+        <span class="alert alert-warning" >No se encontro Detalle del Conductor</span>
     </div>
     <jhi-alert-error></jhi-alert-error>
     <div class="table-responsive" id="entities" *ngIf="filter().length > 0">
