@@ -1,0 +1,70 @@
+<div>
+    <h2 id="page-heading">
+        <span>Tus Necesidad de Donaciones</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-needdonation" [routerLink]="['/needdonation_point/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Crear nueva Necesidad de Donacion
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+
+    <div class="alert alert-warning" id="no-result" *ngIf="filter().length === 0">
+        <span>No se encontraron Necesidad de Donaciones</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="filter().length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>Descripcion</span></th>
+                    <th scope="col" ><span>Fecha-Creacion</span></th>
+                    <th scope="col" ><span>Disponible-Dia</span></th>
+                    <th scope="col" ><span>Disponible-Hora</span></th>
+                    <th scope="col" ><span>Duracion</span></th>
+                    <th scope="col" ><span>Intervalo-Duracion</span></th>
+                    <th scope="col" ><span>Cantidad Persona</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let needdonation of filter() ;trackBy: trackId">
+                    <td>{{ needdonation.description }}</td>
+                    <td>{{ needdonation.datestart | date:'shortDate' }}</td>
+                    <td>{{ needdonation.availabilityday }}</td>
+                    <td>{{ needdonation.availabilitytime }}</td>
+                    <td>{{ needdonation.duration }}</td>
+                    <td>{{ needdonation.intervalduration }}</td>
+                    <td>{{ needdonation.cantpeople }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/needdonation_point', needdonation.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">Vista</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/needdonation_point', needdonation.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Editar</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(needdonation)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Eliminar</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

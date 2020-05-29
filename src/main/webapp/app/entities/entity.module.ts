@@ -53,6 +53,10 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./needdonation/needdonation.module').then(m => m.SinDesperdicioNeeddonationModule)
       },
       {
+        path: 'needdonation_point',
+        loadChildren: () => import('./needdonation_point/needdonation.module_point').then(m => m.SinDesperdicioNeeddonationModule)
+      },
+      {
         path: 'nutrition',
         loadChildren: () => import('./nutrition/nutrition.module').then(m => m.SinDesperdicioNutritionModule)
       }

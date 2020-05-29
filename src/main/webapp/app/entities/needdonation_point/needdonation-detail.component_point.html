@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="needdonation">
+            <h2><span>Necesidad de Donacion</span></h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Descripcion</span></dt>
+                <dd>
+                    <span>{{ needdonation.description }}</span>
+                </dd>
+                <dt><span>Fecha-Inicio</span></dt>
+                <dd>
+                    <span>{{ needdonation.datestart | date:'shortDate'}}</span>
+                </dd>
+                <dt><span>Disponibilidad</span></dt>
+                <dt><span>Dia</span></dt>
+                <dd>
+                    <span>{{ needdonation.availabilityday }}</span>
+                </dd>
+                <dt><span>Hora</span></dt>
+                <dd>
+                    <span>{{ needdonation.availabilitytime }}</span>
+                </dd>
+                <dt><span>Duracion</span></dt>
+                <dd>
+                    <span>{{ needdonation.duration }}</span>
+                </dd>
+                <dt><span>Intervalo-Duracion</span></dt>
+                <dd>
+                    <span>{{ needdonation.intervalduration }}</span>
+                </dd>
+                <dt><span>Cantidad Personas</span></dt>
+                <dd>
+                    <span>{{ needdonation.cantpeople }}</span>
+                </dd>
+                <dt><span>Punto Consumo</span></dt>
+                <dd>
+                    <div *ngIf="needdonation.point">
+                        <a >{{ needdonation.point?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Volver</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/needdonation_point', needdonation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editar</span>
+            </button>
+        </div>
+    </div>
+</div>

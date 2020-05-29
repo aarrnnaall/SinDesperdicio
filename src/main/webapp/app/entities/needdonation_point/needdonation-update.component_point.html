@@ -1,0 +1,191 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-needdonation-heading">Crear o Editar Necesidad de Donacion</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div *ngIf="false" class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_description">Descripcion</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                           formControlName="description"/>
+                    <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('description')?.errors?.required">
+                               Este campo es requerido.
+                        </small>
+                    </div>
+                </div>
+
+                <div *ngIf="false" class="form-group">
+                    <label class="form-control-label" for="field_datestart">Datestart</label>
+                    <div class="d-flex">
+                        <input id="field_datestart" type="datetime-local" class="form-control" name="datestart" formControlName="datestart" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div *ngIf="false" class="form-group">
+                    <label class="form-control-label" for="field_dateend">Dateend</label>
+                    <div class="d-flex">
+                        <input id="field_dateend" type="datetime-local" class="form-control" name="dateend" formControlName="dateend" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <label class="form-control-label"  for="field_availabilityday">Disponibilidad</label>
+                <div class="form-group">
+                    <div>
+                        <table class="table-responsive">
+                            <thead>
+                                <th>
+                        <div class="form-group" >
+                            <label class="form-control-label">Lunes</label>
+                            <input type="checkbox" (click)="Addlunes()">
+                        </div>
+                                </th>
+                                <th>
+                        <div class="form-group">
+                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Martes</label>
+                            <input type="checkbox" (click)="Addmartes()">
+                        </div>
+                                </th>
+                                <th>
+                        <div class="form-group">
+                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Miercoles</label>
+                            <input  type="checkbox" (click)="Addmiercoles()">
+                        </div>
+                                </th>
+                                <th>
+                        <div class="form-group" >
+                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jueves</label>
+                            <input type="checkbox" (click)="Addjueves()">
+                        </div>
+                                </th>
+                                <th>
+                        <div class="form-group">
+                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Viernes</label>
+                            <input type="checkbox" (click)="Addviernes()">
+                        </div>
+                                </th>
+                                <th>
+                        <div class="form-group">
+                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sabado</label>
+                            <input  type="checkbox" (click)="Addsabado()">
+                        </div>
+                                </th>
+                                <th>
+                        <div class="form-group" >
+                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Domingo</label>
+                            <input type="checkbox" (click)="Adddomingo()">
+                        </div>
+                                </th>
+                        </thead>
+                        </table>
+                        <input [hidden]="!editForm.get('availabilityday')!.value" type="text" class="form-control" name="availabilityday" id="field_availabilityday"
+                        formControlName="availabilityday" readonly />
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Desde</span>
+                    </div>
+                    <input class="form-control ng-untouched ng-pristine ng-valid" formControlName="starttime" name="starttime" type="time" >
+                    <div class="input-group-append"> <span class="input-group-text" >Hasta</span>
+                    </div> <input class="form-control ng-pristine ng-valid ng-touched" formControlName="endtime" name="endtime" type="time" >
+                </div>
+                <div class="form-group">
+                    <input [hidden]="!editForm.get('availabilitytime')!.value" type="text" class="form-control" name="availabilitytime" id="field_availabilitytime"
+                           formControlName="availabilitytime" readonly />
+                </div>
+
+                <div *ngIf="false" class="form-group">
+                    <label class="form-control-label" for="field_latitud">Latitud</label>
+                    <input type="number" class="form-control" name="latitud" id="field_latitud"
+                           formControlName="latitud"/>
+                </div>
+
+                <div *ngIf="false" class="form-group">
+                    <label class="form-control-label" for="field_longitud">Longitud</label>
+                    <input type="number" class="form-control" name="longitud" id="field_longitud"
+                           formControlName="longitud"/>
+                </div>
+                <div *ngIf="!unavez" class="form-group">
+                    <label class="form-control-label" >Continua</label>
+                    <input type="checkbox" class="form-control" (click)="Continua()"/>
+                </div>
+                <div *ngIf="!continua" class="form-group">
+                    <label class="form-control-label" >Unavez</label>
+                    <input type="checkbox" class="form-control" (click)="Unavez()"/>
+                </div>
+                <div *ngIf="!continua"> 
+                <div *ngIf="!unavez" class="form-group">
+                    <input [hidden]="!editForm.get('duration')!.value" type="text" class="form-control" name="duration" id="field_duration"
+                           formControlName="duration" readonly />
+                </div>
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" for="field_duration">Duracion</label>
+                    <select class="form-control" name="duration" formControlName="duration" id="field_duration">
+                        <option value="Continua" (click)="AddIntervalo()" >Continua</option>
+                        <option value="Unavez">Unavez</option>
+                    </select>
+                </div>-->
+
+                <div *ngIf="continua" class="form-group">
+                    <label class="form-control-label" for="field_intervalduration">Intervalo-Duracion</label>
+                    <select type="text" class="form-control" name="intervalduration" id="field_intervalduration"
+                    formControlName="intervalduration"> 
+                    <option value="1 dia">1 dia</option>
+                    <option value="2 dias">2 dias</option>
+                    <option value="3 dias">3 dias</option>
+                    <option value="4 dias">4 dias</option>
+                    <option value="5 dias">5 dias</option>
+                    <option value="6 dias">6 dias</option>
+                    <option value="1 semana">1 semana</option>
+                    <option value="2 semanas">2 semana</option>
+                    <option value="3 semana">3 semana</option>
+                    <option value="1 mes">1 mes</option>
+                    <option value="2 mes">2 mes</option>
+                    <option value="3 mes">3 mes</option>
+                    <option value="4 mes">4 mes</option>
+                    <option value="5 mes">5 mes</option>
+                    <option value="6 mes">6 mes</option>
+                    </select>
+                </div>
+                <div *ngIf="!unavez">
+                <div *ngIf="!continua" class="form-group">
+                    <input [hidden]="!editForm.get('intervalduration')!.value" type="text" class="form-control" name="intervalduration" id="field_intervalduration"
+                           formControlName="intervalduration" readonly />
+                </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cantpeople">Cantidad Persona</label>
+                    <input type="number" class="form-control" name="cantpeople" id="field_cantpeople"
+                           formControlName="cantpeople"/>
+                </div>
+
+                <div *ng="false" class="form-group">
+                    <label class="form-control-label" for="field_point">Punto Consumo</label>
+                    <select class="form-control" id="field_point" name="point" formControlName="point">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="roleOption.id === editForm.get('point')!.value?.id ? editForm.get('point')!.value : roleOption" *ngFor="let roleOption of roles; trackBy: trackById">{{ roleOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Guardar</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
