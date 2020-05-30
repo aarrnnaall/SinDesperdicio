@@ -35,6 +35,10 @@ export class DonationsUpdateComponent implements OnInit {
   roles: IRole[] = [];
   authSubscription?: Subscription;
   eventSubscriber?: Subscription;
+  continua = false;
+  unavez = false;
+  statusduracion: any;
+  intervalo: any;
   editForm = this.fb.group({
     id: [],
     description: [null, [Validators.required]],
@@ -47,6 +51,8 @@ export class DonationsUpdateComponent implements OnInit {
     availabilitytime: [],
     statuseat: [],
     statusdrive: [],
+    duration: [],
+    intervalduration: [],
     needdonations: [],
     donor: [],
     eats: this.fb.array([])
@@ -104,6 +110,22 @@ export class DonationsUpdateComponent implements OnInit {
       () => this.onSaveError()
     );
   }
+  Continua(): void {
+    if (this.continua) {
+      this.continua = false;
+    } else {
+      this.continua = true;
+    }
+    this.statusduracion = 'Continua';
+  }
+  Unavez(): void {
+    if (this.unavez) {
+      this.unavez = false;
+    } else {
+      this.unavez = true;
+    }
+    this.statusduracion = 'Unavez';
+  }
   Addeats(): any {
     const eatfb = this.fb.group({
       category: [],
@@ -112,8 +134,8 @@ export class DonationsUpdateComponent implements OnInit {
     });
     this.eats.push(eatfb);
   }
-  Removeeats(indice: number): any {
-    this.eats.removeAt(indice);
+  Removeeats(): any {
+    this.eats.removeAt(this.eats.length - 1);
   }
   filter(login: string): any {
     return this.roles.filter(x => x.user?.login === login);
@@ -129,6 +151,8 @@ export class DonationsUpdateComponent implements OnInit {
       availabilitytime: donations.availabilitytime,
       statuseat: donations.statuseat,
       statusdrive: donations.statusdrive,
+      duration: donations.duration,
+      intervalduration: donations.intervalduration,
       needdonations: donations.needdonations,
       donor: donations.donor
     });
@@ -160,6 +184,17 @@ export class DonationsUpdateComponent implements OnInit {
     } else {
       this.hora = this.editForm.get(['starttime'])!.value + '-' + this.editForm.get(['endtime'])!.value;
     }
+    if (this.statusduracion == null) {
+      this.statusduracion = this.editForm.get(['duration'])!.value;
+    }
+    if (this.editForm.get(['intervalduration'])!.value == null) {
+      this.intervalo = '-';
+    } else {
+      this.intervalo = this.editForm.get(['intervalduration'])!.value;
+    }
+    if (this.unavez) {
+      this.intervalo = '-';
+    }
     return {
       ...new Donations(),
       id: this.editForm.get(['id'])!.value,
@@ -171,6 +206,8 @@ export class DonationsUpdateComponent implements OnInit {
       availabilitytime: this.hora,
       statuseat: TipoEat.Cargado,
       statusdrive: TipoDrive.Cargado,
+      duration: this.statusduracion,
+      intervalduration: this.intervalo,
       needdonations: this.editForm.get(['needdonations'])!.value,
       donor: this.filter(this.account.login)[0]
     };

@@ -25,6 +25,7 @@
                     <th scope="col" ><span>ID</span></th>
                     <th scope="col" ><span>Availabilityday</span></th>
                     <th scope="col" ><span>Availabilitytime</span></th>
+                    <th scope="col" ><span>Transportation</span></th>
                     <th scope="col" ><span>Drive</span></th>
                     <th scope="col"></th>
                 </tr>
@@ -34,6 +35,7 @@
                     <td><a [routerLink]="['/detail-driver', detailDriver.id, 'view']">{{ detailDriver.id }}</a></td>
                     <td>{{ detailDriver.availabilityday }}</td>
                     <td>{{ detailDriver.availabilitytime }}</td>
+                    <td>{{ detailDriver.transportation }}</td>
                     <td>
                         <div *ngIf="detailDriver.drive">
                             <a [routerLink]="['/role', detailDriver.drive?.id, 'view']" >{{ detailDriver.drive?.id }}</a>

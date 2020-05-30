@@ -40,10 +40,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     return this.accountService.isAuthenticated();
   }
 
-  login(): void {
-    this.loginModalService.open();
-  }
-
   ngOnDestroy(): void {
     if (this.authSubscription) {
       this.authSubscription.unsubscribe();

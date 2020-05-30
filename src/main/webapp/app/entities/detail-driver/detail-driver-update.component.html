@@ -24,6 +24,16 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" for="field_transportation">Transportation</label>
+                    <select class="form-control" name="transportation" formControlName="transportation" id="field_transportation">
+                        <option value="AUTO">AUTO</option>
+                        <option value="CAMIONETA">CAMIONETA</option>
+                        <option value="MOTOCICLETA">MOTOCICLETA</option>
+                        <option value="BICICLETA">BICICLETA</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" for="field_drive">Drive</label>
                     <select class="form-control" id="field_drive" name="drive" formControlName="drive">
                         <option [ngValue]="null"></option>

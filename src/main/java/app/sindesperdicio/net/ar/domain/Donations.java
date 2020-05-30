@@ -56,6 +56,12 @@ public class Donations implements Serializable {
     @Column(name = "statusdrive")
     private TipoDrive statusdrive;
 
+    @Column(name = "duration")
+    private String duration;
+
+    @Column(name = "intervalduration")
+    private String intervalduration;
+
     @OneToMany(mappedBy = "donations")
     private Set<Eat> eats = new HashSet<>();
 
@@ -186,6 +192,32 @@ public class Donations implements Serializable {
         this.statusdrive = statusdrive;
     }
 
+    public String getDuration() {
+        return duration;
+    }
+
+    public Donations duration(String duration) {
+        this.duration = duration;
+        return this;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getIntervalduration() {
+        return intervalduration;
+    }
+
+    public Donations intervalduration(String intervalduration) {
+        this.intervalduration = intervalduration;
+        return this;
+    }
+
+    public void setIntervalduration(String intervalduration) {
+        this.intervalduration = intervalduration;
+    }
+
     public Set<Eat> getEats() {
         return eats;
     }
@@ -291,6 +323,8 @@ public class Donations implements Serializable {
             ", availabilitytime='" + getAvailabilitytime() + "'" +
             ", statuseat='" + getStatuseat() + "'" +
             ", statusdrive='" + getStatusdrive() + "'" +
+            ", duration='" + getDuration() + "'" +
+            ", intervalduration='" + getIntervalduration() + "'" +
             "}";
     }
 }

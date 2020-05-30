@@ -9,13 +9,6 @@
             ]
         },
         {
-            "fieldName": "cuit",
-            "fieldType": "Integer",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
             "fieldName": "tipo",
             "fieldType": "TipoOrg",
             "fieldValues": "ONG,OV"
@@ -26,6 +19,10 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "cuit",
+            "fieldType": "String"
         }
     ],
     "relationships": [
@@ -46,5 +43,7 @@
     "readOnly": false,
     "embedded": false,
     "clientRootFolder": "",
-    "applications": "*"
+    "applications": "*",
+    "searchEngine": false,
+    "databaseType": "sql"
 }

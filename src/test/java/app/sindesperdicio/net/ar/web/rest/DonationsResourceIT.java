@@ -68,6 +68,12 @@ public class DonationsResourceIT {
     private static final TipoDrive DEFAULT_STATUSDRIVE = TipoDrive.Cargado;
     private static final TipoDrive UPDATED_STATUSDRIVE = TipoDrive.EnCamino;
 
+    private static final String DEFAULT_DURATION = "AAAAAAAAAA";
+    private static final String UPDATED_DURATION = "BBBBBBBBBB";
+
+    private static final String DEFAULT_INTERVALDURATION = "AAAAAAAAAA";
+    private static final String UPDATED_INTERVALDURATION = "BBBBBBBBBB";
+
     @Autowired
     private DonationsRepository donationsRepository;
 
@@ -97,7 +103,9 @@ public class DonationsResourceIT {
             .availabilityday(DEFAULT_AVAILABILITYDAY)
             .availabilitytime(DEFAULT_AVAILABILITYTIME)
             .statuseat(DEFAULT_STATUSEAT)
-            .statusdrive(DEFAULT_STATUSDRIVE);
+            .statusdrive(DEFAULT_STATUSDRIVE)
+            .duration(DEFAULT_DURATION)
+            .intervalduration(DEFAULT_INTERVALDURATION);
         return donations;
     }
     /**
@@ -115,7 +123,9 @@ public class DonationsResourceIT {
             .availabilityday(UPDATED_AVAILABILITYDAY)
             .availabilitytime(UPDATED_AVAILABILITYTIME)
             .statuseat(UPDATED_STATUSEAT)
-            .statusdrive(UPDATED_STATUSDRIVE);
+            .statusdrive(UPDATED_STATUSDRIVE)
+            .duration(UPDATED_DURATION)
+            .intervalduration(UPDATED_INTERVALDURATION);
         return donations;
     }
 
@@ -147,6 +157,8 @@ public class DonationsResourceIT {
         assertThat(testDonations.getAvailabilitytime()).isEqualTo(DEFAULT_AVAILABILITYTIME);
         assertThat(testDonations.getStatuseat()).isEqualTo(DEFAULT_STATUSEAT);
         assertThat(testDonations.getStatusdrive()).isEqualTo(DEFAULT_STATUSDRIVE);
+        assertThat(testDonations.getDuration()).isEqualTo(DEFAULT_DURATION);
+        assertThat(testDonations.getIntervalduration()).isEqualTo(DEFAULT_INTERVALDURATION);
     }
 
     @Test
@@ -205,7 +217,9 @@ public class DonationsResourceIT {
             .andExpect(jsonPath("$.[*].availabilityday").value(hasItem(DEFAULT_AVAILABILITYDAY)))
             .andExpect(jsonPath("$.[*].availabilitytime").value(hasItem(DEFAULT_AVAILABILITYTIME)))
             .andExpect(jsonPath("$.[*].statuseat").value(hasItem(DEFAULT_STATUSEAT.toString())))
-            .andExpect(jsonPath("$.[*].statusdrive").value(hasItem(DEFAULT_STATUSDRIVE.toString())));
+            .andExpect(jsonPath("$.[*].statusdrive").value(hasItem(DEFAULT_STATUSDRIVE.toString())))
+            .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION)))
+            .andExpect(jsonPath("$.[*].intervalduration").value(hasItem(DEFAULT_INTERVALDURATION)));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -248,7 +262,9 @@ public class DonationsResourceIT {
             .andExpect(jsonPath("$.availabilityday").value(DEFAULT_AVAILABILITYDAY))
             .andExpect(jsonPath("$.availabilitytime").value(DEFAULT_AVAILABILITYTIME))
             .andExpect(jsonPath("$.statuseat").value(DEFAULT_STATUSEAT.toString()))
-            .andExpect(jsonPath("$.statusdrive").value(DEFAULT_STATUSDRIVE.toString()));
+            .andExpect(jsonPath("$.statusdrive").value(DEFAULT_STATUSDRIVE.toString()))
+            .andExpect(jsonPath("$.duration").value(DEFAULT_DURATION))
+            .andExpect(jsonPath("$.intervalduration").value(DEFAULT_INTERVALDURATION));
     }
 
     @Test
@@ -279,7 +295,9 @@ public class DonationsResourceIT {
             .availabilityday(UPDATED_AVAILABILITYDAY)
             .availabilitytime(UPDATED_AVAILABILITYTIME)
             .statuseat(UPDATED_STATUSEAT)
-            .statusdrive(UPDATED_STATUSDRIVE);
+            .statusdrive(UPDATED_STATUSDRIVE)
+            .duration(UPDATED_DURATION)
+            .intervalduration(UPDATED_INTERVALDURATION);
 
         restDonationsMockMvc.perform(put("/api/donations")
             .contentType(MediaType.APPLICATION_JSON)
@@ -298,6 +316,8 @@ public class DonationsResourceIT {
         assertThat(testDonations.getAvailabilitytime()).isEqualTo(UPDATED_AVAILABILITYTIME);
         assertThat(testDonations.getStatuseat()).isEqualTo(UPDATED_STATUSEAT);
         assertThat(testDonations.getStatusdrive()).isEqualTo(UPDATED_STATUSDRIVE);
+        assertThat(testDonations.getDuration()).isEqualTo(UPDATED_DURATION);
+        assertThat(testDonations.getIntervalduration()).isEqualTo(UPDATED_INTERVALDURATION);
     }
 
     @Test

@@ -33,6 +33,14 @@
                 <dd>
                     <span>{{ donations.statusdrive }}</span>
                 </dd>
+                <dt><span>Duracion</span></dt>
+                <dd>
+                    <span>{{ donations.duration }}</span>
+                </dd>
+                <dt><span>Intervalo-Duracion</span></dt>
+                <dd>
+                    <span>{{ donations.intervalduration }}</span>
+                </dd>
                 <dt><span>Punto Consumo</span></dt>
                 <dd>
                     <span *ngFor="let needdonation of donations.needdonations; let last = last">

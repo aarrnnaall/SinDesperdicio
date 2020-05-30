@@ -35,6 +35,8 @@ export class DonationsUpdateComponent implements OnInit {
     availabilitytime: [],
     statuseat: [],
     statusdrive: [],
+    duration: [],
+    intervalduration: [],
     needdonations: [],
     donor: []
   });
@@ -73,6 +75,8 @@ export class DonationsUpdateComponent implements OnInit {
       availabilitytime: donations.availabilitytime,
       statuseat: donations.statuseat,
       statusdrive: donations.statusdrive,
+      duration: donations.duration,
+      intervalduration: donations.intervalduration,
       needdonations: donations.needdonations,
       donor: donations.donor
     });
@@ -104,6 +108,8 @@ export class DonationsUpdateComponent implements OnInit {
       availabilitytime: this.editForm.get(['availabilitytime'])!.value,
       statuseat: this.editForm.get(['statuseat'])!.value,
       statusdrive: this.editForm.get(['statusdrive'])!.value,
+      duration: this.editForm.get(['duration'])!.value,
+      intervalduration: this.editForm.get(['intervalduration'])!.value,
       needdonations: this.editForm.get(['needdonations'])!.value,
       donor: this.editForm.get(['donor'])!.value
     };

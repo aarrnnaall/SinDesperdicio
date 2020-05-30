@@ -2,6 +2,7 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { DetailDriverService } from 'app/entities/detail-driver/detail-driver.service';
 import { IDetailDriver, DetailDriver } from 'app/shared/model/detail-driver.model';
+import { TipoTrans } from 'app/shared/model/enumerations/tipo-trans.model';
 
 describe('Service Tests', () => {
   describe('DetailDriver Service', () => {
@@ -20,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(DetailDriverService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new DetailDriver(0, 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new DetailDriver(0, 'AAAAAAA', 'AAAAAAA', TipoTrans.AUTO);
     });
 
     describe('Service methods', () => {
@@ -55,7 +56,8 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             availabilityday: 'BBBBBB',
-            availabilitytime: 'BBBBBB'
+            availabilitytime: 'BBBBBB',
+            transportation: 'BBBBBB'
           },
           elemDefault
         );
@@ -73,7 +75,8 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             availabilityday: 'BBBBBB',
-            availabilitytime: 'BBBBBB'
+            availabilitytime: 'BBBBBB',
+            transportation: 'BBBBBB'
           },
           elemDefault
         );

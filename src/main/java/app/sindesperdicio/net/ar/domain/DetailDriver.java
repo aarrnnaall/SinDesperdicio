@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.HashSet;
 import java.util.Set;
 
+import app.sindesperdicio.net.ar.domain.enumeration.TipoTrans;
+
 /**
  * A DetailDriver.
  */
@@ -26,6 +28,10 @@ public class DetailDriver implements Serializable {
 
     @Column(name = "availabilitytime")
     private String availabilitytime;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "transportation")
+    private TipoTrans transportation;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -67,6 +73,19 @@ public class DetailDriver implements Serializable {
 
     public void setAvailabilitytime(String availabilitytime) {
         this.availabilitytime = availabilitytime;
+    }
+
+    public TipoTrans getTransportation() {
+        return transportation;
+    }
+
+    public DetailDriver transportation(TipoTrans transportation) {
+        this.transportation = transportation;
+        return this;
+    }
+
+    public void setTransportation(TipoTrans transportation) {
+        this.transportation = transportation;
     }
 
     public Role getDrive() {
@@ -130,6 +149,7 @@ public class DetailDriver implements Serializable {
             "id=" + getId() +
             ", availabilityday='" + getAvailabilityday() + "'" +
             ", availabilitytime='" + getAvailabilitytime() + "'" +
+            ", transportation='" + getTransportation() + "'" +
             "}";
     }
 }

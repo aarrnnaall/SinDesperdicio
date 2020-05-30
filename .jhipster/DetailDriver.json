@@ -8,6 +8,11 @@
         {
             "fieldName": "availabilitytime",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "transportation",
+            "fieldType": "TipoTrans",
+            "fieldValues": "AUTO,CAMIONETA,MOTOCICLETA,BICICLETA"
         }
     ],
     "relationships": [
@@ -36,5 +41,7 @@
     "readOnly": false,
     "embedded": false,
     "clientRootFolder": "",
-    "applications": "*"
+    "applications": "*",
+    "searchEngine": false,
+    "databaseType": "sql"
 }

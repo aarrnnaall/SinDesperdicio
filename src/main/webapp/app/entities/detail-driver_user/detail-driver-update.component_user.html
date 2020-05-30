@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-detail-driver-heading">Disponibilidad</h2>
+            <h2 id="jhi-detail-driver-heading">Crear o Editar Detalle del Conductor</h2>
             <br>
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,6 +12,7 @@
                 </div>
                 <div>
                 </div>
+                <label class="form-control-label" for="field_transportation">Disponibilidad</label>
                 <div class="form-group">
                     <table class="table-responsive">
                         <thead>
@@ -74,7 +75,15 @@
                     <input [hidden]="!editForm.get('availabilitytime')!.value" type="text" class="form-control" name="availabilitytime" id="field_availabilitytime"
                            formControlName="availabilitytime" readonly/>
                 </div>
-
+                <div class="form-group">
+                    <label class="form-control-label" for="field_transportation">Trasporte</label>
+                    <select class="form-control" name="transportation" formControlName="transportation" id="field_transportation">
+                        <option value="AUTO">AUTO</option>
+                        <option value="CAMIONETA">CAMIONETA</option>
+                        <option value="MOTOCICLETA">MOTOCICLETA</option>
+                        <option value="BICICLETA">BICICLETA</option>
+                    </select>
+                </div>
                 <div *ngIf="false" class="form-group">
                     <label class="form-control-label" for="field_drive">Drive</label>
                     <select class="form-control" id="field_drive" name="drive" formControlName="drive">

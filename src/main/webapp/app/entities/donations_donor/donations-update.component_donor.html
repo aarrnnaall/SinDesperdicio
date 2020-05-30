@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <h2 id="jhi-donations-heading">Crear o Editar Donación</h2>
-        <button [hidden]="editForm.get('id')!.value" class="btn btn-info" (click)="Addeats()"> +  </button>
+        
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -127,6 +127,59 @@
                     </select>
                 </div>
 
+                <!--<div class="form-group">
+                    <label class="form-control-label" for="field_duration">Duracion</label>
+                    <input type="text" class="form-control" name="duration" id="field_duration"
+                           formControlName="duration"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_intervalduration">Intervalo-Duracion</label>
+                    <input type="text" class="form-control" name="intervalduration" id="field_intervalduration"
+                           formControlName="intervalduration"/>
+                </div>-->
+                
+                <div *ngIf="!unavez" class="form-group">
+                    <label class="form-control-label" >Continua</label>
+                    <input type="checkbox" class="form-control" (click)="Continua()"/>
+                </div>
+                <div *ngIf="!continua" class="form-group">
+                    <label class="form-control-label" >Unavez</label>
+                    <input type="checkbox" class="form-control" (click)="Unavez()"/>
+                </div>
+                <div *ngIf="!continua"> 
+                <div *ngIf="!unavez" class="form-group">
+                    <input [hidden]="!editForm.get('duration')!.value" type="text" class="form-control" name="duration" id="field_duration"
+                           formControlName="duration" readonly />
+                </div>
+                </div>
+                <div *ngIf="continua" class="form-group">
+                    <label class="form-control-label" for="field_intervalduration">Intervalo-Duracion</label>
+                    <select type="text" class="form-control" name="intervalduration" id="field_intervalduration"
+                    formControlName="intervalduration"> 
+                    <option value="1 dia">1 dia</option>
+                    <option value="2 dias">2 dias</option>
+                    <option value="3 dias">3 dias</option>
+                    <option value="4 dias">4 dias</option>
+                    <option value="5 dias">5 dias</option>
+                    <option value="6 dias">6 dias</option>
+                    <option value="1 semana">1 semana</option>
+                    <option value="2 semanas">2 semana</option>
+                    <option value="3 semana">3 semana</option>
+                    <option value="1 mes">1 mes</option>
+                    <option value="2 mes">2 mes</option>
+                    <option value="3 mes">3 mes</option>
+                    <option value="4 mes">4 mes</option>
+                    <option value="5 mes">5 mes</option>
+                    <option value="6 mes">6 mes</option>
+                    </select>
+                </div>
+                <div *ngIf="!unavez">
+                    <div *ngIf="!continua" class="form-group">
+                        <input [hidden]="!editForm.get('intervalduration')!.value" type="text" class="form-control" name="intervalduration" id="field_intervalduration"
+                               formControlName="intervalduration" readonly />
+                    </div>
+                    </div>
                 <div *ngIf="false" class="form-group">
                     <label for="field_needdonations">Punto Consumo</label>
                     <select class="form-control" id="field_needdonations" multiple name="needdonations" formControlName="needdonations">
@@ -143,6 +196,7 @@
                 </div>
             </div>
             <div formArrayName="eats" *ngFor="let eat of eats.controls; let i = index">
+                <label class="form-control-label" for="field_donor">Comida {{i+1}}</label>
                 <div [formGroupName]="i">
                   <div class="form-group row">
                     <div class="col-md-4">
@@ -177,23 +231,25 @@
                       </select>
                     </div>
                     <div class="col-md-6">
-                      <input type="text" [attr.id]="'canteat' + i" class="form-control" placeholder="Cantidad (KG o L)" formControlName="canteat">
+                      <input type="text" [attr.id]="'canteat' + i" class="form-control" placeholder="Cantidad" formControlName="canteat">
                     </div>
                     <div class="col-md-2">
-                      <button class="btn btn-danger" (click)="Removeeats(i)">-</button>
+                      
                     </div>
                   </div>
                 </div>
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn float-right btn-secondary" (click)="previousState()">
                     <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
                 </button>
 
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn float-right btn-primary">
                     <fa-icon icon="save"></fa-icon>&nbsp;<span>Guardar</span>
                 </button>
             </div>
         </form>
+        <button [hidden]="editForm.get('id')!.value" class="btn btn-info" (click)="Addeats()"> Agregar  </button>
+        <button class="btn btn-danger" (click)="Removeeats()"> Quitar </button>
     </div>
 </div>

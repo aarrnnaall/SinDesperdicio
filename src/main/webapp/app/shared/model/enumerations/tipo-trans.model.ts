@@ -1,0 +1,6 @@
+export const enum TipoTrans {
+  AUTO = 'AUTO',
+  CAMIONETA = 'CAMIONETA',
+  MOTOCICLETA = 'MOTOCICLETA',
+  BICICLETA = 'BICICLETA'
+}

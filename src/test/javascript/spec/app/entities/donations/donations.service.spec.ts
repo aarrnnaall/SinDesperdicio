@@ -26,7 +26,19 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Donations(0, 'AAAAAAA', currentDate, 0, 0, 'AAAAAAA', 'AAAAAAA', TipoEat.Cargado, TipoDrive.Cargado);
+      elemDefault = new Donations(
+        0,
+        'AAAAAAA',
+        currentDate,
+        0,
+        0,
+        'AAAAAAA',
+        'AAAAAAA',
+        TipoEat.Cargado,
+        TipoDrive.Cargado,
+        'AAAAAAA',
+        'AAAAAAA'
+      );
     });
 
     describe('Service methods', () => {
@@ -78,7 +90,9 @@ describe('Service Tests', () => {
             availabilityday: 'BBBBBB',
             availabilitytime: 'BBBBBB',
             statuseat: 'BBBBBB',
-            statusdrive: 'BBBBBB'
+            statusdrive: 'BBBBBB',
+            duration: 'BBBBBB',
+            intervalduration: 'BBBBBB'
           },
           elemDefault
         );
@@ -107,7 +121,9 @@ describe('Service Tests', () => {
             availabilityday: 'BBBBBB',
             availabilitytime: 'BBBBBB',
             statuseat: 'BBBBBB',
-            statusdrive: 'BBBBBB'
+            statusdrive: 'BBBBBB',
+            duration: 'BBBBBB',
+            intervalduration: 'BBBBBB'
           },
           elemDefault
         );

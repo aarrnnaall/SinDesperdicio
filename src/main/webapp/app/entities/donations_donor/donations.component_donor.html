@@ -29,6 +29,8 @@
                     <th scope="col" ><span>Disponible-Hora</span></th>
                     <th scope="col" ><span>Estado-Comida</span></th>
                     <th scope="col" ><span>Estado-Conductor</span></th>
+                    <th scope="col" ><span>Duracion</span></th>
+                    <th scope="col" ><span>Intervalo-Duracion</span></th>
                     <th scope="col" ><span>Punto Consumo</span></th>
                     <th *ngIf="false" scope="col" ><span>Donador</span></th>
                     <th scope="col"></th>
@@ -47,6 +49,8 @@
                     <td>{{ donations.availabilitytime }}</td>
                     <td>{{ donations.statuseat }}</td>
                     <td>{{ donations.statusdrive }}</td>
+                    <td>{{ donations.duration }}</td>
+                    <td>{{ donations.intervalduration }}</td>
                     <td>
                         <span *ngFor="let needdonation of donations.needdonations; let last = last">
                             <a class="form-control-static"><fa-icon [icon]="'times'"></fa-icon></a>{{ last ? '' : ', ' }}

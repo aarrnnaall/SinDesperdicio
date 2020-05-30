@@ -24,9 +24,9 @@
                 <tr>
                     <th scope="col" ><span>ID</span></th>
                     <th scope="col" ><span>Razon Social</span></th>
-                    <th scope="col" ><span>Cuit</span></th>
                     <th scope="col" ><span>Tipo</span></th>
                     <th scope="col" ><span>Description</span></th>
+                    <th scope="col" ><span>Cuit</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -34,9 +34,9 @@
                 <tr *ngFor="let organization of organizations ;trackBy: trackId">
                     <td><a [routerLink]="['/organization', organization.id, 'view']">{{ organization.id }}</a></td>
                     <td>{{ organization.razonSocial }}</td>
-                    <td>{{ organization.cuit }}</td>
                     <td>{{ organization.tipo }}</td>
                     <td>{{ organization.description }}</td>
+                    <td>{{ organization.cuit }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

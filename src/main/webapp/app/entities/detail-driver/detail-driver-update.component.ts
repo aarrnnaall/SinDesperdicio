@@ -23,6 +23,7 @@ export class DetailDriverUpdateComponent implements OnInit {
     id: [],
     availabilityday: [],
     availabilitytime: [],
+    transportation: [],
     drive: []
   });
 
@@ -66,6 +67,7 @@ export class DetailDriverUpdateComponent implements OnInit {
       id: detailDriver.id,
       availabilityday: detailDriver.availabilityday,
       availabilitytime: detailDriver.availabilitytime,
+      transportation: detailDriver.transportation,
       drive: detailDriver.drive
     });
   }
@@ -90,6 +92,7 @@ export class DetailDriverUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       availabilityday: this.editForm.get(['availabilityday'])!.value,
       availabilitytime: this.editForm.get(['availabilitytime'])!.value,
+      transportation: this.editForm.get(['transportation'])!.value,
       drive: this.editForm.get(['drive'])!.value
     };
   }

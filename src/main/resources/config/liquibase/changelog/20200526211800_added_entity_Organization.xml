@@ -19,14 +19,14 @@
             <column name="razon_social" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="cuit" type="integer">
-                <constraints nullable="false" />
-            </column>
             <column name="tipo" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="description" type="varchar(255)">
                 <constraints nullable="false" />
+            </column>
+            <column name="cuit" type="varchar(255)">
+                <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
@@ -52,9 +52,9 @@
                   tableName="organization">
             <column name="id" type="numeric"/>
             <column name="razon_social" type="string"/>
-            <column name="cuit" type="numeric"/>
             <column name="tipo" type="string"/>
             <column name="description" type="string"/>
+            <column name="cuit" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

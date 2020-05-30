@@ -28,10 +28,6 @@ public class Organization implements Serializable {
     @Column(name = "razon_social", nullable = false)
     private String razonSocial;
 
-    @NotNull
-    @Column(name = "cuit", nullable = false)
-    private Integer cuit;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo")
     private TipoOrg tipo;
@@ -39,6 +35,9 @@ public class Organization implements Serializable {
     @NotNull
     @Column(name = "description", nullable = false)
     private String description;
+
+    @Column(name = "cuit")
+    private String cuit;
 
     @OneToMany(mappedBy = "organization")
     private Set<Branch> braches = new HashSet<>();
@@ -65,19 +64,6 @@ public class Organization implements Serializable {
         this.razonSocial = razonSocial;
     }
 
-    public Integer getCuit() {
-        return cuit;
-    }
-
-    public Organization cuit(Integer cuit) {
-        this.cuit = cuit;
-        return this;
-    }
-
-    public void setCuit(Integer cuit) {
-        this.cuit = cuit;
-    }
-
     public TipoOrg getTipo() {
         return tipo;
     }
@@ -102,6 +88,19 @@ public class Organization implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCuit() {
+        return cuit;
+    }
+
+    public Organization cuit(String cuit) {
+        this.cuit = cuit;
+        return this;
+    }
+
+    public void setCuit(String cuit) {
+        this.cuit = cuit;
     }
 
     public Set<Branch> getBraches() {
@@ -151,9 +150,9 @@ public class Organization implements Serializable {
         return "Organization{" +
             "id=" + getId() +
             ", razonSocial='" + getRazonSocial() + "'" +
-            ", cuit=" + getCuit() +
             ", tipo='" + getTipo() + "'" +
             ", description='" + getDescription() + "'" +
+            ", cuit='" + getCuit() + "'" +
             "}";
     }
 }

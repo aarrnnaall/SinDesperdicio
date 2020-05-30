@@ -16,6 +16,8 @@ export interface IDonations {
   availabilitytime?: string;
   statuseat?: TipoEat;
   statusdrive?: TipoDrive;
+  duration?: string;
+  intervalduration?: string;
   eats?: IEat[];
   needdonations?: INeeddonation[];
   nutrition?: INutrition;
@@ -33,6 +35,8 @@ export class Donations implements IDonations {
     public availabilitytime?: string,
     public statuseat?: TipoEat,
     public statusdrive?: TipoDrive,
+    public duration?: string,
+    public intervalduration?: string,
     public eats?: IEat[],
     public needdonations?: INeeddonation[],
     public nutrition?: INutrition,

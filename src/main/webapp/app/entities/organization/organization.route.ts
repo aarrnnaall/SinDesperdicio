@@ -39,7 +39,7 @@ export const organizationRoute: Routes = [
     path: '',
     component: OrganizationComponent,
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.USER],
       pageTitle: 'Organizations'
     },
     canActivate: [UserRouteAccessService]
@@ -51,7 +51,7 @@ export const organizationRoute: Routes = [
       organization: OrganizationResolve
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.USER],
       pageTitle: 'Organizations'
     },
     canActivate: [UserRouteAccessService]
@@ -63,7 +63,7 @@ export const organizationRoute: Routes = [
       organization: OrganizationResolve
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.USER],
       pageTitle: 'Organizations'
     },
     canActivate: [UserRouteAccessService]
@@ -75,7 +75,7 @@ export const organizationRoute: Routes = [
       organization: OrganizationResolve
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.USER],
       pageTitle: 'Organizations'
     },
     canActivate: [UserRouteAccessService]

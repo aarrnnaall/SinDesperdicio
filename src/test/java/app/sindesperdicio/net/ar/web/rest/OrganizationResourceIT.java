@@ -34,14 +34,14 @@ public class OrganizationResourceIT {
     private static final String DEFAULT_RAZON_SOCIAL = "AAAAAAAAAA";
     private static final String UPDATED_RAZON_SOCIAL = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_CUIT = 1;
-    private static final Integer UPDATED_CUIT = 2;
-
     private static final TipoOrg DEFAULT_TIPO = TipoOrg.ONG;
     private static final TipoOrg UPDATED_TIPO = TipoOrg.OV;
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CUIT = "AAAAAAAAAA";
+    private static final String UPDATED_CUIT = "BBBBBBBBBB";
 
     @Autowired
     private OrganizationRepository organizationRepository;
@@ -63,9 +63,9 @@ public class OrganizationResourceIT {
     public static Organization createEntity(EntityManager em) {
         Organization organization = new Organization()
             .razonSocial(DEFAULT_RAZON_SOCIAL)
-            .cuit(DEFAULT_CUIT)
             .tipo(DEFAULT_TIPO)
-            .description(DEFAULT_DESCRIPTION);
+            .description(DEFAULT_DESCRIPTION)
+            .cuit(DEFAULT_CUIT);
         return organization;
     }
     /**
@@ -77,9 +77,9 @@ public class OrganizationResourceIT {
     public static Organization createUpdatedEntity(EntityManager em) {
         Organization organization = new Organization()
             .razonSocial(UPDATED_RAZON_SOCIAL)
-            .cuit(UPDATED_CUIT)
             .tipo(UPDATED_TIPO)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .cuit(UPDATED_CUIT);
         return organization;
     }
 
@@ -104,9 +104,9 @@ public class OrganizationResourceIT {
         assertThat(organizationList).hasSize(databaseSizeBeforeCreate + 1);
         Organization testOrganization = organizationList.get(organizationList.size() - 1);
         assertThat(testOrganization.getRazonSocial()).isEqualTo(DEFAULT_RAZON_SOCIAL);
-        assertThat(testOrganization.getCuit()).isEqualTo(DEFAULT_CUIT);
         assertThat(testOrganization.getTipo()).isEqualTo(DEFAULT_TIPO);
         assertThat(testOrganization.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testOrganization.getCuit()).isEqualTo(DEFAULT_CUIT);
     }
 
     @Test
@@ -149,24 +149,6 @@ public class OrganizationResourceIT {
 
     @Test
     @Transactional
-    public void checkCuitIsRequired() throws Exception {
-        int databaseSizeBeforeTest = organizationRepository.findAll().size();
-        // set the field null
-        organization.setCuit(null);
-
-        // Create the Organization, which fails.
-
-        restOrganizationMockMvc.perform(post("/api/organizations")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(organization)))
-            .andExpect(status().isBadRequest());
-
-        List<Organization> organizationList = organizationRepository.findAll();
-        assertThat(organizationList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkDescriptionIsRequired() throws Exception {
         int databaseSizeBeforeTest = organizationRepository.findAll().size();
         // set the field null
@@ -195,9 +177,9 @@ public class OrganizationResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(organization.getId().intValue())))
             .andExpect(jsonPath("$.[*].razonSocial").value(hasItem(DEFAULT_RAZON_SOCIAL)))
-            .andExpect(jsonPath("$.[*].cuit").value(hasItem(DEFAULT_CUIT)))
             .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO.toString())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].cuit").value(hasItem(DEFAULT_CUIT)));
     }
     
     @Test
@@ -212,9 +194,9 @@ public class OrganizationResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(organization.getId().intValue()))
             .andExpect(jsonPath("$.razonSocial").value(DEFAULT_RAZON_SOCIAL))
-            .andExpect(jsonPath("$.cuit").value(DEFAULT_CUIT))
             .andExpect(jsonPath("$.tipo").value(DEFAULT_TIPO.toString()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.cuit").value(DEFAULT_CUIT));
     }
 
     @Test
@@ -239,9 +221,9 @@ public class OrganizationResourceIT {
         em.detach(updatedOrganization);
         updatedOrganization
             .razonSocial(UPDATED_RAZON_SOCIAL)
-            .cuit(UPDATED_CUIT)
             .tipo(UPDATED_TIPO)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .cuit(UPDATED_CUIT);
 
         restOrganizationMockMvc.perform(put("/api/organizations")
             .contentType(MediaType.APPLICATION_JSON)
@@ -253,9 +235,9 @@ public class OrganizationResourceIT {
         assertThat(organizationList).hasSize(databaseSizeBeforeUpdate);
         Organization testOrganization = organizationList.get(organizationList.size() - 1);
         assertThat(testOrganization.getRazonSocial()).isEqualTo(UPDATED_RAZON_SOCIAL);
-        assertThat(testOrganization.getCuit()).isEqualTo(UPDATED_CUIT);
         assertThat(testOrganization.getTipo()).isEqualTo(UPDATED_TIPO);
         assertThat(testOrganization.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testOrganization.getCuit()).isEqualTo(UPDATED_CUIT);
     }
 
     @Test

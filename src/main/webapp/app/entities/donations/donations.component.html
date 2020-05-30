@@ -31,6 +31,8 @@
                     <th scope="col" ><span>Availabilitytime</span></th>
                     <th scope="col" ><span>Statuseat</span></th>
                     <th scope="col" ><span>Statusdrive</span></th>
+                    <th scope="col" ><span>Duration</span></th>
+                    <th scope="col" ><span>Intervalduration</span></th>
                     <th scope="col" ><span>Needdonation</span></th>
                     <th scope="col" ><span>Donor</span></th>
                     <th scope="col"></th>
@@ -47,6 +49,8 @@
                     <td>{{ donations.availabilitytime }}</td>
                     <td>{{ donations.statuseat }}</td>
                     <td>{{ donations.statusdrive }}</td>
+                    <td>{{ donations.duration }}</td>
+                    <td>{{ donations.intervalduration }}</td>
                     <td>
                         <span *ngFor="let needdonation of donations.needdonations; let last = last">
                             <a class="form-control-static" [routerLink]="['/needdonation', needdonation?.id, 'view']">{{ needdonation.id }}</a>{{ last ? '' : ', ' }}

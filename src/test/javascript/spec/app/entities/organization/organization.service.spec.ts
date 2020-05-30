@@ -21,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(OrganizationService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Organization(0, 'AAAAAAA', 0, TipoOrg.ONG, 'AAAAAAA');
+      elemDefault = new Organization(0, 'AAAAAAA', TipoOrg.ONG, 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -56,9 +56,9 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             razonSocial: 'BBBBBB',
-            cuit: 1,
             tipo: 'BBBBBB',
-            description: 'BBBBBB'
+            description: 'BBBBBB',
+            cuit: 'BBBBBB'
           },
           elemDefault
         );
@@ -76,9 +76,9 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             razonSocial: 'BBBBBB',
-            cuit: 1,
             tipo: 'BBBBBB',
-            description: 'BBBBBB'
+            description: 'BBBBBB',
+            cuit: 'BBBBBB'
           },
           elemDefault
         );

@@ -4,7 +4,7 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-detail-driver" [routerLink]="['/detail-driver_user/new']">
             <fa-icon icon="plus"></fa-icon>
             <span>
-            Disponibilidad
+            Cargar Detalle
             </span>
         </button>
 
@@ -16,17 +16,16 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>
-
-                    <th scope="col" ><span>Disponibilidad</span></th>
-
+                    <th scope="col" ><span>Dia-Disponible</span></th>
+                    <th scope="col" ><span>Hora-Disponible</span></th>
+                    <th scope="col" ><span>Trasporte</span></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let detailDriver of filter() ;trackBy: trackId">
-                    <td scope="col"><b>de Dia</b></td>
                     <td>{{ detailDriver.availabilityday }}</td>
-                    <td scope="col"><b>de Hora</b></td>
                     <td>{{ detailDriver.availabilitytime }}</td>
+                    <td>{{ detailDriver.transportation }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button *ngIf="false" type="submit"

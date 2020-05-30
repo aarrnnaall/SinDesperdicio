@@ -74,6 +74,18 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" for="field_duration">Duration</label>
+                    <input type="text" class="form-control" name="duration" id="field_duration"
+                           formControlName="duration"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_intervalduration">Intervalduration</label>
+                    <input type="text" class="form-control" name="intervalduration" id="field_intervalduration"
+                           formControlName="intervalduration"/>
+                </div>
+
+                <div class="form-group">
                     <label for="field_needdonations">Needdonation</label>
                     <select class="form-control" id="field_needdonations" multiple name="needdonations" formControlName="needdonations">
                         <option [ngValue]="getSelected(editForm.get('needdonations')!.value, needdonationOption)" *ngFor="let needdonationOption of needdonations; trackBy: trackById">{{ needdonationOption.id }}</option>

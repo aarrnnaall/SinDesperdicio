@@ -40,6 +40,12 @@
             <column name="statusdrive" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="duration" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="intervalduration" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="donor_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -86,6 +92,8 @@
             <column name="availabilitytime" type="string"/>
             <column name="statuseat" type="string"/>
             <column name="statusdrive" type="string"/>
+            <column name="duration" type="string"/>
+            <column name="intervalduration" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

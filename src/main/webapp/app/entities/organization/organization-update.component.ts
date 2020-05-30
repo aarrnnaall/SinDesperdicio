@@ -18,9 +18,9 @@ export class OrganizationUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     razonSocial: [null, [Validators.required]],
-    cuit: [null, [Validators.required]],
     tipo: [],
-    description: [null, [Validators.required]]
+    description: [null, [Validators.required]],
+    cuit: []
   });
 
   constructor(protected organizationService: OrganizationService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -35,9 +35,9 @@ export class OrganizationUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: organization.id,
       razonSocial: organization.razonSocial,
-      cuit: organization.cuit,
       tipo: organization.tipo,
-      description: organization.description
+      description: organization.description,
+      cuit: organization.cuit
     });
   }
 
@@ -60,9 +60,9 @@ export class OrganizationUpdateComponent implements OnInit {
       ...new Organization(),
       id: this.editForm.get(['id'])!.value,
       razonSocial: this.editForm.get(['razonSocial'])!.value,
-      cuit: this.editForm.get(['cuit'])!.value,
       tipo: this.editForm.get(['tipo'])!.value,
-      description: this.editForm.get(['description'])!.value
+      description: this.editForm.get(['description'])!.value,
+      cuit: this.editForm.get(['cuit'])!.value
     };
   }
 

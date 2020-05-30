@@ -24,22 +24,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_cuit">Cuit</label>
-                    <input type="number" class="form-control" name="cuit" id="field_cuit"
-                           formControlName="cuit"/>
-                    <div *ngIf="editForm.get('cuit')!.invalid && (editForm.get('cuit')!.dirty || editForm.get('cuit')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('cuit')?.errors?.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('cuit')?.errors?.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" for="field_tipo">Tipo</label>
                     <select class="form-control" name="tipo" formControlName="tipo" id="field_tipo">
                         <option value="ONG">ONG</option>
@@ -57,6 +41,12 @@
                         This field is required.
                         </small>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cuit">Cuit</label>
+                    <input type="text" class="form-control" name="cuit" id="field_cuit"
+                           formControlName="cuit"/>
                 </div>
             </div>
 

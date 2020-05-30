@@ -21,6 +21,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import app.sindesperdicio.net.ar.domain.enumeration.TipoTrans;
 /**
  * Integration tests for the {@link DetailDriverResource} REST controller.
  */
@@ -35,6 +36,9 @@ public class DetailDriverResourceIT {
 
     private static final String DEFAULT_AVAILABILITYTIME = "AAAAAAAAAA";
     private static final String UPDATED_AVAILABILITYTIME = "BBBBBBBBBB";
+
+    private static final TipoTrans DEFAULT_TRANSPORTATION = TipoTrans.AUTO;
+    private static final TipoTrans UPDATED_TRANSPORTATION = TipoTrans.CAMIONETA;
 
     @Autowired
     private DetailDriverRepository detailDriverRepository;
@@ -56,7 +60,8 @@ public class DetailDriverResourceIT {
     public static DetailDriver createEntity(EntityManager em) {
         DetailDriver detailDriver = new DetailDriver()
             .availabilityday(DEFAULT_AVAILABILITYDAY)
-            .availabilitytime(DEFAULT_AVAILABILITYTIME);
+            .availabilitytime(DEFAULT_AVAILABILITYTIME)
+            .transportation(DEFAULT_TRANSPORTATION);
         return detailDriver;
     }
     /**
@@ -68,7 +73,8 @@ public class DetailDriverResourceIT {
     public static DetailDriver createUpdatedEntity(EntityManager em) {
         DetailDriver detailDriver = new DetailDriver()
             .availabilityday(UPDATED_AVAILABILITYDAY)
-            .availabilitytime(UPDATED_AVAILABILITYTIME);
+            .availabilitytime(UPDATED_AVAILABILITYTIME)
+            .transportation(UPDATED_TRANSPORTATION);
         return detailDriver;
     }
 
@@ -94,6 +100,7 @@ public class DetailDriverResourceIT {
         DetailDriver testDetailDriver = detailDriverList.get(detailDriverList.size() - 1);
         assertThat(testDetailDriver.getAvailabilityday()).isEqualTo(DEFAULT_AVAILABILITYDAY);
         assertThat(testDetailDriver.getAvailabilitytime()).isEqualTo(DEFAULT_AVAILABILITYTIME);
+        assertThat(testDetailDriver.getTransportation()).isEqualTo(DEFAULT_TRANSPORTATION);
     }
 
     @Test
@@ -128,7 +135,8 @@ public class DetailDriverResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(detailDriver.getId().intValue())))
             .andExpect(jsonPath("$.[*].availabilityday").value(hasItem(DEFAULT_AVAILABILITYDAY)))
-            .andExpect(jsonPath("$.[*].availabilitytime").value(hasItem(DEFAULT_AVAILABILITYTIME)));
+            .andExpect(jsonPath("$.[*].availabilitytime").value(hasItem(DEFAULT_AVAILABILITYTIME)))
+            .andExpect(jsonPath("$.[*].transportation").value(hasItem(DEFAULT_TRANSPORTATION.toString())));
     }
     
     @Test
@@ -143,7 +151,8 @@ public class DetailDriverResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(detailDriver.getId().intValue()))
             .andExpect(jsonPath("$.availabilityday").value(DEFAULT_AVAILABILITYDAY))
-            .andExpect(jsonPath("$.availabilitytime").value(DEFAULT_AVAILABILITYTIME));
+            .andExpect(jsonPath("$.availabilitytime").value(DEFAULT_AVAILABILITYTIME))
+            .andExpect(jsonPath("$.transportation").value(DEFAULT_TRANSPORTATION.toString()));
     }
 
     @Test
@@ -168,7 +177,8 @@ public class DetailDriverResourceIT {
         em.detach(updatedDetailDriver);
         updatedDetailDriver
             .availabilityday(UPDATED_AVAILABILITYDAY)
-            .availabilitytime(UPDATED_AVAILABILITYTIME);
+            .availabilitytime(UPDATED_AVAILABILITYTIME)
+            .transportation(UPDATED_TRANSPORTATION);
 
         restDetailDriverMockMvc.perform(put("/api/detail-drivers")
             .contentType(MediaType.APPLICATION_JSON)
@@ -181,6 +191,7 @@ public class DetailDriverResourceIT {
         DetailDriver testDetailDriver = detailDriverList.get(detailDriverList.size() - 1);
         assertThat(testDetailDriver.getAvailabilityday()).isEqualTo(UPDATED_AVAILABILITYDAY);
         assertThat(testDetailDriver.getAvailabilitytime()).isEqualTo(UPDATED_AVAILABILITYTIME);
+        assertThat(testDetailDriver.getTransportation()).isEqualTo(UPDATED_TRANSPORTATION);
     }
 
     @Test

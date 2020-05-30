@@ -37,6 +37,14 @@
             "fieldName": "statusdrive",
             "fieldType": "TipoDrive",
             "fieldValues": "Cargado,EnCamino,Problema,Entregado"
+        },
+        {
+            "fieldName": "duration",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "intervalduration",
+            "fieldType": "String"
         }
     ],
     "relationships": [
@@ -79,5 +87,7 @@
     "readOnly": false,
     "embedded": false,
     "clientRootFolder": "",
-    "applications": "*"
+    "applications": "*",
+    "searchEngine": false,
+    "databaseType": "sql"
 }
