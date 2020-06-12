@@ -6,69 +6,57 @@
     <a class="navbar-toggler d-lg-none" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
         <fa-icon icon="bars"></fa-icon>
     </a>
-    <div>
+   
+    <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
         <ul class="navbar-nav ml-auto">
-        <div [ngSwitch]="isAuthenticated()">
-            <div *ngSwitchCase="true">
+            <div *jhiHasAnyAuthority="'ROLE_USER'">
                 <div *ngIf="filter()">
                     <div *ngFor="let role of filter() ;trackBy: trackId">
                         <div *ngIf="role.donor" >
-                            <div *jhiHasAnyAuthority="'ROLE_USER'">
-                                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                    <a  class="nav-link" routerLink="eat_donation" (click)="collapseNavbar()" >
-                                        <button type="submit" class="btn btn-danger">
-                                                <span class="d-none d-md-inline">Donador</span>
-                                        </button>
-                                    </a>
-                                </li>
-                            </div>
+                            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                <a  class="nav-link" routerLink="eat_donation" (click)="collapseNavbar()" >
+                                    <span>
+                                        <fa-icon _ngcontent-gia-c136="" icon="th-list" class="ng-fa-icon" ng-reflect-icon="user-plus"></fa-icon>
+                                    <span>Donador</span>
+                                    </span>
+                                </a>
+                            </li> 
                         </div>
                     </div>
-                </div>
+                </div>   
             </div>
-        </div>
-        <div [ngSwitch]="isAuthenticated()">
-            <div *ngSwitchCase="true">
+            <div *jhiHasAnyAuthority="'ROLE_USER'">
                 <div *ngIf="filter()">
                     <div *ngFor="let role of filter() ;trackBy: trackId">
                         <div *ngIf="role.driver" >
-                            <div *jhiHasAnyAuthority="'ROLE_USER'">
-                                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                    <a  class="nav-link" routerLink="detail-driver_user" (click)="collapseNavbar()" >
-                                        <button type="submit" class="btn btn-info">
-                                                <span class="d-none d-md-inline">Conductor</span>
-                                        </button>
-                                    </a>
-                                </li>
-                            </div>
+                            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                <a  class="nav-link" routerLink="detail-driver_user" (click)="collapseNavbar()" >
+                                    <span>
+                                        <fa-icon _ngcontent-gia-c136="" icon="th-list" class="ng-fa-icon" ng-reflect-icon="user-plus"></fa-icon>
+                                    <span>Conductor</span>
+                                    </span>
+                                </a>
+                            </li> 
                         </div>
                     </div>
-                </div>
+                </div>   
             </div>
-        </div>
-        <div [ngSwitch]="isAuthenticated()">
-            <div *ngSwitchCase="true">
+            <div *jhiHasAnyAuthority="'ROLE_USER'">
                 <div *ngIf="filter()">
                     <div *ngFor="let role of filter() ;trackBy: trackId">
                         <div *ngIf="role.pointConsumption" >
-                            <div *jhiHasAnyAuthority="'ROLE_USER'">
-                                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                    <a  class="nav-link" routerLink="needdonation_point" (click)="collapseNavbar()" >
-                                        <button type="submit" class="btn btn-warning ">
-                                                <span class="d-none d-md-inline">Punto Consumo</span>
-                                        </button>
-                                    </a>
-                                </li>
-                            </div>
+                            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                <a  class="nav-link" routerLink="needdonation_point" (click)="collapseNavbar()" >
+                                    <span>
+                                        <fa-icon _ngcontent-gia-c136="" icon="th-list" class="ng-fa-icon" ng-reflect-icon="user-plus"></fa-icon>
+                                    <span>Punto Consumo</span>
+                                    </span>
+                                </a>
+                            </li> 
                         </div>
                     </div>
-                </div>
+                </div>   
             </div>
-        </div>
-        </ul>
-        </div>
-    <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
-        <ul class="navbar-nav ml-auto">
             <div *jhiHasAnyAuthority="'ROLE_USER'">
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                 <a  class="nav-link" routerLink="role_user" (click)="collapseNavbar()" >

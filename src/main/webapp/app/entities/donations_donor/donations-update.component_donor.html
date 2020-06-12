@@ -48,43 +48,43 @@
                             <thead>
                                 <th>
                         <div class="form-group" >
-                            <label class="form-control-label">Lunes</label>
+                            <label class="form-control-label">&nbsp;Lunes&nbsp;</label>
                             <input type="checkbox" (click)="Addlunes()">
                         </div>
                                 </th>
                                 <th>
                         <div class="form-group">
-                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Martes</label>
+                            <label class="form-control-label">&nbsp;Martes&nbsp;</label>
                             <input type="checkbox" (click)="Addmartes()">
                         </div>
                                 </th>
                                 <th>
                         <div class="form-group">
-                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Miercoles</label>
+                            <label class="form-control-label">&nbsp;Miercoles&nbsp;</label>
                             <input  type="checkbox" (click)="Addmiercoles()">
                         </div>
                                 </th>
                                 <th>
                         <div class="form-group" >
-                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jueves</label>
+                            <label class="form-control-label">&nbsp;Jueves&nbsp;</label>
                             <input type="checkbox" (click)="Addjueves()">
                         </div>
                                 </th>
                                 <th>
                         <div class="form-group">
-                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Viernes</label>
+                            <label class="form-control-label">&nbsp;Viernes&nbsp;</label>
                             <input type="checkbox" (click)="Addviernes()">
                         </div>
                                 </th>
                                 <th>
                         <div class="form-group">
-                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sabado</label>
+                            <label class="form-control-label">&nbsp;Sabado&nbsp;</label>
                             <input  type="checkbox" (click)="Addsabado()">
                         </div>
                                 </th>
                                 <th>
                         <div class="form-group" >
-                            <label class="form-control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Domingo</label>
+                            <label class="form-control-label">&nbsp;Domingo&nbsp;</label>
                             <input type="checkbox" (click)="Adddomingo()">
                         </div>
                                 </th>
@@ -231,7 +231,7 @@
                       </select>
                     </div>
                     <div class="col-md-6">
-                      <input type="text" [attr.id]="'canteat' + i" class="form-control" placeholder="Cantidad" formControlName="canteat">
+                      <input type="text" [attr.id]="'canteat' + i" class="form-control" placeholder="Cantidad en Kilogramos/Litros" formControlName="canteat">
                     </div>
                     <div class="col-md-2">
                       
@@ -241,15 +241,24 @@
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn float-right btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
+                    <fa-icon icon="ban"></fa-icon><span class="d-none d-md-inline">Guargar</span>
                 </button>
 
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn float-right btn-primary">
-                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Guardar</span>
+                    <fa-icon icon="save"></fa-icon><span class="d-none d-md-inline">Cancelar</span>
                 </button>
             </div>
         </form>
-        <button [hidden]="editForm.get('id')!.value" class="btn btn-info" (click)="Addeats()"> Agregar  </button>
-        <button class="btn btn-danger" (click)="Removeeats()"> Quitar </button>
-    </div>
+       <button type="submit" (click)="Addeats()"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="plus"></fa-icon>
+                                <span class="d-none d-md-inline">Quitar</span>
+                            </button>
+    
+        <button [hidden]="editForm.get('id')!.value" type="submit" (click)="Removeeats()"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Quitar</span>
+                            </button>
+      </div>
 </div>
