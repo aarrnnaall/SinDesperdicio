@@ -33,6 +33,9 @@ public class Branch implements Serializable {
     @Column(name = "longitud")
     private Integer longitud;
 
+    @Column(name = "direction")
+    private String direction;
+
     @OneToMany(mappedBy = "branch")
     private Set<Role> roles = new HashSet<>();
 
@@ -86,6 +89,19 @@ public class Branch implements Serializable {
 
     public void setLongitud(Integer longitud) {
         this.longitud = longitud;
+    }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public Branch direction(String direction) {
+        this.direction = direction;
+        return this;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
     }
 
     public Set<Role> getRoles() {
@@ -150,6 +166,7 @@ public class Branch implements Serializable {
             ", desription='" + getDesription() + "'" +
             ", latitud=" + getLatitud() +
             ", longitud=" + getLongitud() +
+            ", direction='" + getDirection() + "'" +
             "}";
     }
 }

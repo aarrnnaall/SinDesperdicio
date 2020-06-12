@@ -39,6 +39,9 @@ public class BranchResourceIT {
     private static final Integer DEFAULT_LONGITUD = 1;
     private static final Integer UPDATED_LONGITUD = 2;
 
+    private static final String DEFAULT_DIRECTION = "AAAAAAAAAA";
+    private static final String UPDATED_DIRECTION = "BBBBBBBBBB";
+
     @Autowired
     private BranchRepository branchRepository;
 
@@ -60,7 +63,8 @@ public class BranchResourceIT {
         Branch branch = new Branch()
             .desription(DEFAULT_DESRIPTION)
             .latitud(DEFAULT_LATITUD)
-            .longitud(DEFAULT_LONGITUD);
+            .longitud(DEFAULT_LONGITUD)
+            .direction(DEFAULT_DIRECTION);
         return branch;
     }
     /**
@@ -73,7 +77,8 @@ public class BranchResourceIT {
         Branch branch = new Branch()
             .desription(UPDATED_DESRIPTION)
             .latitud(UPDATED_LATITUD)
-            .longitud(UPDATED_LONGITUD);
+            .longitud(UPDATED_LONGITUD)
+            .direction(UPDATED_DIRECTION);
         return branch;
     }
 
@@ -100,6 +105,7 @@ public class BranchResourceIT {
         assertThat(testBranch.getDesription()).isEqualTo(DEFAULT_DESRIPTION);
         assertThat(testBranch.getLatitud()).isEqualTo(DEFAULT_LATITUD);
         assertThat(testBranch.getLongitud()).isEqualTo(DEFAULT_LONGITUD);
+        assertThat(testBranch.getDirection()).isEqualTo(DEFAULT_DIRECTION);
     }
 
     @Test
@@ -153,7 +159,8 @@ public class BranchResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(branch.getId().intValue())))
             .andExpect(jsonPath("$.[*].desription").value(hasItem(DEFAULT_DESRIPTION)))
             .andExpect(jsonPath("$.[*].latitud").value(hasItem(DEFAULT_LATITUD)))
-            .andExpect(jsonPath("$.[*].longitud").value(hasItem(DEFAULT_LONGITUD)));
+            .andExpect(jsonPath("$.[*].longitud").value(hasItem(DEFAULT_LONGITUD)))
+            .andExpect(jsonPath("$.[*].direction").value(hasItem(DEFAULT_DIRECTION)));
     }
     
     @Test
@@ -169,7 +176,8 @@ public class BranchResourceIT {
             .andExpect(jsonPath("$.id").value(branch.getId().intValue()))
             .andExpect(jsonPath("$.desription").value(DEFAULT_DESRIPTION))
             .andExpect(jsonPath("$.latitud").value(DEFAULT_LATITUD))
-            .andExpect(jsonPath("$.longitud").value(DEFAULT_LONGITUD));
+            .andExpect(jsonPath("$.longitud").value(DEFAULT_LONGITUD))
+            .andExpect(jsonPath("$.direction").value(DEFAULT_DIRECTION));
     }
 
     @Test
@@ -195,7 +203,8 @@ public class BranchResourceIT {
         updatedBranch
             .desription(UPDATED_DESRIPTION)
             .latitud(UPDATED_LATITUD)
-            .longitud(UPDATED_LONGITUD);
+            .longitud(UPDATED_LONGITUD)
+            .direction(UPDATED_DIRECTION);
 
         restBranchMockMvc.perform(put("/api/branches")
             .contentType(MediaType.APPLICATION_JSON)
@@ -209,6 +218,7 @@ public class BranchResourceIT {
         assertThat(testBranch.getDesription()).isEqualTo(UPDATED_DESRIPTION);
         assertThat(testBranch.getLatitud()).isEqualTo(UPDATED_LATITUD);
         assertThat(testBranch.getLongitud()).isEqualTo(UPDATED_LONGITUD);
+        assertThat(testBranch.getDirection()).isEqualTo(UPDATED_DIRECTION);
     }
 
     @Test
