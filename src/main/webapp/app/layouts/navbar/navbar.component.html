@@ -65,6 +65,25 @@
                 </div>
             </div>
         </div>
+        <div [ngSwitch]="isAuthenticated()">
+            <div *ngSwitchCase="true">
+                <div *ngIf="filter()">
+                    <div *ngFor="let role of filter() ;trackBy: trackId">
+                        <div *ngIf="role.admin" >
+                            <div *jhiHasAnyAuthority="'ROLE_USER'">
+                                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                    <a  class="nav-link" routerLink="" (click)="collapseNavbar()" >
+                                        <button type="submit" class="btn btn-warning ">
+                                                <span class="d-none d-md-inline">Administrador</span>
+                                        </button>
+                                    </a>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         </ul>
         </div>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
