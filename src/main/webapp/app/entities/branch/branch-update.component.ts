@@ -23,6 +23,7 @@ export class BranchUpdateComponent implements OnInit {
     desription: [null, [Validators.required]],
     latitud: [],
     longitud: [],
+    direction: [],
     organization: []
   });
 
@@ -47,6 +48,7 @@ export class BranchUpdateComponent implements OnInit {
       desription: branch.desription,
       latitud: branch.latitud,
       longitud: branch.longitud,
+      direction: branch.direction,
       organization: branch.organization
     });
   }
@@ -72,6 +74,7 @@ export class BranchUpdateComponent implements OnInit {
       desription: this.editForm.get(['desription'])!.value,
       latitud: this.editForm.get(['latitud'])!.value,
       longitud: this.editForm.get(['longitud'])!.value,
+      direction: this.editForm.get(['direction'])!.value,
       organization: this.editForm.get(['organization'])!.value
     };
   }

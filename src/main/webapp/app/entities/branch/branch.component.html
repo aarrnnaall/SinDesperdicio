@@ -26,6 +26,7 @@
                     <th scope="col" ><span>Desription</span></th>
                     <th scope="col" ><span>Latitud</span></th>
                     <th scope="col" ><span>Longitud</span></th>
+                    <th scope="col" ><span>Direction</span></th>
                     <th scope="col" ><span>Organization</span></th>
                     <th scope="col"></th>
                 </tr>
@@ -36,6 +37,7 @@
                     <td>{{ branch.desription }}</td>
                     <td>{{ branch.latitud }}</td>
                     <td>{{ branch.longitud }}</td>
+                    <td>{{ branch.direction }}</td>
                     <td>
                         <div *ngIf="branch.organization">
                             <a [routerLink]="['/organization', branch.organization?.id, 'view']" >{{ branch.organization?.id }}</a>

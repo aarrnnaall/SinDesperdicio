@@ -1,11 +1,11 @@
 <div>
     <h2 id="page-heading">
-        <span>Tus Necesidad de Donaciones</span>
+        <span>Necesidad</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-needdonation" [routerLink]="['/needdonation_point/new']">
             <fa-icon icon="plus"></fa-icon>
             <span>
-            Crear nueva Necesidad de Donacion
+            Crear Necesidad
             </span>
         </button>
     </h2>
@@ -14,7 +14,7 @@
 
 
     <div class="alert alert-warning" id="no-result" *ngIf="filter().length === 0">
-        <span>No se encontraron Necesidad de Donaciones</span>
+        <span>No se encontraron Necesidad </span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="filter().length > 0">

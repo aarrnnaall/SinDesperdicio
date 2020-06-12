@@ -15,6 +15,10 @@
         {
             "fieldName": "longitud",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "direction",
+            "fieldType": "String"
         }
     ],
     "relationships": [
@@ -42,5 +46,7 @@
     "readOnly": false,
     "embedded": false,
     "clientRootFolder": "",
-    "applications": "*"
+    "applications": "*",
+    "searchEngine": false,
+    "databaseType": "sql"
 }

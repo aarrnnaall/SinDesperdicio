@@ -6,6 +6,7 @@ export interface IBranch {
   desription?: string;
   latitud?: number;
   longitud?: number;
+  direction?: string;
   roles?: IRole[];
   organization?: IOrganization;
 }
@@ -16,6 +17,7 @@ export class Branch implements IBranch {
     public desription?: string,
     public latitud?: number,
     public longitud?: number,
+    public direction?: string,
     public roles?: IRole[],
     public organization?: IOrganization
   ) {}

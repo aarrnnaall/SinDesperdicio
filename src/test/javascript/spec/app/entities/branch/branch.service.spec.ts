@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(BranchService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Branch(0, 'AAAAAAA', 0, 0);
+      elemDefault = new Branch(0, 'AAAAAAA', 0, 0, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -56,7 +56,8 @@ describe('Service Tests', () => {
           {
             desription: 'BBBBBB',
             latitud: 1,
-            longitud: 1
+            longitud: 1,
+            direction: 'BBBBBB'
           },
           elemDefault
         );
@@ -75,7 +76,8 @@ describe('Service Tests', () => {
           {
             desription: 'BBBBBB',
             latitud: 1,
-            longitud: 1
+            longitud: 1,
+            direction: 'BBBBBB'
           },
           elemDefault
         );

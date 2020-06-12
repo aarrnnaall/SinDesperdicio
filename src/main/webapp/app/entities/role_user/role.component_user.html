@@ -5,7 +5,7 @@
         <button id="jh-create-entity" *ngIf="filter(account.login)?.length === 0" class="btn btn-primary float-right jh-create-entity create-role" [routerLink]="['/role_user/new']">
             <fa-icon icon="plus"></fa-icon>
             <span>
-            Crear Nuevo Rol
+            Crear Rol
             </span>
         </button>
     </h2>
@@ -37,22 +37,22 @@
                     <td *ngIf="false"><a [routerLink]="['/role', role.id, 'view']">{{ role.id }}</a></td>
                     <td>
                         <div *ngIf="role.donor">
-                            <a><fa-icon [icon]="'times'"></fa-icon></a>
+                            <a><fa-icon icon="asterisk"></fa-icon></a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="role.driver">
-                            <a><fa-icon [icon]="'times'"></fa-icon></a>
+                            <a><fa-icon icon="asterisk"></fa-icon></a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="role.pointConsumption">
-                            <a><fa-icon [icon]="'times'"></fa-icon></a>
+                            <a><fa-icon icon="asterisk"></fa-icon></a>
                         </div>
                     </td>
                     <td *ngIf="false">
                         <div *ngIf="role.admin">
-                            <a><fa-icon [icon]="'times'"></fa-icon></a>
+                            <a><fa-icon icon="asterisk"></fa-icon></a>
                         </div>
                     </td>
 
