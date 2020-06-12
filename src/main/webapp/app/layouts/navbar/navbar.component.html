@@ -57,7 +57,6 @@
                     </div>
                 </div>   
             </div>
-<<<<<<< HEAD
         </div>
         <div [ngSwitch]="isAuthenticated()">
             <div *ngSwitchCase="true">
@@ -82,8 +81,6 @@
         </div>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
         <ul class="navbar-nav ml-auto">
-=======
->>>>>>> e2c7316d58ae68cacf288cfb2bc8ea36f0a5ee5e
             <div *jhiHasAnyAuthority="'ROLE_USER'">
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                 <a  class="nav-link" routerLink="role_user" (click)="collapseNavbar()" >
