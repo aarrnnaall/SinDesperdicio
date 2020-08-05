@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="user">
+            <h2>
+                <span>Usuario</span> [<b>{{ user.login }}</b>]
+            </h2>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Usuario</span></dt>
+                <dd>
+                    <span>{{ user.login }}</span>
+                    <jhi-boolean
+                        [value]="user.activated"
+                        textTrue="Activated"
+                        textFalse="Deactivated">
+                    </jhi-boolean>
+                </dd>
+
+                <dt><span>Nombre</span></dt>
+                <dd>{{ user.firstName }}</dd>
+
+                <dt><span>Apellido</span></dt>
+                <dd>{{ user.lastName }}</dd>
+
+                <dt><span>Correo</span></dt>
+                <dd>{{ user.email }}</dd>
+
+                <dt><span>Fecha de creación</span></dt>
+                <dd>{{ user.createdDate | date:'dd/MM/yy HH:mm' }}</dd>
+
+                <dt><span>Ultima Fecha de Modificacion</span></dt>
+                <dd>{{ user.lastModifiedDate | date:'dd/MM/yy HH:mm' }}</dd>
+
+            </dl>
+
+            <button type="submit" routerLink="../../" class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Atras</span>
+            </button>
+        </div>
+    </div>
+</div>

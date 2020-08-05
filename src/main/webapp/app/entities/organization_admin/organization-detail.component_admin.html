@@ -24,6 +24,15 @@
                 <dd>
                     <span>{{ organization.cuit }}</span>
                 </dd>
+                <dt><span>Sucursal</span></dt>
+                <dd>
+                    <span>{{ this.filter()[0].branch?.desription }}</span>
+                </dd>
+                <dt><span>Dirección</span></dt>
+                <dd>
+                    <span>{{ this.filter()[0].branch?.direction  }}</span>
+                </dd>
+          
             </dl>
 
             <button type="submit"

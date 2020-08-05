@@ -2,22 +2,18 @@
     <h2 id="page-heading">
         <span>Organización</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-organization" [routerLink]="['/organization_admin/new']">
+        <button *ngIf="!filter()[0].branch.organization" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-organization" [routerLink]="['/organization_admin/new']">
             <fa-icon icon="plus"></fa-icon>
             <span>
             Crear Organización
             </span>
         </button>
     </h2>
-
     <jhi-alert-error></jhi-alert-error>
-
-    <jhi-alert></jhi-alert>
 
     <div class="alert alert-warning" id="no-result" *ngIf="organizations?.length === 0">
         <span>No se encontro organización.</span>
     </div>
-
     <div class="table-responsive" id="entities" *ngIf="organizations?.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
@@ -27,15 +23,19 @@
                     <th scope="col" ><span>Tipo</span></th>
                     <th scope="col" ><span>Description</span></th>
                     <th scope="col" ><span>Cuit</span></th>
+                    <th scope="col" ><span>Sucursal</span></th>
+                    <th scope="col" ><span>Dirección</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let organization of organizations ;trackBy: trackId">
+                <tr *ngFor="let organization of filterorg() ;trackBy: trackId">
                     <td>{{ organization.razonSocial }}</td>
                     <td>{{ organization.tipo }}</td>
                     <td>{{ organization.description }}</td>
                     <td>{{ organization.cuit }}</td>
+                    <td>{{ this.filter()[0].branch?.desription }}</td>
+                    <td>{{ this.filter()[0].branch?.direction }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
@@ -52,7 +52,7 @@
                                 <span class="d-none d-md-inline">Editar</span>
                             </button>
 
-                            <button type="submit" (click)="delete(organization)"
+                            <button *ngIf="!filter()[0].branch.organization" type="submit" (click)="delete(organization)"
                                     class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>
                                 <span class="d-none d-md-inline">Eliminar</span>

@@ -28,7 +28,7 @@
                     <th *ngIf="!role.admin" scope="col" ><span>Punto Consumo</span></th>
                     <th *ngIf="role.admin" scope="col" ><span>Admin</span></th>
                     <th *ngIf="false" scope="col" ><span>Usuario</span></th>
-                    <th *ngIf="!role.admin" scope="col" ><span>Sucursal</span></th>
+                    <th *ngIf="!role.admin" scope="col" ><span>Organización</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -62,7 +62,7 @@
                     <td>
                         <div *ngIf="!role.admin">
                         <div *ngIf="role.branch">
-                            <a [routerLink]="['/branch', role.branch?.id, 'view']" >{{ role.branch?.desription }}</a>
+                            <a [routerLink]="['/branch', role.branch?.id, 'view']" >{{ role.branch?.organization?.description }}</a>
                         </div>
                         </div>
                     </td>

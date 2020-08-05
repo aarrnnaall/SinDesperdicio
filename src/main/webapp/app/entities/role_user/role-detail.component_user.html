@@ -36,10 +36,10 @@
                     {{ role.user?.id }}
                 </dd>-->
                 <div *ngIf="role.branch">
-                <dt><span>Sucursal</span></dt>
+                <dt><span>Organización</span></dt>
                 <dd>
                     <div *ngIf="role.branch">
-                        <a [routerLink]="['/branch', role.branch?.id, 'view']">{{ role.branch?.desription }}</a>
+                        <a >{{ role.branch?.organization?.description }}</a>
                     </div>
                 </dd>
                 </div>

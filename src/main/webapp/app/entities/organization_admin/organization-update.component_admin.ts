@@ -8,6 +8,11 @@ import { BranchService } from 'app/entities/branch_admin/branch.service_admin';
 import { IOrganization, Organization } from 'app/shared/model/organization.model';
 import { OrganizationService } from './organization.service_admin';
 import { IBranch, Branch } from 'app/shared/model/branch.model';
+import { RoleService } from 'app/entities/role_user/role.service_user';
+import { AccountService } from 'app/core/auth/account.service';
+import { Subscription } from 'rxjs';
+import { JhiEventManager } from 'ng-jhipster';
+import { IRole, Role } from 'app/shared/model/role.model';
 
 @Component({
   selector: 'jhi-organization-update',
@@ -15,6 +20,10 @@ import { IBranch, Branch } from 'app/shared/model/branch.model';
 })
 export class OrganizationUpdateComponent implements OnInit {
   isSaving = false;
+  eventSubscriber?: Subscription;
+  authSubscription?: Subscription;
+  roles?: IRole[];
+  account: any;
 
   editForm = this.fb.group({
     id: [],
@@ -32,15 +41,29 @@ export class OrganizationUpdateComponent implements OnInit {
     protected organizationService: OrganizationService,
     protected branchService: BranchService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private accountService: AccountService,
+    protected eventManager: JhiEventManager,
+    protected roleService: RoleService
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ organization }) => {
       this.updateForm(organization);
     });
+    this.loadAllrole();
+    this.registerChangeInRoles();
+    this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
   }
-
+  loadAllrole(): void {
+    this.roleService.query().subscribe((res: HttpResponse<IRole[]>) => (this.roles = res.body || []));
+  }
+  registerChangeInRoles(): void {
+    this.eventSubscriber = this.eventManager.subscribe('roleListModification', () => this.loadAllrole());
+  }
+  filter(): any {
+    return this.roles?.filter(x => x.user?.login === this.account.login);
+  }
   updateForm(organization: IOrganization): void {
     this.editForm.patchValue({
       id: organization.id,
@@ -62,7 +85,8 @@ export class OrganizationUpdateComponent implements OnInit {
     if (organization.id !== undefined) {
       this.subscribeToSaveResponse(this.organizationService.update(organization));
     } else {
-      this.subscribeToSaveResponse(this.branchService.create(branch));
+      const role = this.createFromFormRole(branch);
+      this.subscribeToSaveResponseRole(this.roleService.update(role));
     }
   }
 
@@ -86,11 +110,29 @@ export class OrganizationUpdateComponent implements OnInit {
       organization
     };
   }
+  private createFromFormRole(branch: IBranch): IRole {
+    return {
+      ...new Role(),
+      id: this.filter()[0].id,
+      admin: this.filter()[0].admin,
+      user: this.filter()[0].user,
+      branch
+    };
+  }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IOrganization>>): void {
     result.subscribe(
       () => this.onSaveSuccess(),
       () => this.onSaveError()
+    );
+  }
+  protected subscribeToSaveResponseRole(result: Observable<HttpResponse<IRole>>): void {
+    result.subscribe(
+      () => this.onSaveSuccess(),
+      () => this.onSaveError(),
+      () => {
+        this.eventManager.broadcast('roleListModification');
+      }
     );
   }
 
