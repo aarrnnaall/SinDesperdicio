@@ -1,7 +1,8 @@
 package app.sindesperdicio.net.ar.service;
-
+import app.sindesperdicio.net.ar.repository.RoleRepository;
 import app.sindesperdicio.net.ar.config.Constants;
 import app.sindesperdicio.net.ar.domain.Authority;
+import app.sindesperdicio.net.ar.domain.Role;
 import app.sindesperdicio.net.ar.domain.User;
 import app.sindesperdicio.net.ar.repository.AuthorityRepository;
 import app.sindesperdicio.net.ar.repository.UserRepository;
@@ -38,12 +39,15 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final RoleRepository roleRepository;
+
     private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
+        this.roleRepository = roleRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -106,7 +110,7 @@ public class UserService {
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
-        newUser.setActivated(true);
+        newUser.setActivated(userDTO.isActivated());
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
@@ -114,6 +118,12 @@ public class UserService {
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
         log.debug("Created Information for User: {}", newUser);
+        if(userDTO.isActivated()==false){
+            Role role = new Role();
+            role.admin(true);
+            role.setUser(newUser);
+            roleRepository.save(role);
+                                        }
         return newUser;
     }
 

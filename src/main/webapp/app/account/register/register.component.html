@@ -6,7 +6,11 @@
             <div class="alert alert-success" *ngIf="success">
                 <strong>¡Registro guardado!</strong> .Por favor, iniciar sesión.
             </div>
-
+            
+            <div class="alert alert-warning" *ngIf="success">
+                <strong>¡Momento!</strong> Si su registro fue como Administrador Organizacional. ¡Debe esperar su Alta!
+            </div>
+            
             <div class="alert alert-danger" *ngIf="error">
                 <strong>¡Registro fallido!</strong> Por favor, inténtelo de nuevo más tarde.
             </div>
@@ -138,7 +142,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label">Administrador</label>
-                    <input type="radio" class="form-control" name="user" />
+                    <input type="radio" class="form-control" (click)="admin()" name="user" />
                 </div>
 
                 <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">Registrarse</button>

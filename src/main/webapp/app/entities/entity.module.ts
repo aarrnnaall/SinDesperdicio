@@ -29,8 +29,16 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./organization/organization.module').then(m => m.SinDesperdicioOrganizationModule)
       },
       {
+        path: 'organization_admin',
+        loadChildren: () => import('./organization_admin/organization.module_admin').then(m => m.SinDesperdicioOrganizationModule)
+      },
+      {
         path: 'branch',
         loadChildren: () => import('./branch/branch.module').then(m => m.SinDesperdicioBranchModule)
+      },
+      {
+        path: 'branch_admin',
+        loadChildren: () => import('./branch_admin/branch.module_admin').then(m => m.SinDesperdicioBranchModule)
       },
       {
         path: 'detail-driver',

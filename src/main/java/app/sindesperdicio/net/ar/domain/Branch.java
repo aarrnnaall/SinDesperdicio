@@ -39,7 +39,7 @@ public class Branch implements Serializable {
     @OneToMany(mappedBy = "branch")
     private Set<Role> roles = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JsonIgnoreProperties("braches")
     private Organization organization;
 

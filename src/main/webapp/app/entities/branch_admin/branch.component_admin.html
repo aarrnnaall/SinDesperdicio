@@ -1,0 +1,72 @@
+<div>
+    <h2 id="page-heading">
+        <span>Sucursal</span>
+
+        <button *ngIf="!filter()[0].branch" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-branch" [routerLink]="['/branch_admin/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Crear Sucursal
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="branches?.length === 0">
+        <span>No se encontraron sucursales</span>
+    </div>
+    <div class="table-responsive" id="entities" *ngIf="branches?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th *ngIf="false" scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Descripción</span></th>
+                    <th *ngIf="false" scope="col" ><span>Latitud</span></th>
+                    <th *ngIf="false" scope="col" ><span>Longitud</span></th>
+                    <th scope="col" ><span>Dirección</span></th>
+                    <th scope="col" ><span>Organización</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let branch of filterbranch() ;trackBy: trackId">
+                    <td *ngIf="false" ><a [routerLink]="['/branch', branch.id, 'view']">{{ branch.id }}</a></td>
+                    <td>{{ branch.desription }}</td>
+                    <td *ngIf="false" >{{ branch.latitud }}</td>
+                    <td *ngIf="false" >{{ branch.longitud }}</td>
+                    <td>{{ branch.direction }}</td>
+                    <td>
+                        <div *ngIf="branch.organization">
+                            <a [routerLink]="['/organization_admin', branch.organization?.id, 'view']" >{{ branch.organization?.description }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/branch_admin', branch.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">Vista</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/branch_admin', branch.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Editar</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(branch)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Eliminar</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

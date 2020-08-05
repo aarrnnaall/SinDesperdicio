@@ -13,7 +13,7 @@ import { RegisterService } from './register.service';
 export class RegisterComponent implements AfterViewInit {
   @ViewChild('login', { static: false })
   login?: ElementRef;
-
+  actived = true;
   doNotMatch = false;
   error = false;
   errorEmailExists = false;
@@ -47,7 +47,7 @@ export class RegisterComponent implements AfterViewInit {
     } else {
       const login = this.registerForm.get(['login'])!.value;
       const email = this.registerForm.get(['email'])!.value;
-      const activated = true;
+      const activated = this.actived;
       this.registerService.save({ login, email, password, activated, langKey: 'en' }).subscribe(
         () => (this.success = true),
         response => this.processError(response)
@@ -55,6 +55,9 @@ export class RegisterComponent implements AfterViewInit {
     }
   }
 
+  admin(): void {
+    this.actived = false;
+  }
   openLogin(): void {
     this.loginModalService.open();
   }
