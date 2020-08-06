@@ -82,10 +82,12 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   filter(): any {
     return this.roles?.filter(x => x.user?.login === this.account.login);
   }
-  filterrole(): any {
-    return this.roles?.filter(x => x.branch?.organization?.id === this.filter()[0].branch?.organization?.id);
+  filteruser(): any {
+    return this.roles?.filter(x => x.branch?.id === this.filter()[0].branch.id);
   }
-
+  filterusers(id: number): any {
+    return this.users?.filter(x => x.id === id);
+  }
   setActive(user: User, isActivated: boolean): void {
     this.userService.update({ ...user, activated: isActivated }).subscribe(() => this.loadAll());
   }
@@ -134,7 +136,10 @@ export class UserManagementComponent implements OnInit, OnDestroy {
     }
     return result;
   }
-
+  trackId(index: number, item: IRole): number {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    return item.id!;
+  }
   private onSuccess(users: User[] | null, headers: HttpHeaders): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.users = users;

@@ -59,14 +59,22 @@
                     <input type="number" class="form-control" name="longitud" id="field_longitud"
                            formControlName="longitud"/>
                 </div>
-             
+                
+                <div class="form-group">
+                    <label class="form-control-label" for="field_desription">Sucursal</label>
+                    <input type="text" class="form-control" name="desription" id="field_desription"
+                           formControlName="desription"/>
+                </div>
+                <div *ngIf="this.filter()[0].branch?.desription" class="form-group" [hidden]="!this.filter()[0].branch?.desription">
+                    <input value="{{this.filter()[0].branch?.desription}}" type="text" class="form-control"readonly />
+                </div> 
                 <div class="form-group">
                     <label class="form-control-label" for="field_direction">Dirección</label>
                     <input type="text" class="form-control" name="direction" id="field_direction"
                            formControlName="direction"/>
                 </div>
                 <div *ngIf="this.filter()[0].branch?.direction" class="form-group" [hidden]="!this.filter()[0].branch?.direction">
-                    <input value="{{this.filter()[0].branch?.direction}}" type="text" class="form-control" id="dire" name="dire" formControlName="dire" readonly />
+                    <input value="{{this.filter()[0].branch?.direction}}" type="text" class="form-control" readonly />
                 </div>
 
             </div>

@@ -24,14 +24,15 @@ export class OrganizationUpdateComponent implements OnInit {
   authSubscription?: Subscription;
   roles?: IRole[];
   account: any;
-
+  tempdirection: any;
+  tempsucursal: any;
   editForm = this.fb.group({
     id: [],
     razonSocial: [null, [Validators.required]],
     tipo: [],
     description: [null, [Validators.required]],
     cuit: [],
-    desription: ['Central'],
+    desription: [],
     latitud: [],
     longitud: [],
     direction: []
@@ -82,8 +83,10 @@ export class OrganizationUpdateComponent implements OnInit {
     this.isSaving = true;
     const organization = this.createFromForm();
     const branch = this.createFromFormBranch(organization);
+    const branchupdate = this.updateFromFormBranch();
     if (organization.id !== undefined) {
       this.subscribeToSaveResponse(this.organizationService.update(organization));
+      this.subscribeToSaveResponseBrach(this.branchService.update(branchupdate));
     } else {
       const role = this.createFromFormRole(branch);
       this.subscribeToSaveResponseRole(this.roleService.update(role));
@@ -108,6 +111,27 @@ export class OrganizationUpdateComponent implements OnInit {
       longitud: this.editForm.get(['longitud'])!.value,
       direction: this.editForm.get(['direction'])!.value,
       organization
+    };
+  }
+  private updateFromFormBranch(): IBranch {
+    if (this.editForm.get(['direction'])!.value === null) {
+      this.tempdirection = this.filter()[0].branch?.direction;
+    } else {
+      this.tempdirection = this.editForm.get(['direction'])!.value;
+    }
+    if (this.editForm.get(['desription'])!.value === null) {
+      this.tempsucursal = this.filter()[0].branch?.desription;
+    } else {
+      this.tempsucursal = this.editForm.get(['desription'])!.value;
+    }
+    return {
+      ...new Branch(),
+      id: this.filter()[0].branch?.id,
+      desription: this.tempsucursal,
+      latitud: this.editForm.get(['latitud'])!.value,
+      longitud: this.editForm.get(['longitud'])!.value,
+      direction: this.tempdirection,
+      organization: this.filter()[0].branch?.organization
     };
   }
   private createFromFormRole(branch: IBranch): IRole {
@@ -135,7 +159,12 @@ export class OrganizationUpdateComponent implements OnInit {
       }
     );
   }
-
+  protected subscribeToSaveResponseBrach(result: Observable<HttpResponse<IBranch>>): void {
+    result.subscribe(
+      () => this.onSaveSuccess(),
+      () => this.onSaveError()
+    );
+  }
   protected onSaveSuccess(): void {
     this.isSaving = false;
     this.previousState();
