@@ -2,7 +2,7 @@
     <h2 id="page-heading">
         <span>Organización</span>
 
-        <button *ngIf="!filter()[0].branch.organization" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-organization" [routerLink]="['/organization_admin/new']">
+        <button *ngIf="notorg()"  id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-organization" [routerLink]="['/organization_admin/new']">
             <fa-icon icon="plus"></fa-icon>
             <span>
             Crear Organización
@@ -11,10 +11,10 @@
     </h2>
     <jhi-alert-error></jhi-alert-error>
 
-    <div class="alert alert-warning" id="no-result" *ngIf="organizations?.length === 0">
+    <div class="alert alert-warning" id="no-result" *ngIf="notorg()">
         <span>No se encontro organización.</span>
     </div>
-    <div class="table-responsive" id="entities" *ngIf="organizations?.length > 0">
+    <div class="table-responsive" id="entities" *ngIf="!notorg()">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>

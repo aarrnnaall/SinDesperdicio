@@ -49,7 +49,7 @@ public class Role implements Serializable {
     @JsonIgnore
     private DetailDriver rol;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.MERGE)
     @JsonIgnoreProperties("roles")
     private Branch branch;
 

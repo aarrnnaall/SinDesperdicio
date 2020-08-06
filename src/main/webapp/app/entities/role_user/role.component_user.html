@@ -50,8 +50,8 @@
                             <a><fa-icon icon="asterisk"></fa-icon></a>
                         </div>
                     </td>
-                    <td>
-                            <div class="alert alert-warning" *ngIf="role.admin">
+                    <td *ngIf="role.admin">
+                            <div class="alert alert-warning" >
                                 <strong><h1>¡Atencion!</h1></strong> ¿Deseas cambiar de Rol? Comunicate con el Administrador del Sitio.
                             </div> 
                     </td>

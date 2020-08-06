@@ -10,6 +10,7 @@ import { RoleService } from '../../entities/role_user/role.service_user';
 import { HttpResponse } from '@angular/common/http';
 import { IRole } from 'app/shared/model/role.model';
 import { JhiEventManager } from 'ng-jhipster';
+
 @Component({
   selector: 'jhi-navbar',
   templateUrl: './navbar.component.html',
@@ -18,6 +19,7 @@ import { JhiEventManager } from 'ng-jhipster';
 export class NavbarComponent implements OnInit, OnDestroy {
   inProduction?: boolean;
   roles?: IRole[];
+  role: any;
   isNavbarCollapsed = true;
   swaggerEnabled?: boolean;
   version: string;
@@ -61,7 +63,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
   collapseNavbar(): void {
     this.isNavbarCollapsed = true;
   }
-
+  notrole(): any {
+    if (this.filter().length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   isAuthenticated(): boolean {
     return this.accountService.isAuthenticated();
   }

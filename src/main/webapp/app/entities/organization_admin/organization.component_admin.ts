@@ -57,7 +57,13 @@ export class OrganizationComponent implements OnInit, OnDestroy {
   filterorg(): any {
     return this.organizations?.filter(x => x.id === this.filter()[0].branch.organization.id);
   }
-
+  notorg(): any {
+    if (this.filter()[0].branch === null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   trackId(index: number, item: IOrganization): number {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     return item.id!;

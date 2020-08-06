@@ -12,6 +12,8 @@ import { Account } from 'app/core/user/account.model';
 import { UserService } from 'app/core/user/user.service';
 import { User } from 'app/core/user/user.model';
 import { UserManagementDeleteDialogComponent } from './user-management-delete-dialog.component_org';
+import { RoleService } from 'app/entities/role_user/role.service_user';
+import { IRole } from 'app/shared/model/role.model';
 
 @Component({
   selector: 'jhi-user-mgmt',
@@ -27,10 +29,15 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   predicate!: string;
   previousPage!: number;
   ascending!: boolean;
+  authSubscription?: Subscription;
+  roles?: IRole[];
+  eventSubscriber?: Subscription;
+  account: any;
 
   constructor(
-    private userService: UserService,
     private accountService: AccountService,
+    protected roleService: RoleService,
+    private userService: UserService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private eventManager: JhiEventManager,
@@ -54,12 +61,29 @@ export class UserManagementComponent implements OnInit, OnDestroy {
         )
       )
       .subscribe();
+    this.loadAllRole();
+    this.registerChangeInRoles();
+    this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
+  }
+  registerChangeInRoles(): void {
+    this.eventSubscriber = this.eventManager.subscribe('roleListModification', () => this.loadAll());
+  }
+
+  loadAllRole(): void {
+    this.roleService.query().subscribe((res: HttpResponse<IRole[]>) => (this.roles = res.body || []));
   }
 
   ngOnDestroy(): void {
     if (this.userListSubscription) {
       this.eventManager.destroy(this.userListSubscription);
     }
+  }
+
+  filter(): any {
+    return this.roles?.filter(x => x.user?.login === this.account.login);
+  }
+  filterrole(): any {
+    return this.roles?.filter(x => x.branch?.organization?.id === this.filter()[0].branch?.organization?.id);
   }
 
   setActive(user: User, isActivated: boolean): void {
