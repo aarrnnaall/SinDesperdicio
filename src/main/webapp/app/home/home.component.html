@@ -2,13 +2,12 @@
     <div class="col-md-3">
         <span class="hipster img-fluid rounded"></span>
     </div>
-
     <div class="col-md-9">
         <h1 class="display-4">¡Bienvenido, Sin Desperdicio!</h1>
-
-
+    
         <div [ngSwitch]="isAuthenticated()">
             <div *ngSwitchCase="true">
+                
                 <p class="lead">Esta es tu página de inicio</p>
                 <div class="alert alert-success" *ngIf="account">
                 <span id="home-logged-message" >Has iniciado sesión como usuario: "{{ account.login }}".</span>
@@ -17,6 +16,9 @@
                 <div class="alert alert-warning" *ngIf="!filter()[0]">
                     <span id="home-logged-message">¿Todavía no tenes Rol?. ¡Dirígete a la Pestaña de "Rol" para asignarte uno!</span>
                 </div>
+                <div  *ngIf="false" class="row">
+                    <div id="hotel_map"></div>
+                </div>        
                 </div>
             </div>
         </div>
