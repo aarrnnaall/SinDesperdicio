@@ -1,7 +1,12 @@
 package app.sindesperdicio.net.ar.web.rest;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -40,7 +45,51 @@ public class SuperSetResource {
         catch(Exception e) {
         return "Error";
         }
-	}   
+    }   
+    @GetMapping("/geocoding/{text}")
+    public String geocoding(@PathVariable String text) throws java.io.IOException {
+        String replacetext=text.replace(" ", "+");
+        String url = "https://api.geocode.earth/v1/search?api_key=ge-6071d21825e9421c&text="+replacetext;
+        HttpURLConnection c = null;
+        try {
+            URL u = new URL(url);
+            c = (HttpURLConnection) u.openConnection();
+            c.setRequestMethod("GET");
+            c.setRequestProperty("Content-length", "0");
+            c.setUseCaches(false);
+            c.setAllowUserInteraction(false);
+            c.connect();
+            int status = c.getResponseCode();
+    
+            switch (status) {
+                case 200:
+                case 201:
+                    BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line+"\n");
+                    }
+                    br.close();
+                    return sb.toString();
+            }
+    
+        } catch (MalformedURLException ex) {
+ 
+        } catch (IOException ex) {
+ 
+        } finally {
+           if (c != null) {
+              try {
+                  c.disconnect();
+              } catch (Exception ex) {
+ 
+            }
+           }
+        }
+        return null;
+    }
+      
 }
 
 

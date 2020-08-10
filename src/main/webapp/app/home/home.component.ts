@@ -11,6 +11,13 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import OSM from 'ol/source/OSM';
 import * as olProj from 'ol/proj';
+import Feature from 'ol/Feature';
+import Point from 'ol/geom/Point';
+import Style from 'ol/style/Style';
+import Icon from 'ol/style/Icon';
+import Vectorlayer from 'ol/layer/Vector';
+import Vectorsource from 'ol/source/Vector';
+
 import TileLayer from 'ol/layer/Tile';
 
 @Component({
@@ -58,6 +65,34 @@ export class HomeComponent implements OnInit, OnDestroy {
         zoom
       })
     });
+
+    const marcador = new Feature({
+      geometry: new Point(
+        olProj.fromLonLat([log, lat]) // En dónde se va a ubicar
+      )
+    });
+
+    // Agregamos icono
+    marcador.setStyle(
+      new Style({
+        image: new Icon({
+          src: '../../content/images/marcador.png'
+        })
+      })
+    );
+
+    // marcadores debe ser un arreglo
+    const marcadores = []; // Arreglo para que se puedan agregar otros más tarde
+
+    marcadores.push(marcador); // Agregamos el marcador al arreglo
+
+    const capa = new Vectorlayer({
+      source: new Vectorsource({
+        features: marcadores // A la capa le ponemos los marcadores
+      })
+    });
+    // Y agregamos la capa al mapa
+    this.map.addLayer(capa);
   }
   filter(): any {
     return this.roles?.filter(x => x.user?.login === this.account.login);
