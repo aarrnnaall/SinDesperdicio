@@ -7,16 +7,23 @@ import { createRequestOption } from 'app/shared/util/request-util';
 import { IBranch } from 'app/shared/model/branch.model';
 
 type EntityResponseType = HttpResponse<IBranch>;
+type EntityResponseTypegeocode = HttpResponse<String>;
+
 type EntityArrayResponseType = HttpResponse<IBranch[]>;
 
 @Injectable({ providedIn: 'root' })
 export class BranchService {
   public resourceUrl = SERVER_API_URL + 'api/branches';
+  public geocodeUrl = SERVER_API_URL + 'api/geocoding';
 
   constructor(protected http: HttpClient) {}
 
   create(branch: IBranch): Observable<EntityResponseType> {
     return this.http.post<IBranch>(this.resourceUrl, branch, { observe: 'response' });
+  }
+
+  geocode(text: String): Observable<EntityResponseTypegeocode> {
+    return this.http.get<String>(`${this.geocodeUrl}/${text}`, { observe: 'response' });
   }
 
   update(branch: IBranch): Observable<EntityResponseType> {
