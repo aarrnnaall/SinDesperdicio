@@ -12,7 +12,10 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.StringJoiner;
 
 @RestController
@@ -38,13 +41,108 @@ public class SuperSetResource {
         http.setFixedLengthStreamingMode(length);
         http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         http.connect();
-        try(OutputStream os = http.getOutputStream()) {
+        OutputStream os = http.getOutputStream();
         os.write(out);
-        return "Login";
+        os.flush();
+        os.close();
+        int responseCode = http.getResponseCode();
+        if (responseCode == 302) { 
+        Map<String, List<String>> headerFields = http.getHeaderFields();
+ 
+        Set<String> headerFieldsSet = headerFields.keySet();
+        Iterator<String> hearerFieldsIter = headerFieldsSet.iterator();
+        String resutl="";
+        String resutl2="";
+             
+        while (hearerFieldsIter.hasNext()) {
+             
+             String headerFieldKey = hearerFieldsIter.next();
+             if ("Set-Cookie".equalsIgnoreCase(headerFieldKey)) {
+                  
+                 List<String> headerFieldValue = headerFields.get(headerFieldKey);
+                  
+                 for (String headerValue : headerFieldValue) {
+                      
+                    System.out.println("Cookie Found...");
+                      
+                    String[] fields = headerValue.split(";\s*");
+ 
+                    String cookieValue = fields[0];
+                    String expires = null;
+                    String path = null;
+                    String domain = null;
+                    boolean secure = false;
+                     
+                    // Parse each field
+                    for (int j = 1; j < fields.length; j++) {
+                        if ("secure".equalsIgnoreCase(fields[j])) {
+                            secure = true;
+                        }
+                        else if (fields[j].indexOf('=') > 0) {
+                            String[] f = fields[j].split("=");
+                            if ("expires".equalsIgnoreCase(f[0])) {
+                                expires = f[1];
+                            }
+                            else if ("domain".equalsIgnoreCase(f[0])) {
+                                domain = f[1];
+                            }
+                            else if ("path".equalsIgnoreCase(f[0])) {
+                                path = f[1];
+                            }
+                        }
+                         
+                    }
+                    resutl2 = "cookieValue:" + cookieValue + "expires:" + expires+"path:" + path+"domain:" + domain+"secure:" + secure;
+   
+                    resutl = cookieValue;
+            }    
+            }    
+            }
+        String welcome = "http://superset.sindesperdicio.net.ar:8088/superset/welcome";
+        HttpURLConnection c = null;
+        try {
+            URL u = new URL(welcome);
+            c = (HttpURLConnection) u.openConnection();
+            c.setRequestMethod("GET");
+            c.setRequestProperty("Content-length", "0");
+            c.setRequestProperty("Set-Cookie", resutl);
+            c.setUseCaches(false);
+            c.setAllowUserInteraction(false);
+            c.connect();
+            int status = c.getResponseCode();
+    
+            switch (status) {
+                case 200:
+                case 201:
+                    BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line+"\n");
+                    }
+                    br.close();
+                    return sb.toString();
+            }
+    
+        } catch (MalformedURLException ex) {
+ 
+        } catch (IOException ex) {
+ 
+        } finally {
+           if (c != null) {
+              try {
+                  c.disconnect();
+              } catch (Exception ex) {
+ 
+            }
+           }
         }
-        catch(Exception e) {
-        return "Error";
+        return null;
+    
+        }else{
+            return "ERROR";
         }
+        
     }   
     @GetMapping("/geocoding/{text}")
     public String geocoding(@PathVariable String text) throws java.io.IOException {
