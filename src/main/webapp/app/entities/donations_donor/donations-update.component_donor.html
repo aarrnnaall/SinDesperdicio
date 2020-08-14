@@ -241,18 +241,18 @@
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn float-right btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon><span class="d-none d-md-inline">Guargar</span>
+                    <fa-icon icon="ban"></fa-icon><span class="d-none d-md-inline">Cancelar</span>
                 </button>
 
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn float-right btn-primary">
-                    <fa-icon icon="save"></fa-icon><span class="d-none d-md-inline">Cancelar</span>
+                    <fa-icon icon="save"></fa-icon><span class="d-none d-md-inline">Guardar</span>
                 </button>
             </div>
         </form>
-       <button type="submit" (click)="Addeats()"
+       <button [hidden]="editForm.get('id')!.value" type="submit" (click)="Addeats()"
                                     class="btn btn-info btn-sm">
                                 <fa-icon icon="plus"></fa-icon>
-                                <span class="d-none d-md-inline">Quitar</span>
+                                <span class="d-none d-md-inline">Agregar</span>
                             </button>
     
         <button [hidden]="editForm.get('id')!.value" type="submit" (click)="Removeeats()"

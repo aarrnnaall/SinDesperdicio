@@ -63,9 +63,7 @@ public class SuperSetResource {
                   
                  for (String headerValue : headerFieldValue) {
                       
-                    System.out.println("Cookie Found...");
-                      
-                    String[] fields = headerValue.split(";\s*");
+                    String[] fields = headerValue.split(";\\s*");
  
                     String cookieValue = fields[0];
                     String expires = null;
@@ -98,14 +96,43 @@ public class SuperSetResource {
             }    
             }    
             }
-        String welcome = "http://superset.sindesperdicio.net.ar:8088/superset/welcome";
+            URL url2 = new URL("http://superset.sindesperdicio.net.ar:8088/users/add");
+            URLConnection con2 = url2.openConnection();
+            HttpURLConnection http2 = (HttpURLConnection)con2;
+            http2.setRequestMethod("POST"); // PUT is another valid option
+            http2.setDoOutput(true);
+            http2.setRequestProperty("Cookie", resutl);
+            Map<String,String> arguments2 = new HashMap<>();
+            arguments2.put("first_name", "sadlksakdj");
+            arguments2.put("last_named", "skajdjasd"); // This is a fake password obviously
+            arguments2.put("email", "skljadlkjsd"); // This is a fake password obviously
+            arguments2.put("password", "123"); // This is a fake password obviously
+            arguments2.put("conf_password", "123"); // This is a fake password obviously
+            StringJoiner sj2 = new StringJoiner("&");
+            for(Map.Entry<String,String> entry : arguments2.entrySet())
+                sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" 
+                     + URLEncoder.encode(entry.getValue(), "UTF-8"));
+            byte[] out2 = sj2.toString().getBytes(StandardCharsets.UTF_8);
+            int length2 = out2.length;    
+            http2.setFixedLengthStreamingMode(length2);
+            http2.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            http2.connect();
+            OutputStream os2 = http2.getOutputStream();
+            os2.write(out2);
+            os2.flush();
+            os2.close();
+            int responseCode2 = http2.getResponseCode();
+            if (responseCode2 == 302) {
+                return "realizado";
+            }
+       /* String welcome = "http://superset.sindesperdicio.net.ar:8088/users/add";
         HttpURLConnection c = null;
         try {
             URL u = new URL(welcome);
             c = (HttpURLConnection) u.openConnection();
             c.setRequestMethod("GET");
             c.setRequestProperty("Content-length", "0");
-            c.setRequestProperty("Set-Cookie", resutl);
+            c.setRequestProperty("Cookie", resutl);
             c.setUseCaches(false);
             c.setAllowUserInteraction(false);
             c.connect();
@@ -141,9 +168,12 @@ public class SuperSetResource {
     
         }else{
             return "ERROR";
-        }
+        }*/
+    }
+        return null;
+    }
         
-    }   
+   
     @GetMapping("/geocoding/{text}")
     public String geocoding(@PathVariable String text) throws java.io.IOException {
         String replacetext=text.replace(" ", "+");
