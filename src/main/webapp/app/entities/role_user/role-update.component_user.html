@@ -44,7 +44,7 @@
                     <label class="form-control-label" for="field_branch">Organización</label>
                     <select class="form-control" id="field_branch" name="branch" formControlName="branch">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="branchOption.id === editForm.get('branch')!.value?.id ? editForm.get('branch')!.value : branchOption" *ngFor="let branchOption of branches; trackBy: trackById">{{ branchOption.organization?.razonSocial }} - {{ role.branch?.desription }</option>
+                        <option [ngValue]="branchOption.id === editForm.get('branch')!.value?.id ? editForm.get('branch')!.value : branchOption" *ngFor="let branchOption of branches; trackBy: trackById">{{ branchOption.organization?.razonSocial }} - {{ branchOption?.desription }}</option>
                     </select>
                 </div>
             </div>
