@@ -103,14 +103,15 @@ public class SuperSetResource {
             http2.setDoOutput(true);
             http2.setRequestProperty("Cookie", resutl);
             Map<String,String> arguments2 = new HashMap<>();
-            arguments2.put("first_name", "sadlksakdj");
-            arguments2.put("last_named", "skajdjasd"); // This is a fake password obviously
-            arguments2.put("email", "skljadlkjsd"); // This is a fake password obviously
-            arguments2.put("password", "123"); // This is a fake password obviously
-            arguments2.put("conf_password", "123"); // This is a fake password obviously
+            arguments.put("first_name", "firstJhipster");
+            arguments.put("last_name", "lastJhipster");
+            arguments.put("username", "jhipster");
+            arguments.put("email", "jhipster@gmail.com");
+            arguments.put("password", "jhispter123");
+            arguments.put("conf_password", "jhispter123");
             StringJoiner sj2 = new StringJoiner("&");
             for(Map.Entry<String,String> entry : arguments2.entrySet())
-                sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" 
+                sj2.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" 
                      + URLEncoder.encode(entry.getValue(), "UTF-8"));
             byte[] out2 = sj2.toString().getBytes(StandardCharsets.UTF_8);
             int length2 = out2.length;    
@@ -200,6 +201,7 @@ public class SuperSetResource {
                     }
                     br.close();
                     return sb.toString();
+                    
             }
     
         } catch (MalformedURLException ex) {
@@ -217,7 +219,90 @@ public class SuperSetResource {
         }
         return null;
     }
-      
+    @GetMapping("/loginsuperset")
+    public String login() throws java.io.IOException {
+        String url = "http://superset.sindesperdicio.net.ar:8088/login?username=admin&redirect=/users/add";
+        HttpURLConnection c = null;
+            URL u = new URL(url);
+            c = (HttpURLConnection) u.openConnection();
+            c.setReadTimeout(99999999);
+            c.setRequestMethod("GET");
+            c.setRequestProperty("Accept", "*/*");
+            c.setRequestProperty("Accept-Encoding", "gzip, deflate, br");
+            c.setRequestProperty("Connection", "keep-alive");
+            c.connect();
+            int status = c.getResponseCode();
+    
+            switch (status) {
+                case 302:
+                case 308:
+                String newUrl2 = c.getHeaderField("Location");
+                HttpURLConnection c2 = null;
+                URL u2 = new URL(newUrl2);
+                c2 = (HttpURLConnection) u2.openConnection();
+                c2.setReadTimeout(99999999);
+                c2.setRequestMethod("GET");
+                c2.setRequestProperty("Accept", "*/*");
+                c2.setRequestProperty("Accept-Encoding", "gzip, deflate, br");
+                c2.setRequestProperty("Connection", "keep-alive");
+                c2.connect(); 
+                int status2 = c2.getResponseCode();
+                if (status2==302){
+                    return "302";
+                }
+                 /*    BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line+"\n");
+                    }
+                    br.close();
+                    return sb.toString();*/
+                  /*
+                    HttpURLConnection conn2 = null;
+                    String newUrl2 = c.getHeaderField("Location");
+                	URL u3 = new URL(newUrl2);
+                    conn2 = (HttpURLConnection) u3.openConnection();
+                    conn2.setRequestMethod("GET");
+                    conn2.setReadTimeout(99999999);
+                    conn2.setRequestProperty("Cookie", c.getHeaderField("Set-Cookie"));
+                    conn2.setRequestProperty("Accept-Encoding", "gzip, deflate, br");
+                    conn2.setRequestProperty("Connection", "keep-alive");
+                    
+                    BufferedReader br2 = new BufferedReader(new InputStreamReader(conn2.getInputStream()));
+                    StringBuilder sb2 = new StringBuilder();
+                    String line2;
+                    while ((line2 = br2.readLine()) != null) {
+                        sb2.append(line2+"\n");
+                    }
+                    br2.close();
+                    return sb2.toString();
+                    */
+                    //return array[0];
+                                    
+/*                    
+                    HttpURLConnection conn = null;
+                    String newUrl = "http://superset.sindesperdicio.net.ar:8088/users/add";
+
+                    URL u2 = new URL(newUrl);
+                    conn = (HttpURLConnection) u2.openConnection();
+                    conn.setRequestProperty("Content-Encoding", "gzip");
+                    conn.setRequestProperty("Content-Type", "text/html; charset=utf-8");
+                    conn.setRequestProperty("Cookie", array[0]);
+                    conn.connect();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line+"\n");
+                    }
+                    br.close();
+                    return sb.toString();
+  */                 
+            }
+    
+            return "nada";
+    }
 }
 
 
