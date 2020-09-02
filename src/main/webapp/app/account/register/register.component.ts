@@ -58,6 +58,9 @@ export class RegisterComponent implements AfterViewInit {
   admin(): void {
     this.actived = false;
   }
+  user(): void {
+    this.actived = true;
+  }
   openLogin(): void {
     this.loginModalService.open();
   }

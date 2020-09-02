@@ -1,7 +1,14 @@
 <div class="row justify-content-center">
     <div class="col-8">
+        <div class="form-group" [hidden]="!editForm.get('id')!.value">
+            <h2 id="jhi-donations-heading">Editar Detalle del Conductor</h2>
+        </div>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value">
+            <h2 id="jhi-donations-heading">Crear Detalle del Conductor</h2>
+        </div>
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-detail-driver-heading">Crear o Editar Detalle del Conductor</h2>
+           
             <br>
             <div>
                 <jhi-alert-error></jhi-alert-error>
