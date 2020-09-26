@@ -1,6 +1,8 @@
 package app.sindesperdicio.net.ar.web.rest;
 import org.springframework.web.bind.annotation.*;
 
+import liquibase.pro.packaged.n;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -231,11 +233,10 @@ public class SuperSetResource {
             c.setRequestProperty("Accept-Encoding", "gzip, deflate, br");
             c.setRequestProperty("Connection", "keep-alive");
             c.connect();
+            //String cookies = c.getHeaderField("Set-Cookie");
             int status = c.getResponseCode();
-    
-            switch (status) {
-                case 302:
-                case 308:
+            //String numCadena= status+"";
+            if(status == 308){
                 String newUrl2 = c.getHeaderField("Location");
                 HttpURLConnection c2 = null;
                 URL u2 = new URL(newUrl2);
@@ -246,10 +247,24 @@ public class SuperSetResource {
                 c2.setRequestProperty("Accept-Encoding", "gzip, deflate, br");
                 c2.setRequestProperty("Connection", "keep-alive");
                 c2.connect(); 
+                
+                String cookies2 = c2.getHeaderField("Set-Cookie");
                 int status2 = c2.getResponseCode();
-                if (status2==302){
-                    return "302";
+                if (status2==200){
+                    String cont = c2.toString();
+                    String arraycont[]=cont.split("http");
+                    String urlredirec="http"+arraycont[2]+"http"+arraycont[3];
+                    return urlredirec;
+                 
+                }else{
+                    String numCadena= status2+"";
+                    return numCadena;
                 }
+            }else{
+                String numCadena= status+"";
+                return numCadena;
+            }
+            
                  /*    BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()));
                     StringBuilder sb = new StringBuilder();
                     String line;
@@ -299,9 +314,9 @@ public class SuperSetResource {
                     br.close();
                     return sb.toString();
   */                 
-            }
+            
     
-            return "nada";
+           
     }
 }
 
