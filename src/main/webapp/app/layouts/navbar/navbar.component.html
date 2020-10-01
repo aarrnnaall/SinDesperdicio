@@ -78,6 +78,23 @@
                     <div *ngFor="let role of filter() ;trackBy: trackId">
                         <div *ngIf="role.admin" >
                             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                <a  class="nav-link" routerLink="organization_admin/datos" (click)="collapseNavbar()" >
+                                    <span>
+                                        <fa-icon _ngcontent-gia-c136="" icon="th-list" class="ng-fa-icon" ng-reflect-icon="user-plus"></fa-icon>
+                                    <span>Datos</span>
+                                    </span>
+                                </a>
+                            </li> 
+                        </div>
+                    </div>
+                </div>   
+            </div>
+            
+            <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                <div *ngIf="filter()">
+                    <div *ngFor="let role of filter() ;trackBy: trackId">
+                        <div *ngIf="role.admin" >
+                            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                                 <a  class="nav-link" routerLink="admin/user-management_org" (click)="collapseNavbar()" >
                                     <span>
                                         <fa-icon icon="user" fixedWidth="true"></fa-icon>

@@ -11,6 +11,7 @@ import { OrganizationService } from './organization.service_admin';
 import { OrganizationComponent } from './organization.component_admin';
 import { OrganizationDetailComponent } from './organization-detail.component_admin';
 import { OrganizationUpdateComponent } from './organization-update.component_admin';
+import { OrganizationDatosComponent } from './organization.component_datos';
 
 @Injectable({ providedIn: 'root' })
 export class OrganizationResolve implements Resolve<IOrganization> {
@@ -41,6 +42,15 @@ export const organizationRoute: Routes = [
     data: {
       authorities: [Authority.ADMIN],
       pageTitle: 'Organizations'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'datos',
+    component: OrganizationDatosComponent,
+    data: {
+      authorities: [Authority.ADMIN],
+      pageTitle: 'OrganizationsDatos'
     },
     canActivate: [UserRouteAccessService]
   },
