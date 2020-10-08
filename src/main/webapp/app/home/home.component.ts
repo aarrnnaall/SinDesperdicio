@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { RoleService } from '../entities/role_user/role.service_user';
-import { LoginModalService } from 'app/core/login/login-modal.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { HttpResponse } from '@angular/common/http';
 import { IRole } from 'app/shared/model/role.model';
@@ -42,7 +41,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private accountService: AccountService,
     protected roleService: RoleService,
-    private loginModalService: LoginModalService,
     protected eventManager: JhiEventManager,
     private fb: FormBuilder,
     protected branchService: BranchService
