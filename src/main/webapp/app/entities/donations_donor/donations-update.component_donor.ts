@@ -129,6 +129,7 @@ export class DonationsUpdateComponent implements OnInit {
   Addeats(): any {
     const eatfb = this.fb.group({
       category: [],
+      medida: [],
       canteat: [],
       donations: []
     });
@@ -170,7 +171,9 @@ export class DonationsUpdateComponent implements OnInit {
     }
     for (const elemento of this.eats.controls) {
       this.subscribeToSaveResponseEat(
-        this.eatService.create(this.createFromEat(elemento.get(['category']).value, elemento.get(['canteat']).value, donations))
+        this.eatService.create(
+          this.createFromEat(elemento.get(['category']).value + elemento.get(['medida']).value, elemento.get(['canteat']).value, donations)
+        )
       );
     }
   }

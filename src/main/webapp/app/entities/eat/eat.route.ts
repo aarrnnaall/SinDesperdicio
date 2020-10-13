@@ -39,7 +39,7 @@ export const eatRoute: Routes = [
     path: '',
     component: EatComponent,
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.USER],
       pageTitle: 'Eats'
     },
     canActivate: [UserRouteAccessService]
@@ -51,7 +51,7 @@ export const eatRoute: Routes = [
       eat: EatResolve
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.USER],
       pageTitle: 'Eats'
     },
     canActivate: [UserRouteAccessService]
@@ -63,7 +63,7 @@ export const eatRoute: Routes = [
       eat: EatResolve
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.USER],
       pageTitle: 'Eats'
     },
     canActivate: [UserRouteAccessService]
@@ -75,7 +75,7 @@ export const eatRoute: Routes = [
       eat: EatResolve
     },
     data: {
-      authorities: [Authority.ADMIN],
+      authorities: [Authority.USER],
       pageTitle: 'Eats'
     },
     canActivate: [UserRouteAccessService]

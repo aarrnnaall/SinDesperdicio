@@ -17,10 +17,11 @@ import { DonationsService } from 'app/entities/donations/donations.service';
 export class EatUpdateComponent implements OnInit {
   isSaving = false;
   donations: IDonations[] = [];
-
+  categoria: any;
   editForm = this.fb.group({
     id: [],
     category: [],
+    medida: [],
     canteat: [],
     donations: []
   });
@@ -64,10 +65,15 @@ export class EatUpdateComponent implements OnInit {
   }
 
   private createFromForm(): IEat {
+    if (this.editForm.get(['medida'])!.value === null) {
+      this.categoria = this.editForm.get(['category'])!.value;
+    } else {
+      this.categoria = this.editForm.get(['category'])!.value + this.editForm.get(['medida'])!.value;
+    }
     return {
       ...new Eat(),
       id: this.editForm.get(['id'])!.value,
-      category: this.editForm.get(['category'])!.value,
+      category: this.categoria,
       canteat: this.editForm.get(['canteat'])!.value,
       donations: this.editForm.get(['donations'])!.value
     };
