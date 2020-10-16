@@ -12,6 +12,14 @@
                 <dd>
                     <span>{{ donations.description }}</span>
                 </dd>
+                <dt><span>Ubicacion</span></dt>
+                <dd>
+                    <span>{{ donations?.latitud | number: '.'}}</span>
+                </dd>
+                <dd>
+                    <span>{{ donations?.longitud | number: '.'}}</span>
+                </dd>
+                
                 <dt><span>Fecha</span></dt>
                 <dd>
                     <span>{{ donations.date | date:'shortDate'}}</span>

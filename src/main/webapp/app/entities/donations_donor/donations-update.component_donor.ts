@@ -19,6 +19,18 @@ import { IEat, Eat } from '../../shared/model/eat.model';
 import { EatService } from '../../entities/eat_donation/eat.service_donation';
 import { TipoCate } from 'app/shared/model/enumerations/tipo-cate.model';
 import { JhiEventManager } from 'ng-jhipster';
+import { BranchService } from 'app/entities/branch_admin/branch.service_admin';
+import TileLayer from 'ol/layer/Tile';
+import Map from 'ol/Map';
+import View from 'ol/View';
+import OSM from 'ol/source/OSM';
+import * as olProj from 'ol/proj';
+import Feature from 'ol/Feature';
+import Point from 'ol/geom/Point';
+import Style from 'ol/style/Style';
+import Icon from 'ol/style/Icon';
+import Vectorlayer from 'ol/layer/Vector';
+import Vectorsource from 'ol/source/Vector';
 type SelectableEntity = INeeddonation | IRole;
 
 @Component({
@@ -39,6 +51,12 @@ export class DonationsUpdateComponent implements OnInit {
   unavez = false;
   statusduracion: any;
   intervalo: any;
+  geocode: any;
+  features: any;
+  return: any;
+  map: any;
+  lat?: number;
+  long?: number;
   editForm = this.fb.group({
     id: [],
     description: [null, [Validators.required]],
@@ -57,7 +75,9 @@ export class DonationsUpdateComponent implements OnInit {
     donor: [],
     eats: this.fb.array([])
   });
-
+  Form = this.fb.group({
+    seach: []
+  });
   constructor(
     protected donationsService: DonationsService,
     protected needdonationService: NeeddonationService,
@@ -66,7 +86,8 @@ export class DonationsUpdateComponent implements OnInit {
     private fb: FormBuilder,
     private accountService: AccountService,
     protected eatService: EatService,
-    protected eventManager: JhiEventManager
+    protected eventManager: JhiEventManager,
+    protected branchService: BranchService
   ) {}
 
   ngOnInit(): void {
@@ -95,6 +116,19 @@ export class DonationsUpdateComponent implements OnInit {
   }
   get eats(): any {
     return this.editForm.get('eats') as FormArray;
+  }
+  refresh(): void {
+    this.loadAllgeocode();
+  }
+  loadAllgeocode(): void {
+    const text = this.Form.get(['seach'])!.value;
+
+    if (text !== null) {
+      this.branchService.geocode(text).subscribe((res: HttpResponse<String>) => (this.geocode = res.body || []));
+      this.features = this.geocode.features;
+    } else {
+      this.geocode = null;
+    }
   }
   private createFromEat(category: TipoCate, canteat: number, donations: IDonations): IEat {
     return {
@@ -125,6 +159,62 @@ export class DonationsUpdateComponent implements OnInit {
       this.unavez = true;
     }
     this.statusduracion = 'Unavez';
+  }
+  refreshdir(text: string): void {
+    this.return = text;
+    const textsplit = text + '';
+    const splitted = textsplit.split(',', 2);
+    const lat = splitted[0] + '';
+    const splitlat = lat.split('.', 2);
+    const log = splitted[1] + '';
+    const splitlog = log.split('.', 2);
+
+    this.lat = parseFloat(splitlat[0] + splitlat[1]);
+    this.long = parseFloat(splitlog[0] + splitlog[1]);
+    this.mapscoor(text + '', 18);
+  }
+  mapscoor(loglat: string, zoom: number): any {
+    const splitted = loglat.split(',', 2);
+    this.map = new Map({
+      target: 'hotel_map',
+      layers: [
+        new TileLayer({
+          source: new OSM()
+        })
+      ],
+      view: new View({
+        center: olProj.fromLonLat([parseFloat(splitted[0]), parseFloat(splitted[1])]),
+        zoom
+      })
+    });
+
+    const marcador = new Feature({
+      geometry: new Point(
+        olProj.fromLonLat([parseFloat(splitted[0]), parseFloat(splitted[1])]) // En dónde se va a ubicar
+      )
+    });
+
+    // Agregamos icono
+    marcador.setStyle(
+      new Style({
+        image: new Icon({
+          src: '../../content/images/marcador.png'
+        })
+      })
+    );
+
+    // marcadores debe ser un arreglo
+    const marcadores = []; // Arreglo para que se puedan agregar otros más tarde
+
+    marcadores.push(marcador); // Agregamos el marcador al arreglo
+
+    const capa = new Vectorlayer({
+      source: new Vectorsource({
+        features: marcadores // A la capa le ponemos los marcadores
+      })
+    });
+    // Y agregamos la capa al mapa
+    this.map.addLayer(capa);
   }
   Addeats(): any {
     const eatfb = this.fb.group({
@@ -203,8 +293,8 @@ export class DonationsUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       description: this.editForm.get(['description'])!.value,
       date: this.editForm.get(['date'])!.value ? moment(this.editForm.get(['date'])!.value, DATE_TIME_FORMAT) : undefined,
-      latitud: this.editForm.get(['latitud'])!.value,
-      longitud: this.editForm.get(['longitud'])!.value,
+      latitud: this.lat,
+      longitud: this.long,
       availabilityday: this.day,
       availabilitytime: this.hora,
       statuseat: TipoEat.Cargado,

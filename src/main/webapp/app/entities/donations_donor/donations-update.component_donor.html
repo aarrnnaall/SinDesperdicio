@@ -28,7 +28,31 @@
                         </small>
                     </div>
                 </div>
-
+                <div>
+                    <div class="form-group ">
+                        <form name="Form" role="form" novalidate (ngSubmit)="refresh()" [formGroup]="Form">
+                                    <div >
+                                        <label class="form-control-label" for="field_seach">Ubicacion</label>
+                                        <input type="text" class="form-control" name="seach" id="field_seach"
+                                               formControlName="seach" placeholder="Buscar Ubicacion" required />          
+                                               <div *ngIf="Form.get('seach')!.invalid && (Form.get('seach')!.dirty || Form.get('seach')!.touched)">
+                                                <small class="form-text text-danger"
+                                                       *ngIf="Form.get('seach')?.errors?.required">
+                                                       Este campo es requerido.
+                                                </small>
+                                            </div>
+                                    </div>
+                        </form>
+                    </div>
+                    <div *ngIf="geocode !== null">
+                    <div *ngFor="let elem of features"> 
+                    <div class="form-group">
+                        <label class="form-control-label">{{elem.properties.label}}</label>
+                        <input type="radio" class="form-control" name="user" (click)="refreshdir(elem.geometry.coordinates)" >
+                    </div>    
+                    </div>
+                    </div>
+                    </div>
                 <div *ngIf="false" class="form-group">
                     <label class="form-control-label" for="field_date">Fecha</label>
                     <div class="d-flex">
@@ -253,27 +277,29 @@
                   </div>
                 </div>
             </div>
+          
             <div>
                 <button type="button" id="cancel-save" class="btn float-right btn-secondary" (click)="previousState()">
                     <fa-icon icon="ban"></fa-icon><span class="d-none d-md-inline">Cancelar</span>
                 </button>
 
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn float-right btn-primary">
+                <button type="submit" id="save-entity" [disabled]="Form.invalid || editForm.invalid || isSaving" class="btn float-right btn-primary">
                     <fa-icon icon="save"></fa-icon><span class="d-none d-md-inline">Guardar</span>
                 </button>
             </div>
         </form>
-        <p>Comida</p>
        <button [hidden]="editForm.get('id')!.value" type="submit" (click)="Addeats()"
                                     class="btn btn-info btn-sm">
                                 <fa-icon icon="plus"></fa-icon>
-                                <span class="d-none d-md-inline">Agregar</span>
+                                <span class="d-none d-md-inline">Agregar Comida</span>
                             </button>
     
         <button [hidden]="editForm.get('id')!.value" type="submit" (click)="Removeeats()"
                                     class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>
-                                <span class="d-none d-md-inline">Quitar</span>
+                                <span class="d-none d-md-inline">Quitar Comida</span>
                             </button>
-      </div>
+                            
+     </div>
+          
 </div>
