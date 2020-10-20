@@ -57,6 +57,7 @@ export class DonationsUpdateComponent implements OnInit {
   map: any;
   lat?: number;
   long?: number;
+  palabra = '';
   editForm = this.fb.group({
     id: [],
     description: [null, [Validators.required]],
