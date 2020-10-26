@@ -1,7 +1,11 @@
 package app.sindesperdicio.net.ar.web.rest;
 
+import app.sindesperdicio.net.ar.domain.Branch;
 import app.sindesperdicio.net.ar.domain.Role;
+import app.sindesperdicio.net.ar.domain.User;
+import app.sindesperdicio.net.ar.repository.BranchRepository;
 import app.sindesperdicio.net.ar.repository.RoleRepository;
+import app.sindesperdicio.net.ar.repository.UserRepository;
 import app.sindesperdicio.net.ar.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -36,9 +40,13 @@ public class RoleResource {
     private String applicationName;
 
     private final RoleRepository roleRepository;
+    private final BranchRepository branchRepository;
+    private final UserRepository userRepository;
 
-    public RoleResource(RoleRepository roleRepository) {
+    public RoleResource(RoleRepository roleRepository,BranchRepository branchRepository,UserRepository userRepository) {
         this.roleRepository = roleRepository;
+        this.branchRepository = branchRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -106,9 +114,24 @@ public class RoleResource {
      * @param id the id of the role to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the role, or with status {@code 404 (Not Found)}.
      */
+    @GetMapping("/rolesuser/{id}")
+    public List<Role> getRoleuser(@PathVariable Long id) {
+        log.debug("REST request to get Role : {}", id);
+        Optional<Branch> branch = branchRepository.findById(id);
+        List<Role> role = roleRepository.findAllByBranch(branch);
+        return role;   
+    }
+    @GetMapping("/roleslogin/{id}")
+    public Number getRoleLogin(@PathVariable Long id) {
+        log.debug("REST request to get Role By Login : {}", id);
+        Optional<User> user = userRepository.findById(id);
+        Optional<Role> role = roleRepository.findByUser(user);
+        return role.get().getBranch().getId();
+    }
+
     @GetMapping("/roles/{id}")
     public ResponseEntity<Role> getRole(@PathVariable Long id) {
-        log.debug("REST request to get Role : {}", id);
+        log.debug("REST request to get Role By User : {}", id);
         Optional<Role> role = roleRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(role);
     }

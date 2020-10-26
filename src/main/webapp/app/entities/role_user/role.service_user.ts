@@ -7,11 +7,16 @@ import { createRequestOption } from 'app/shared/util/request-util';
 import { IRole } from 'app/shared/model/role.model';
 
 type EntityResponseType = HttpResponse<IRole>;
+type EntityResponseTypeAny = HttpResponse<any>;
+
 type EntityArrayResponseType = HttpResponse<IRole[]>;
+type EntityArrayResponseTypeAny = HttpResponse<any[]>;
 
 @Injectable({ providedIn: 'root' })
 export class RoleService {
   public resourceUrl = SERVER_API_URL + 'api/roles';
+  public resourceUrl2 = SERVER_API_URL + 'api/roleslogin';
+  public resourceUrl3 = SERVER_API_URL + 'api/rolesuser';
 
   constructor(protected http: HttpClient) {}
 
@@ -34,7 +39,12 @@ export class RoleService {
     const options = createRequestOption(req);
     return this.http.get<IRole[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
-
+  rolebranch(id: number): Observable<EntityArrayResponseTypeAny> {
+    return this.http.get<any[]>(`${this.resourceUrl3}/${id}`, { observe: 'response' });
+  }
+  rolelogin(id: number): Observable<EntityResponseTypeAny> {
+    return this.http.get<any>(`${this.resourceUrl2}/${id}`, { observe: 'response' });
+  }
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

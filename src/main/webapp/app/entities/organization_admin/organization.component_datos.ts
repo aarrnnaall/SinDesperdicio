@@ -21,9 +21,12 @@ export class OrganizationDatosComponent implements OnInit, OnDestroy {
   roles?: IRole[];
   account: any;
   authSubscription?: Subscription;
+  loginSubscription?: Subscription;
+  branchSubscription?: Subscription;
+  userarray: string[] = [];
   graftview: any;
-  rolesuser?: IRole[];
-
+  public rolelogin: any = 0;
+  rolesuser: any[] = [];
   constructor(
     private accountService: AccountService,
     protected roleService: RoleService,
@@ -40,16 +43,26 @@ export class OrganizationDatosComponent implements OnInit, OnDestroy {
     this.registerChangeInOrganizations();
     this.loadAllrole();
     this.registerChangeInRoles();
+    this.all();
+  }
+  all(): void {
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
-    this.filteruser();
-    this.graft();
+    this.loginSubscription = this.roleService
+      .rolelogin(this.account.id)
+      .subscribe(role2 => this.roleService.rolebranch(role2.body).subscribe(role => this.adduser(role.body || [])));
+  }
+  adduser(user: any[]): void {
+    user.forEach(element => {
+      this.userarray.push(element.user.login);
+    });
+    this.graft(this.userarray);
   }
 
-  graft(): void {
+  graft(userarray: string[]): void {
     this.graftview = new Chart('canvas', {
       type: 'bar',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: userarray,
         datasets: [
           {
             label: '# of Votes',
@@ -97,14 +110,21 @@ export class OrganizationDatosComponent implements OnInit, OnDestroy {
   loadAllrole(): void {
     this.roleService.query().subscribe((res: HttpResponse<IRole[]>) => (this.roles = res.body || []));
   }
+  loadAllroleuser(): void {
+    this.loadAllrolelogin();
+    const data = this.rolelogin;
+
+    this.roleService.rolebranch(data).subscribe((res: HttpResponse<any[]>) => (this.rolesuser = res.body || []));
+  }
+  loadAllrolelogin(): void {
+    const data = this.account.id;
+    this.roleService.rolelogin(data).subscribe((res: HttpResponse<any>) => (this.rolelogin = res.body));
+  }
   registerChangeInRoles(): void {
     this.eventSubscriber = this.eventManager.subscribe('roleListModification', () => this.loadAllrole());
   }
   filter(): any {
     return this.roles?.filter(x => x.user?.login === this.account.login);
-  }
-  filteruser(): void {
-    this.rolesuser = this.roles?.filter(x => x.branch?.id === this.filter()[0].branch.id).filter(s => s.donor === true);
   }
 
   filterorg(): any {
