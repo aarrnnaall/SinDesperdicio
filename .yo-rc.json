@@ -34,8 +34,6 @@
     "dtoSuffix": "DTO",
     "otherModules": [],
     "enableTranslation": false,
-    "blueprints": [],
-    "herokuAppName": "afternoon-garden-36827",
-    "herokuDeployType": "git"
+    "blueprints": []
   }
 }
