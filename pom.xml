@@ -6,7 +6,7 @@
     <groupId>app.sindesperdicio.net.ar</groupId>
     <artifactId>sin-desperdicio</artifactId>
     <version>1.7.4</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>Sin Desperdicio</name>
 
     <repositories>
