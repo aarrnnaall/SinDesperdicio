@@ -36,6 +36,15 @@
     "enableTranslation": false,
     "blueprints": [],
     "herokuAppName": "sdesperdicio",
-    "herokuDeployType": "git"
+    "herokuDeployType": "git",
+    "aws": {
+      "applicationName": "sin-desperdicio",
+      "environmentName": "sin-desperdicio-env",
+      "bucketName": "sin-desperdicio",
+      "instanceType": "t2.micro",
+      "awsRegion": "eu-central-1",
+      "dbName": "SinDesperdicio",
+      "dbInstanceClass": "db.t2.micro"
+    }
   }
 }

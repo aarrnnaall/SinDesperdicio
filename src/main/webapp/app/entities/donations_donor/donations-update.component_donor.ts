@@ -58,6 +58,7 @@ export class DonationsUpdateComponent implements OnInit {
   lat?: number;
   long?: number;
   palabra = '';
+  par = true;
   editForm = this.fb.group({
     id: [],
     description: [null, [Validators.required]],
@@ -232,6 +233,7 @@ export class DonationsUpdateComponent implements OnInit {
   filter(login: string): any {
     return this.roles.filter(x => x.user?.login === login);
   }
+
   updateForm(donations: IDonations): void {
     this.editForm.patchValue({
       id: donations.id,

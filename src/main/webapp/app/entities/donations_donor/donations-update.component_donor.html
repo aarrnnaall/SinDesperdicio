@@ -7,7 +7,7 @@
         <div class="form-group" [hidden]="editForm.get('id')!.value">
             <h2 id="jhi-donations-heading">Crear Donación</h2>
         </div>
-
+        
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -28,20 +28,38 @@
                         </small>
                     </div>
                 </div>
+                <div *ngIf="false" class="form-group" >
+                    <label for="id">Ubicacion</label>
+                    <input type="text" class="form-control" placeholder="{{filter(account.login)[0].branch.direction}}" readonly />
+                </div>    
                 <div>
-                    <div class="form-group ">
+                    <div class="form-group" *ngIf="true" >
                         <form name="Form" role="form" novalidate (ngSubmit)="refresh()" [formGroup]="Form">
-                                    <div >
                                         <label class="form-control-label" for="field_seach">Ubicacion</label>
-                                        <input type="text" class="form-control" name="seach" id="field_seach"
-                                               formControlName="seach" placeholder="Buscar Ubicacion" required />          
-                                               <div *ngIf="Form.get('seach')!.invalid && (Form.get('seach')!.dirty || Form.get('seach')!.touched)">
-                                                <small class="form-text text-danger"
-                                                       *ngIf="Form.get('seach')?.errors?.required">
-                                                       Este campo es requerido.
-                                                </small>
-                                            </div>
-                                    </div>
+                                        <table >
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="col-md-18">
+                                                            <input type="text" class="form-control" name="seach" id="field_seach"
+                                                                   formControlName="seach" placeholder="Ingresar Ubicacion" required />          
+                                                            </div>
+                                                                   <div *ngIf="Form.get('seach')!.invalid && (Form.get('seach')!.dirty || Form.get('seach')!.touched)">
+                                                                    <small class="form-text text-danger"
+                                                                           *ngIf="Form.get('seach')?.errors?.required">
+                                                                           Este campo es requerido.
+                                                                    </small>
+                                                                    </div>                    
+                                                    </td>
+                                                    <td>
+                                                        <button type="submit" class="btn float-right btn-primary">
+                                                            <fa-icon icon="seach"></fa-icon><span class="d-none d-md-inline">Buscar</span>
+                                                        </button>
+                                                    
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                         </form>
                     </div>
                     <div *ngIf="geocode !== null">

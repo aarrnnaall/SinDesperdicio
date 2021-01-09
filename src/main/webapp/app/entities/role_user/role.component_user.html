@@ -62,7 +62,7 @@
                     <td>
                         <div *ngIf="!role.admin">
                         <div *ngIf="role.branch">
-                            <a [routerLink]="['/branch', role.branch?.id, 'view']" >{{ role.branch?.organization?.razonSocial }} - {{ role.branch?.desription }}</a>
+                            {{ role.branch?.organization?.razonSocial }} - {{ role.branch?.desription }}
                         </div>
                         </div>
                     </td>
