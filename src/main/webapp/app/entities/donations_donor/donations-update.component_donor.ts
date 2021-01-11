@@ -270,7 +270,13 @@ export class DonationsUpdateComponent implements OnInit {
       );
     }
   }
-
+  particular(): void {
+    try {
+      this.filter(this.account.login)[0]?.branch?.direction;
+    } catch (er) {
+      this.par = false;
+    }
+  }
   private createFromForm(): IDonations {
     if (this.day === '') {
       this.day = this.editForm.get(['availabilityday'])!.value;
@@ -290,6 +296,15 @@ export class DonationsUpdateComponent implements OnInit {
     }
     if (this.unavez) {
       this.intervalo = '-';
+    }
+    if (!this.lat && !this.long) {
+      if (this.filter(this.account.login)[0]?.branch?.latitud && this.filter(this.account.login)[0]?.branch?.longitud) {
+        this.lat = this.filter(this.account.login)[0]?.branch?.latitud;
+        this.long = this.filter(this.account.login)[0]?.branch?.longitud;
+      } else {
+        this.lat = this.editForm.get(['latitud'])!.value;
+        this.long = this.editForm.get(['longitud'])!.value;
+      }
     }
     return {
       ...new Donations(),

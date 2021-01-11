@@ -28,12 +28,14 @@
                         </small>
                     </div>
                 </div>
-                <div *ngIf="false" class="form-group" >
+                <h1>
+                </h1>
+                <div *ngIf="filter(account.login)[0]?.branch?.direction" class="form-group" >
                     <label for="id">Ubicacion</label>
                     <input type="text" class="form-control" placeholder="{{filter(account.login)[0].branch.direction}}" readonly />
                 </div>    
                 <div>
-                    <div class="form-group" *ngIf="true" >
+                    <div class="form-group" *ngIf="!filter(account.login)[0]?.branch?.direction" >
                         <form name="Form" role="form" novalidate (ngSubmit)="refresh()" [formGroup]="Form">
                                         <label class="form-control-label" for="field_seach">Ubicacion</label>
                                         <table >
@@ -42,14 +44,8 @@
                                                     <td>
                                                         <div class="col-md-18">
                                                             <input type="text" class="form-control" name="seach" id="field_seach"
-                                                                   formControlName="seach" placeholder="Ingresar Ubicacion" required />          
+                                                                   formControlName="seach" placeholder="Ingresar Ubicacion" />          
                                                             </div>
-                                                                   <div *ngIf="Form.get('seach')!.invalid && (Form.get('seach')!.dirty || Form.get('seach')!.touched)">
-                                                                    <small class="form-text text-danger"
-                                                                           *ngIf="Form.get('seach')?.errors?.required">
-                                                                           Este campo es requerido.
-                                                                    </small>
-                                                                    </div>                    
                                                     </td>
                                                     <td>
                                                         <button type="submit" class="btn float-right btn-primary">
