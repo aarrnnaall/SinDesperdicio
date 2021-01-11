@@ -19,8 +19,8 @@ eureka:
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://jdbc:mysql://sql2.freesqldatabase.com:3306/sql2386023?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
-    username: sql2386023
-    password: wY1!nV7!
+    url: jdbc:mysql://database-1.c7mwmbdyepxg.eu-central-1.rds.amazonaws.com:3306/SinDesperdicio?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: root
+    password: sindesperdicio123
     hikari:
       maximumPoolSize: 8

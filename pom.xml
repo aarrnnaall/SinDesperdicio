@@ -1120,10 +1120,10 @@
                             <changeLogFile>src/main/resources/config/liquibase/master.xml</changeLogFile>
                             <diffChangeLogFile>src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                             <driver></driver>
-                            <url>jdbc:mysql://sql2.freesqldatabase.com:3306/sql2386023</url>
+                            <url>jdbc:mysql://database-1.c7mwmbdyepxg.eu-central-1.rds.amazonaws.com:3306/SinDesperdicio</url>
                             <defaultSchemaName></defaultSchemaName>
-                            <username>sql2386023</username>
-                            <password>wY1!nV7!</password>
+                            <username>root</username>
+                            <password>sindesperdicio123</password>
                             <referenceUrl>hibernate:spring:app.sindesperdicio.net.ar.domain?dialect=org.hibernate.dialect.MySQL8Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                             <verbose>true</verbose>
                             <logging>debug</logging>
