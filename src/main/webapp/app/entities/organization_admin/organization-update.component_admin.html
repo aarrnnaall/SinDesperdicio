@@ -1,8 +1,14 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-organization-heading">Crear o Editar Organización</h2>
-
+            <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                <h2 id="jhi-donations-heading">Editar Organización</h2>
+            </div>
+    
+            <div class="form-group" [hidden]="editForm.get('id')!.value">
+                <h2 id="jhi-donations-heading">Crear Organización</h2>
+            </div>
+            
             <div>
                 <jhi-alert-error></jhi-alert-error>
 
@@ -59,35 +65,67 @@
                     <input type="number" class="form-control" name="longitud" id="field_longitud"
                            formControlName="longitud"/>
                 </div>
-                
+                <label class="form-control-label" for="field_desription">Sucursal</label>
+                <div *ngIf="this.filter()[0].branch?.desription!" class="form-group" [hidden]="!this.filter()[0].branch?.desription!">
+                    <input value="{{this.filter()[0].branch?.desription!}}" type="text" class="form-control"readonly />
+                </div>  
                 <div class="form-group">
-                    <label class="form-control-label" for="field_desription">Sucursal</label>
                     <input type="text" class="form-control" name="desription" id="field_desription"
                            formControlName="desription"/>
                 </div>
-                <div *ngIf="this.filter()[0].branch?.desription" class="form-group" [hidden]="!this.filter()[0].branch?.desription">
-                    <input value="{{this.filter()[0].branch?.desription}}" type="text" class="form-control"readonly />
-                </div> 
-                <div class="form-group">
+                <div *ngIf="false"class="form-group">
                     <label class="form-control-label" for="field_direction">Dirección</label>
                     <input type="text" class="form-control" name="direction" id="field_direction"
                            formControlName="direction"/>
                 </div>
+            </div>
+
+                <label class="form-control-label" for="field_seach">Dirección</label>
                 <div *ngIf="this.filter()[0].branch?.direction" class="form-group" [hidden]="!this.filter()[0].branch?.direction">
                     <input value="{{this.filter()[0].branch?.direction}}" type="text" class="form-control" readonly />
                 </div>
-
-            </div>
-
+                <div>
+                    <div class="form-group" >
+                        <form name="Form" role="form" novalidate (ngSubmit)="refresh()" [formGroup]="Form">
+                                        <table >
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="col-md-18">
+                                                            <input type="text" class="form-control" name="seach" id="field_seach"
+                                                                   formControlName="seach" placeholder="Ingresar Ubicacion" />          
+                                                            </div>
+                                                    </td>
+                                                    <td>
+                                                        <button type="submit" class="btn float-right btn-primary">
+                                                            <fa-icon icon="seach"></fa-icon><span class="d-none d-md-inline">Buscar</span>
+                                                        </button>
+                                                    
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                        </form>
+                    </div>
+                    <div *ngIf="geocode !== null">
+                    <div *ngFor="let elem of features"> 
+                    <div class="form-group">
+                        <label class="form-control-label">{{elem.properties.label}}</label>
+                        <input type="radio" class="form-control" name="user" (click)="refreshdir(elem.geometry.coordinates)" >
+                    </div>    
+                    </div>
+                    </div>
+                </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary float-right" (click)="previousState()">
                     <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
                 </button>
 
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary float-right">
                     <fa-icon icon="save"></fa-icon>&nbsp;<span>Guardar</span>
                 </button>
             </div>
         </form>
+
     </div>
 </div>

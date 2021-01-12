@@ -6,7 +6,7 @@
             <hr>
 
             <jhi-alert-error></jhi-alert-error>
-
+            
             <dl class="row-md jh-entity-details">
                 <dt><span>Descripción</span></dt>
                 <dd>
@@ -14,12 +14,11 @@
                 </dd>
                 <dt><span>Ubicacion</span></dt>
                 <dd>
-                    <span>{{ donations?.latitud | number: '.'}}</span>
+                    <span>{{ donations?.latitud?.toString().slice(0,3)+"."+donations?.latitud?.toString().slice(4,10) }}</span>
                 </dd>
                 <dd>
-                    <span>{{ donations?.longitud | number: '.'}}</span>
+                    <span>{{ donations?.longitud?.toString().slice(0,3)+"."+donations?.longitud?.toString().slice(4,10) }}</span>
                 </dd>
-                
                 <dt><span>Fecha</span></dt>
                 <dd>
                     <span>{{ donations.date | date:'shortDate'}}</span>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { IDonations } from 'app/shared/model/donations.model';
 
 @Component({
@@ -9,6 +8,7 @@ import { IDonations } from 'app/shared/model/donations.model';
 })
 export class DonationsDetailComponent implements OnInit {
   donations: IDonations | null = null;
+  map: any;
 
   constructor(protected activatedRoute: ActivatedRoute) {}
 

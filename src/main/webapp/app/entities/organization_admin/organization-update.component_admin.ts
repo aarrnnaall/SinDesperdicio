@@ -23,9 +23,15 @@ export class OrganizationUpdateComponent implements OnInit {
   eventSubscriber?: Subscription;
   authSubscription?: Subscription;
   roles?: IRole[];
+  geocode: any;
   account: any;
+  features: any;
   tempdirection: any;
   tempsucursal: any;
+  return: any;
+  lat?: number;
+  long?: number;
+
   editForm = this.fb.group({
     id: [],
     razonSocial: [null, [Validators.required]],
@@ -36,6 +42,9 @@ export class OrganizationUpdateComponent implements OnInit {
     latitud: [],
     longitud: [],
     direction: []
+  });
+  Form = this.fb.group({
+    seach: []
   });
 
   constructor(
@@ -56,6 +65,32 @@ export class OrganizationUpdateComponent implements OnInit {
     this.registerChangeInRoles();
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
   }
+  refresh(): void {
+    this.loadAllgeocode();
+  }
+  loadAllgeocode(): void {
+    const text = this.Form.get(['seach'])!.value;
+
+    if (text !== null) {
+      this.branchService.geocode(text).subscribe((res: HttpResponse<String>) => (this.geocode = res.body || []));
+      this.features = this.geocode.features;
+    } else {
+      this.geocode = null;
+    }
+  }
+  refreshdir(text: string): void {
+    this.return = text;
+    const textsplit = text + '';
+    const splitted = textsplit.split(',', 2);
+    const lat = splitted[0] + '';
+    const splitlat = lat.split('.', 2);
+    const log = splitted[1] + '';
+    const splitlog = log.split('.', 2);
+
+    this.lat = parseFloat(splitlat[0] + splitlat[1]);
+    this.long = parseFloat(splitlog[0] + splitlog[1]);
+  }
+
   loadAllrole(): void {
     this.roleService.query().subscribe((res: HttpResponse<IRole[]>) => (this.roles = res.body || []));
   }
@@ -104,12 +139,17 @@ export class OrganizationUpdateComponent implements OnInit {
     };
   }
   private createFromFormBranch(organization: IOrganization): IBranch {
+    if (!this.lat && !this.long) {
+      this.lat = this.editForm.get(['latitud'])!.value;
+      this.long = this.editForm.get(['longitud'])!.value;
+    }
+
     return {
       ...new Branch(),
       desription: this.editForm.get(['desription'])!.value,
-      latitud: this.editForm.get(['latitud'])!.value,
-      longitud: this.editForm.get(['longitud'])!.value,
-      direction: this.editForm.get(['direction'])!.value,
+      latitud: this.lat,
+      longitud: this.long,
+      direction: this.Form.get(['seach'])!.value,
       organization
     };
   }

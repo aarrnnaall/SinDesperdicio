@@ -32,6 +32,13 @@
                 <dd>
                     <span>{{ this.filter()[0].branch?.direction  }}</span>
                 </dd>
+                <dt><span>Ubicacion</span></dt>
+                <dd>
+                    <span>{{ this.filter()[0].branch?.latitud?.toString().slice(0,3)+"."+this.filter()[0].branch?.latitud?.toString().slice(4,10)  }}</span>
+                </dd>
+                <dd>
+                    <span>{{ this.filter()[0].branch?.longitud?.toString().slice(0,3)+"."+this.filter()[0].branch?.longitud?.toString().slice(4,10)  }}</span>
+                </dd>
           
             </dl>
 
