@@ -39,7 +39,7 @@ export const branchRoute: Routes = [
     path: '',
     component: BranchComponent,
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'Branches'
     },
     canActivate: [UserRouteAccessService]
@@ -51,7 +51,7 @@ export const branchRoute: Routes = [
       branch: BranchResolve
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'Branches'
     },
     canActivate: [UserRouteAccessService]
@@ -63,7 +63,7 @@ export const branchRoute: Routes = [
       branch: BranchResolve
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'Branches'
     },
     canActivate: [UserRouteAccessService]
@@ -75,8 +75,20 @@ export const branchRoute: Routes = [
       branch: BranchResolve
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.ADMIN],
       pageTitle: 'Branches'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: ':value/add',
+    component: BranchUpdateComponent,
+    resolve: {
+      branch: BranchResolve
+    },
+    data: {
+      authorities: [Authority.ADMIN],
+      pageTitle: 'Branch'
     },
     canActivate: [UserRouteAccessService]
   }

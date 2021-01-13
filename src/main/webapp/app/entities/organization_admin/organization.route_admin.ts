@@ -89,5 +89,17 @@ export const organizationRoute: Routes = [
       pageTitle: 'Organizations'
     },
     canActivate: [UserRouteAccessService]
+  },
+  {
+    path: ':value/add',
+    component: OrganizationUpdateComponent,
+    resolve: {
+      organization: OrganizationResolve
+    },
+    data: {
+      authorities: [Authority.ADMIN],
+      pageTitle: 'Branch'
+    },
+    canActivate: [UserRouteAccessService]
   }
 ];

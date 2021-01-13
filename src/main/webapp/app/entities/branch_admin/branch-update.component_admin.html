@@ -1,8 +1,9 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-branch-heading">Crear o Editar Sucursal</h2>
-
+            <h2 *ngIf="!value" id="jhi-branch-heading">Crear o Editar Sucursal</h2>
+            <h2 *ngIf="value" id="jhi-branch-heading">Agregar Sucursal</h2>
+            
             <div>
                 <jhi-alert-error></jhi-alert-error>
 
@@ -35,13 +36,13 @@
                            formControlName="longitud"/>
                 </div>
 
-                <div class="form-group">
+                <div *ngIf="false" class="form-group">
                     <label class="form-control-label" for="field_direction">Dirección</label>
                     <input type="text" class="form-control" name="direction" id="field_direction"
                            formControlName="direction"/>
                 </div>
 
-                <div class="form-group">
+                <div *ngIf="false" class="form-group">
                     <label class="form-control-label" for="field_organization">Organización</label>
                     <select class="form-control" id="field_organization" name="organization" formControlName="organization">
                         <option [ngValue]="null"></option>
@@ -49,7 +50,40 @@
                     </select>
                 </div>
             </div>
-
+            <label class="form-control-label" for="field_seach">Dirección</label>
+            <div>
+                <div class="form-group" >
+                    <form name="Form" role="form" novalidate (ngSubmit)="refresh()" [formGroup]="Form">
+                                    <table >
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="col-md-18">
+                                                        <input type="text" class="form-control" name="seach" id="field_seach"
+                                                               formControlName="seach" placeholder="Ingresar Dirección" />          
+                                                        </div>
+                                                </td>
+                                                <td>
+                                                    <button type="submit" class="btn float-right btn-primary">
+                                                        <span class="d-none d-md-inline">Buscar</span>
+                                                    </button>
+                                                
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                    </form>
+                </div>
+                <div *ngIf="geocode !== null">
+                <div *ngFor="let elem of features"> 
+                <div class="form-group">
+                    <label class="form-control-label">{{elem.properties.label}}</label>
+                    <input type="radio" class="form-control" name="user" (click)="refreshdir(elem.geometry.coordinates)" >
+                </div>    
+                </div>
+                </div>
+            </div>
+           
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>

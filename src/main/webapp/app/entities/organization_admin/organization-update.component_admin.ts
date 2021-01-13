@@ -139,11 +139,10 @@ export class OrganizationUpdateComponent implements OnInit {
     };
   }
   private createFromFormBranch(organization: IOrganization): IBranch {
-    if (!this.lat && !this.long) {
-      this.lat = this.editForm.get(['latitud'])!.value;
-      this.long = this.editForm.get(['longitud'])!.value;
+    if (!this.Form.get(['seach'])!.value) {
+      this.lat = this.filter()[0].branch?.latitud;
+      this.long = this.filter()[0].branch?.longitud;
     }
-
     return {
       ...new Branch(),
       desription: this.editForm.get(['desription'])!.value,
@@ -164,12 +163,16 @@ export class OrganizationUpdateComponent implements OnInit {
     } else {
       this.tempsucursal = this.editForm.get(['desription'])!.value;
     }
+    if (!this.Form.get(['seach'])!.value) {
+      this.lat = this.filter()[0].branch?.latitud;
+      this.long = this.filter()[0].branch?.longitud;
+    }
     return {
       ...new Branch(),
       id: this.filter()[0].branch?.id,
       desription: this.tempsucursal,
-      latitud: this.editForm.get(['latitud'])!.value,
-      longitud: this.editForm.get(['longitud'])!.value,
+      latitud: this.lat,
+      longitud: this.long,
       direction: this.tempdirection,
       organization: this.filter()[0].branch?.organization
     };

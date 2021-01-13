@@ -72,6 +72,9 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name="desription" id="field_desription"
                            formControlName="desription"/>
+                           <small class="form-text text-danger">
+                           Importante: Sucursal central de la Organización.
+                           </small>
                 </div>
                 <div *ngIf="false"class="form-group">
                     <label class="form-control-label" for="field_direction">Dirección</label>
@@ -93,12 +96,12 @@
                                                     <td>
                                                         <div class="col-md-18">
                                                             <input type="text" class="form-control" name="seach" id="field_seach"
-                                                                   formControlName="seach" placeholder="Ingresar Ubicacion" />          
+                                                                   formControlName="seach" placeholder="Ingresar Dirección" />          
                                                             </div>
                                                     </td>
                                                     <td>
                                                         <button type="submit" class="btn float-right btn-primary">
-                                                            <fa-icon icon="seach"></fa-icon><span class="d-none d-md-inline">Buscar</span>
+                                                            <span class="d-none d-md-inline">Buscar</span>
                                                         </button>
                                                     
                                                     </td>

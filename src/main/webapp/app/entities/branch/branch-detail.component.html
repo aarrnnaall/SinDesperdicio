@@ -24,12 +24,6 @@
                 <dd>
                     <span>{{ branch.direction }}</span>
                 </dd>
-                <dt><span>Organization</span></dt>
-                <dd>
-                    <div *ngIf="branch.organization">
-                        <a [routerLink]="['/organization', branch.organization?.id, 'view']">{{ branch.organization?.id }}</a>
-                    </div>
-                </dd>
             </dl>
 
             <button type="submit"

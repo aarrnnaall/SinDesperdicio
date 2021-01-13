@@ -51,8 +51,74 @@
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline">Editar</span>
                             </button>
-
+                
                             <button *ngIf="!filter()[0].branch.organization" type="submit" (click)="delete(organization)"
+                            class="btn btn-danger btn-sm">
+                            <fa-icon icon="times"></fa-icon>
+                            <span class="d-none d-md-inline">Eliminar</span>
+                            </button>
+
+                            <button type="submit" 
+                                    [routerLink]="['/branch_admin', organization.id, 'add']"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="plus"></fa-icon>
+                                <span class="d-none d-md-inline">Agregar Sucursal</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <h2 id="page-heading">
+        <span>Sucursal</span>
+    </h2>
+     
+    <div class="table-responsive" id="entities" *ngIf="branches?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th *ngIf="false" scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Descripción</span></th>
+                    <th *ngIf="false" scope="col" ><span>Latitud</span></th>
+                    <th *ngIf="false" scope="col" ><span>Longitud</span></th>
+                    <th scope="col" ><span>Dirección</span></th>
+                    <th *ngIf="false" scope="col" ><span>Organization</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let branch of filtersuc() ;trackBy: trackId">
+                    <td *ngIf="false">{{ branch.id }}</td>
+                    <td >{{ branch.desription }}</td>
+                    <td *ngIf="false">{{ branch.latitud }}</td>
+                    <td *ngIf="false">{{ branch.longitud }}</td>
+                    <td>{{ branch.direction }}</td>
+                    <td>
+                        <div *ngIf="false">
+                            <a [routerLink]="['/organization', branch.organization?.id, 'view']" >{{ branch.organization?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button *ngIf="!filter()[0].branch?.desription===branch?.desription && !filter()[0].branch?.direction===branch?.direction" type="submit" id="save-entity" [disabled]="true" class="btn btn-info btn-sm">
+                                &nbsp;<span>Centro</span>
+                            </button>
+                            <button *ngIf="filter()[0].branch?.desription===branch?.desription && filter()[0].branch?.direction===branch?.direction" type="submit"
+                                    [routerLink]="['/branch_admin', branch.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">Vista</span>
+                            </button>
+
+                            <button *ngIf="filter()[0].branch?.desription===branch?.desription && filter()[0].branch?.direction===branch?.direction" type="submit"
+                                    [routerLink]="['/branch_admin', branch.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Editar</span>
+                            </button>
+
+                            <button *ngIf="false" type="submit" (click)="delete(branch)"
                                     class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>
                                 <span class="d-none d-md-inline">Eliminar</span>

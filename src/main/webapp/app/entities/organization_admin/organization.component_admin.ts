@@ -9,6 +9,8 @@ import { IOrganization } from 'app/shared/model/organization.model';
 import { OrganizationService } from './organization.service_admin';
 import { OrganizationDeleteDialogComponent } from './organization-delete-dialog.component_admin';
 import { IRole } from 'app/shared/model/role.model';
+import { BranchService } from 'app/entities/branch_admin/branch.service_admin';
+import { IBranch } from 'app/shared/model/branch.model';
 
 @Component({
   selector: 'jhi-organization',
@@ -20,13 +22,15 @@ export class OrganizationComponent implements OnInit, OnDestroy {
   roles?: IRole[];
   account: any;
   authSubscription?: Subscription;
+  branches?: IBranch[];
 
   constructor(
     private accountService: AccountService,
     protected roleService: RoleService,
     protected organizationService: OrganizationService,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected branchService: BranchService
   ) {}
 
   loadAll(): void {
@@ -38,6 +42,7 @@ export class OrganizationComponent implements OnInit, OnDestroy {
     this.loadAllrole();
     this.registerChangeInRoles();
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
+    this.branchService.query().subscribe((res: HttpResponse<IBranch[]>) => (this.branches = res.body || []));
   }
 
   ngOnDestroy(): void {
@@ -56,6 +61,9 @@ export class OrganizationComponent implements OnInit, OnDestroy {
   }
   filterorg(): any {
     return this.organizations?.filter(x => x.id === this.filter()[0].branch.organization.id);
+  }
+  filtersuc(): any {
+    return this.branches?.filter(x => x.organization?.id === this.filter()[0].branch.organization.id);
   }
   notorg(): any {
     if (this.filter()[0].branch === null) {

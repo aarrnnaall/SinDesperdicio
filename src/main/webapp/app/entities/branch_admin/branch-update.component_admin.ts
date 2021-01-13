@@ -25,6 +25,13 @@ export class BranchUpdateComponent implements OnInit, OnDestroy {
   eventSubscriber?: Subscription;
   authSubscription?: Subscription;
   account: any;
+  value: any;
+  features: any;
+  return: any;
+  geocode: any;
+  lat?: number;
+  long?: number;
+
   editForm = this.fb.group({
     id: [],
     desription: [null, [Validators.required]],
@@ -32,6 +39,9 @@ export class BranchUpdateComponent implements OnInit, OnDestroy {
     longitud: [],
     direction: [],
     organization: []
+  });
+  Form = this.fb.group({
+    seach: []
   });
 
   constructor(
@@ -53,11 +63,39 @@ export class BranchUpdateComponent implements OnInit, OnDestroy {
     this.loadAllrole();
     this.registerChangeInRoles();
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.value = params.get('value');
+    });
   }
   ngOnDestroy(): void {
     if (this.eventSubscriber) {
       this.eventManager.destroy(this.eventSubscriber);
     }
+  }
+  refresh(): void {
+    this.loadAllgeocode();
+  }
+  loadAllgeocode(): void {
+    const text = this.Form.get(['seach'])!.value;
+
+    if (text !== null) {
+      this.branchService.geocode(text).subscribe((res: HttpResponse<String>) => (this.geocode = res.body || []));
+      this.features = this.geocode.features;
+    } else {
+      this.geocode = null;
+    }
+  }
+  refreshdir(text: string): void {
+    this.return = text;
+    const textsplit = text + '';
+    const splitted = textsplit.split(',', 2);
+    const lat = splitted[0] + '';
+    const splitlat = lat.split('.', 2);
+    const log = splitted[1] + '';
+    const splitlog = log.split('.', 2);
+
+    this.lat = parseFloat(splitlat[0] + splitlat[1]);
+    this.long = parseFloat(splitlog[0] + splitlog[1]);
   }
   loadAllrole(): void {
     this.roleService.query().subscribe((res: HttpResponse<IRole[]>) => (this.roles = res.body || []));
@@ -99,10 +137,10 @@ export class BranchUpdateComponent implements OnInit, OnDestroy {
       ...new Branch(),
       id: this.editForm.get(['id'])!.value,
       desription: this.editForm.get(['desription'])!.value,
-      latitud: this.editForm.get(['latitud'])!.value,
-      longitud: this.editForm.get(['longitud'])!.value,
-      direction: this.editForm.get(['direction'])!.value,
-      organization: this.editForm.get(['organization'])!.value
+      latitud: this.lat,
+      longitud: this.long,
+      direction: this.Form.get(['seach'])!.value,
+      organization: this.filter()[0].branch.organization
     };
   }
   private createFromFormRole(branch: IBranch): IRole {
