@@ -11,6 +11,7 @@ import { OrganizationDeleteDialogComponent } from './organization-delete-dialog.
 import { IRole } from 'app/shared/model/role.model';
 import { BranchService } from 'app/entities/branch_admin/branch.service_admin';
 import { IBranch } from 'app/shared/model/branch.model';
+import { BranchDeleteDialogComponent } from '../branch_admin/branch-delete-dialog.component_admin';
 
 @Component({
   selector: 'jhi-organization',
@@ -57,13 +58,13 @@ export class OrganizationComponent implements OnInit, OnDestroy {
     this.eventSubscriber = this.eventManager.subscribe('roleListModification', () => this.loadAllrole());
   }
   filter(): any {
-    return this.roles?.filter(x => x.user?.login === this.account.login);
+    return this.roles?.filter(x => x.user?.login === this.account.login)!;
   }
   filterorg(): any {
-    return this.organizations?.filter(x => x.id === this.filter()[0].branch.organization.id);
+    return this.organizations?.filter(x => x.id === this.filter()[0].branch.organization.id)!;
   }
   filtersuc(): any {
-    return this.branches?.filter(x => x.organization?.id === this.filter()[0].branch.organization.id);
+    return this.branches?.filter(x => x.organization?.id === this.filter()[0].branch.organization.id)!;
   }
   notorg(): any {
     if (this.filter()[0].branch === null) {
@@ -84,5 +85,10 @@ export class OrganizationComponent implements OnInit, OnDestroy {
   delete(organization: IOrganization): void {
     const modalRef = this.modalService.open(OrganizationDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.organization = organization;
+  }
+
+  deletebranch(branch: IBranch): void {
+    const modalRef = this.modalService.open(BranchDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.branch = branch;
   }
 }

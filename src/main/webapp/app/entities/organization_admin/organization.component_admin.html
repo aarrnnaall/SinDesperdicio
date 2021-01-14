@@ -2,7 +2,7 @@
     <h2 id="page-heading">
         <span>Organización</span>
 
-        <button *ngIf="notorg()"  id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-organization" [routerLink]="['/organization_admin/new']">
+        <button *ngIf="filterorg()?.length! === 0"  id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-organization" [routerLink]="['/organization_admin/new']">
             <fa-icon icon="plus"></fa-icon>
             <span>
             Crear Organización
@@ -11,10 +11,10 @@
     </h2>
     <jhi-alert-error></jhi-alert-error>
 
-    <div class="alert alert-warning" id="no-result" *ngIf="notorg()">
+    <div class="alert alert-warning" id="no-result" *ngIf="filterorg()?.length! === 0">
         <span>No se encontro organización.</span>
     </div>
-    <div class="table-responsive" id="entities" *ngIf="!notorg()">
+    <div class="table-responsive" id="entities" *ngIf="filterorg()?.length! > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>
@@ -34,8 +34,8 @@
                     <td>{{ organization.tipo }}</td>
                     <td>{{ organization.description }}</td>
                     <td>{{ organization.cuit }}</td>
-                    <td>{{ this.filter()[0].branch?.desription }}</td>
-                    <td>{{ this.filter()[0].branch?.direction }}</td>
+                    <td>{{ filtersuc()[0].desription! }}</td>
+                    <td>{{ filtersuc()[0].direction! }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
@@ -73,8 +73,11 @@
     <h2 id="page-heading">
         <span>Sucursal</span>
     </h2>
+    <div class="alert alert-warning" id="no-result" *ngIf="filtersuc()?.length! === 0">
+        <span>No se encontro Sucursal.</span>
+    </div>
      
-    <div class="table-responsive" id="entities" *ngIf="branches?.length > 0">
+    <div class="table-responsive" id="entities" *ngIf="filtersuc()?.length! > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>
@@ -101,24 +104,28 @@
                     </td>
                     <td class="text-right">
                         <div class="btn-group">
-                            <button *ngIf="!filter()[0].branch?.desription===branch?.desription && !filter()[0].branch?.direction===branch?.direction" type="submit" id="save-entity" [disabled]="true" class="btn btn-info btn-sm">
-                                &nbsp;<span>Centro</span>
+                            
+                            <button  *ngIf="filtersuc()[0].desription! === branch?.desription!" type="submit" [disabled]="true"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="plus"></fa-icon>
+                                <span class="d-none d-md-inline">Central</span>
                             </button>
-                            <button *ngIf="filter()[0].branch?.desription===branch?.desription && filter()[0].branch?.direction===branch?.direction" type="submit"
+
+                            <button  *ngIf="filtersuc()[0].desription! !== branch?.desription!" type="submit"
                                     [routerLink]="['/branch_admin', branch.id, 'view']"
                                     class="btn btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
                                 <span class="d-none d-md-inline">Vista</span>
                             </button>
 
-                            <button *ngIf="filter()[0].branch?.desription===branch?.desription && filter()[0].branch?.direction===branch?.direction" type="submit"
+                            <button  *ngIf="filtersuc()[0].desription! !== branch?.desription!" type="submit"
                                     [routerLink]="['/branch_admin', branch.id, 'edit']"
                                     class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline">Editar</span>
                             </button>
 
-                            <button *ngIf="false" type="submit" (click)="delete(branch)"
+                            <button *ngIf="filtersuc()[0].desription! !== branch?.desription!" type="submit" (click)="deletebranch(branch)"
                                     class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>
                                 <span class="d-none d-md-inline">Eliminar</span>

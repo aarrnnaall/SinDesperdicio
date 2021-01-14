@@ -113,6 +113,9 @@ public class BranchResource {
     @DeleteMapping("/branches/{id}")
     public ResponseEntity<Void> deleteBranch(@PathVariable Long id) {
         log.debug("REST request to delete Branch : {}", id);
+        Optional<Branch> branch = branchRepository.findById(id);
+        branch.get().setOrganization(null);
+        branchRepository.save(branch.get());
         branchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
