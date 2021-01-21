@@ -14,7 +14,7 @@
                 </dd>
                 <dt><span>Dirección</span></dt>
                 <dd>
-                    <span>{{ branch.direction }}</span>
+                    {{ branch.direction! }}
                 </dd>
                 <dt><span>Ubicacion</span></dt>
                 <dd>
@@ -23,8 +23,8 @@
                 <dd>
                     <span>{{ branch?.longitud?.toString().slice(0,3)+"."+branch?.longitud?.toString().slice(4,10)  }}</span>
                 </dd>
-          
-      
+
+
             </dl>
 
             <button type="submit"

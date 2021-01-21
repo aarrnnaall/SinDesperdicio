@@ -4,11 +4,11 @@
             <div class="form-group" [hidden]="!editForm.get('id')!.value">
                 <h2 id="jhi-donations-heading">Editar Organización</h2>
             </div>
-    
+
             <div class="form-group" [hidden]="editForm.get('id')!.value">
                 <h2 id="jhi-donations-heading">Crear Organización</h2>
             </div>
-            
+
             <div>
                 <jhi-alert-error></jhi-alert-error>
 
@@ -68,7 +68,7 @@
                 <label class="form-control-label" for="field_desription">Sucursal</label>
                 <div *ngIf="this.filter()[0].branch?.desription!" class="form-group" [hidden]="!this.filter()[0].branch?.desription!">
                     <input value="{{this.filter()[0].branch?.desription!}}" type="text" class="form-control"readonly />
-                </div>  
+                </div>
                 <div class="form-group">
                     <input type="text" class="form-control" name="desription" id="field_desription"
                            formControlName="desription"/>
@@ -96,14 +96,14 @@
                                                     <td>
                                                         <div class="col-md-18">
                                                             <input type="text" class="form-control" name="seach" id="field_seach"
-                                                                   formControlName="seach" placeholder="Ingresar Dirección" />          
+                                                                   formControlName="seach" placeholder="Ingresar Dirección" />
                                                             </div>
                                                     </td>
                                                     <td>
                                                         <button type="submit" class="btn float-right btn-primary">
                                                             <fa-icon fas icon="search"></fa-icon>&nbsp;<span class="d-none d-md-inline">Buscar</span>
                                                         </button>
-                                                    
+
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -111,11 +111,11 @@
                         </form>
                     </div>
                     <div *ngIf="geocode !== null">
-                    <div *ngFor="let elem of features"> 
+                    <div *ngFor="let elem of features">
                     <div class="form-group">
                         <label class="form-control-label">{{elem.properties.label}}</label>
-                        <input type="radio" class="form-control" name="user" (click)="refreshdir(elem.geometry.coordinates)" >
-                    </div>    
+                        <input type="radio" class="form-control" name="user" (click)="refreshdir(elem.geometry.coordinates,elem.properties.label)" >
+                    </div>
                     </div>
                     </div>
                 </div>

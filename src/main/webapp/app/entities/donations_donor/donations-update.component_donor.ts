@@ -54,6 +54,8 @@ export class DonationsUpdateComponent implements OnInit {
   geocode: any;
   features: any;
   return: any;
+  return2: any;
+
   map: any;
   lat?: number;
   long?: number;
@@ -162,8 +164,10 @@ export class DonationsUpdateComponent implements OnInit {
     }
     this.statusduracion = 'Unavez';
   }
-  refreshdir(text: string): void {
+  refreshdir(text: string, text2: string): void {
     this.return = text;
+    this.return2 = text2;
+
     const textsplit = text + '';
     const splitted = textsplit.split(',', 2);
     const lat = splitted[0] + '';

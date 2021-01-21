@@ -29,6 +29,8 @@ export class OrganizationUpdateComponent implements OnInit {
   tempdirection: any;
   tempsucursal: any;
   return: any;
+  return2: any;
+
   lat?: number;
   long?: number;
 
@@ -78,8 +80,10 @@ export class OrganizationUpdateComponent implements OnInit {
       this.geocode = null;
     }
   }
-  refreshdir(text: string): void {
+  refreshdir(text: string, text2: string): void {
     this.return = text;
+    this.return2 = text2;
+
     const textsplit = text + '';
     const splitted = textsplit.split(',', 2);
     const lat = splitted[0] + '';
@@ -148,7 +152,7 @@ export class OrganizationUpdateComponent implements OnInit {
       desription: this.editForm.get(['desription'])!.value,
       latitud: this.lat,
       longitud: this.long,
-      direction: this.Form.get(['seach'])!.value,
+      direction: this.return2,
       organization
     };
   }

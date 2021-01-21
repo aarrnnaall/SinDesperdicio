@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <div class="col-8"> 
+    <div class="col-8">
         <div class="form-group" [hidden]="!editForm.get('id')!.value">
             <h2 id="jhi-donations-heading">Editar Donación</h2>
         </div>
@@ -7,7 +7,7 @@
         <div class="form-group" [hidden]="editForm.get('id')!.value">
             <h2 id="jhi-donations-heading">Crear Donación</h2>
         </div>
-        
+
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -33,7 +33,7 @@
                 <div *ngIf="filter(account.login)[0]?.branch?.direction" class="form-group" >
                     <label for="id">Ubicacion</label>
                     <input type="text" class="form-control" placeholder="{{filter(account.login)[0].branch.direction}}" readonly />
-                </div>    
+                </div>
                 <div>
                     <div class="form-group" *ngIf="!filter(account.login)[0]?.branch?.direction" >
                         <form name="Form" role="form" novalidate (ngSubmit)="refresh()" [formGroup]="Form">
@@ -44,14 +44,14 @@
                                                     <td>
                                                         <div class="col-md-18">
                                                             <input type="text" class="form-control" name="seach" id="field_seach"
-                                                                   formControlName="seach" placeholder="Ingresar Ubicacion" />          
+                                                                   formControlName="seach" placeholder="Ingresar Ubicacion" />
                                                             </div>
                                                     </td>
                                                     <td>
                                                         <button type="submit" class="btn float-right btn-primary">
                                                             <fa-icon fas icon="search"></fa-icon>&nbsp;<span class="d-none d-md-inline">Buscar</span>
                                                         </button>
-                                                                
+
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -59,11 +59,11 @@
                         </form>
                     </div>
                     <div *ngIf="geocode !== null">
-                    <div *ngFor="let elem of features"> 
+                    <div *ngFor="let elem of features">
                     <div class="form-group">
                         <label class="form-control-label">{{elem.properties.label}}</label>
-                        <input type="radio" class="form-control" name="user" (click)="refreshdir(elem.geometry.coordinates)" >
-                    </div>    
+                        <input type="radio" class="form-control" name="user" (click)="refreshdir(elem.geometry.coordinates,elem.properties.label)" >
+                    </div>
                     </div>
                     </div>
                     </div>
@@ -182,7 +182,7 @@
                     <input type="text" class="form-control" name="intervalduration" id="field_intervalduration"
                            formControlName="intervalduration"/>
                 </div>-->
-                
+
                 <div *ngIf="!unavez" class="form-group">
                     <label class="form-control-label" >Continua</label>
                     <input type="checkbox" class="form-control" (click)="Continua()"/>
@@ -191,7 +191,7 @@
                     <label class="form-control-label" >Unavez</label>
                     <input type="checkbox" class="form-control" (click)="Unavez()"/>
                 </div>
-                <div *ngIf="!continua"> 
+                <div *ngIf="!continua">
                 <div *ngIf="!unavez" class="form-group">
                     <input [hidden]="!editForm.get('duration')!.value" type="text" class="form-control" name="duration" id="field_duration"
                            formControlName="duration" readonly />
@@ -200,7 +200,7 @@
                 <div *ngIf="continua" class="form-group">
                     <label class="form-control-label" for="field_intervalduration">Intervalo-Duracion</label>
                     <select type="text" class="form-control" name="intervalduration" id="field_intervalduration"
-                    formControlName="intervalduration"> 
+                    formControlName="intervalduration">
                     <option value="1 dia">1 dia</option>
                     <option value="2 dias">2 dias</option>
                     <option value="3 dias">3 dias</option>
@@ -277,7 +277,7 @@
                     <div class="col-md-4">
                       <input type="text" [attr.id]="'canteat' + i" class="form-control" placeholder="Cantidad" formControlName="canteat">
                     </div>
-                    
+
                         <div class="col-md-4">
                             <select type="text" [attr.id]="'medida' + i" class="form-control" placeholder="Ingresar Medida" formControlName="medida">
                               <option ></option>
@@ -291,7 +291,7 @@
                   </div>
                 </div>
             </div>
-          
+
             <div>
                 <button type="button" id="cancel-save" class="btn float-right btn-secondary" (click)="previousState()">
                     <fa-icon icon="ban"></fa-icon><span class="d-none d-md-inline">Cancelar</span>
@@ -307,13 +307,13 @@
                                 <fa-icon icon="plus"></fa-icon>
                                 <span class="d-none d-md-inline">Agregar Comida</span>
                             </button>
-    
+
         <button [hidden]="editForm.get('id')!.value" type="submit" (click)="Removeeats()"
                                     class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>
                                 <span class="d-none d-md-inline">Quitar Comida</span>
                             </button>
-                            
+
      </div>
-          
+
 </div>

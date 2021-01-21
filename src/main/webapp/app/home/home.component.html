@@ -7,7 +7,7 @@
         <h1 class="display-4">¡Bienvenido, Sin Desperdicio!</h1>
         <div [ngSwitch]="isAuthenticated()">
             <div *ngSwitchCase="true">
-                
+
                 <p class="lead">Esta es tu página de inicio</p>
                 <div class="alert alert-success" *ngIf="account">
                 <span id="home-logged-message" >Has iniciado sesión como usuario: "{{ account.login }}".</span>
@@ -18,39 +18,40 @@
                 </div>
                 <div *ngIf="false" class="row">
                     <div id="hotel_map"></div>
-                </div>        
-                
+                </div>
+
         <!--------------------------------------------------------------------------------->
         <div *ngIf="false" class="row justify-content-center">
             <div class="col-12">
                 <form name="editForm" role="form" novalidate (ngSubmit)="refresh()" [formGroup]="editForm">
-                  
+
                     <div>
                         <div class="form-group">
                             <label class="form-control-label" for="field_seach"></label>
                             <input type="text" class="form-control" name="seach" id="field_seach"
                                    formControlName="seach"/>
                         </div>
-                        
+
                     </div>
                 </form>
             </div>
         </div>
-        
-        <!--------------------------------------------------------------------------------->        
-        <div *ngFor="let elem of geocode.features"> 
+
+        <!--------------------------------------------------------------------------------->
+        <div *ngFor="let elem of geocode.features">
         <!--<p>{{elem.properties.label}}</p>-->
         <div class="form-group">
             <label class="form-control-label">{{elem.properties.label}}</label>
             <input type="radio" class="form-control" name="user" (click)="refreshdir(elem.geometry.coordinates)" >
-        </div>    
-        <!--<p>{{elem.geometry.coordinates}}</p>-->  
+        </div>
+        <!--<p>{{elem.geometry.coordinates}}</p>-->
         </div>
         <div *ngIf="false" class="row">
             <div id="hotel_mapnav"></div>
-        </div>    
+        </div>
     </div>
             </div>
         </div>
     </div>
 </div>
+
